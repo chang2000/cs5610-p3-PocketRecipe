@@ -13,6 +13,12 @@ app.use(cors());
 var indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
+// Static Hosting
+// should only be used during production phase
+app.use(express.static("../frontend/build"));
+
+// console.log("PROCESS ENV VARS: ", process.env.MONGO_URL)
+
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
