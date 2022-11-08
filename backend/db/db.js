@@ -6,7 +6,7 @@ const db = () => {
 
   const url = process.env.MONGO_URL || mongoString;
   console.log("db url", url);
-  const DB_NAME = "champlist";
+  const DB_NAME = "pocketrecipe";
 
   mydb.testDB = async () => {
     let client;

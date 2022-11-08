@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "product": "cd ../frontend; npm run build; cd ../backend; node app.js"
   },
   "license": "MIT",
   "dependencies": {
