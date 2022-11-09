@@ -18,11 +18,10 @@ function Root() {
             <Link to={`discover`}>Discover</Link>
           </li>
 
-
         </nav>
       </div>
 
-      <div id="detail">
+      <div id="content">
         <Outlet />
       </div>
 

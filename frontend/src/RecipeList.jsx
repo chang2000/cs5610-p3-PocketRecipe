@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Link, Outlet } from 'react-router-dom'
+import RecipeDetail from './RecipeDetail'
 
 function RecipeList(props) {
   const type = props.type
@@ -11,9 +13,25 @@ function RecipeList(props) {
    * Automatically render the the first recipe it found
    * 
    */
+  // const detail = {
+  //   name: "Medium Rare Steak",
+  //   id: 1
+  // }
   return (
     // also create a bunch of Link here
-    <div>{`RecipeList ${type}`}</div>
+    <div>
+      {`RecipeList ${type}`}
+      <br></br>
+      {/* The following items should be dynamic */}
+      <Link to={`mine/1`}>
+        Link to recipe 1
+      </Link>
+      <Link to={`mine/2`}>
+        Link to recipe 2
+      </Link>
+
+      <Outlet />
+    </div>
   )
 }
 
