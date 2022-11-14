@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <RecipeList type="mine" />,
         children: [
           {
-            path: "mine/:id",
+            path: ":id",
             element: <RecipeDetail />,
             loader: recipeDetailLoader,
           },
@@ -27,23 +27,28 @@ const router = createBrowserRouter([
 
       {
         path: "fav",
-        element: <RecipeList type="fav" />
-      },
-
-      {
-        path: "fav/:id",
-        element: <RecipeList />
+        element: <RecipeList type="fav" />,
+        children: [
+          {
+            path: ":id",
+            element: <RecipeDetail />,
+            loader: recipeDetailLoader,
+          },
+        ]
       },
 
       {
         path: "discover",
-        element: <RecipeList type="discover" />
+        element: <RecipeList type="discover" />,
+        children: [
+          {
+            path: ":id",
+            element: <RecipeDetail />,
+            loader: recipeDetailLoader,
+          },
+        ]
       },
 
-      {
-        path: "discover/:id",
-        element: <RecipeList />
-      },
     ]
   }
 ])

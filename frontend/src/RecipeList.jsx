@@ -17,16 +17,18 @@ function RecipeList(props) {
   //   name: "Medium Rare Steak",
   //   id: 1
   // }
+
+
   return (
     // also create a bunch of Link here
     <div>
       {`RecipeList ${type}`}
       <br></br>
       {/* The following items should be dynamic */}
-      <Link to={`mine/1`}>
+      <Link to={`/${type}/1`}>
         Link to recipe 1
       </Link>
-      <Link to={`mine/2`}>
+      <Link to={`/${type}/2`}>
         Link to recipe 2
       </Link>
 
