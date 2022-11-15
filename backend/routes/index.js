@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import db from "../db/db.js"
 const router = express.Router();
 
-const db = require("../db/db.js");
+// const db = require("../db/db.js");
 
 router.get("/user/login", async (req, res) => {
   try {
@@ -251,4 +252,4 @@ router.get("/item/detail", async (req, res) => {
   }
 })
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId, CURSOR_FLAGS } = require("mongodb");
+import { MongoClient, ObjectId } from "mongodb";
 
 const db = () => {
   const mydb = {};
@@ -304,4 +304,5 @@ const db = () => {
   }
   return mydb
 }
-module.exports = db();
+
+export default db();
