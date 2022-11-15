@@ -23,7 +23,7 @@ What we already done:
 
 What's left:
 
-- Client side: user create/login(will reuse the project 2)
+- Client side: user create/login(passport local)
 - Client side: Edit A recipe
 - Add CSS
 - Both client side and server side: Filter by tag
