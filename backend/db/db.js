@@ -174,6 +174,20 @@ const db = () => {
     }
   };
 
+  mydb.getAllPublicItems = async () => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const res = await col.find({ public: true }).toArray()
+      return res;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
 
   // needs to lookup both collections
   mydb.getFavByUser = async (email) => {

@@ -158,10 +158,11 @@ router.post("/item/tag", async (req, res) => {
 
 router.get("/item/getAllPub", async (req, res) => {
   try {
-    const dbRes = await db.getAllPulicItem()
+    const dbRes = await db.getAllPublicItems()
+    console.log(dbRes)
     res.send({
       val: 1,
-      recipes: dbRes.recipes,
+      recipes: dbRes,
     })
   } catch (e) {
     console.log("Error", e);
