@@ -74,7 +74,7 @@ router.post("/item/edit", async (req, res) => {
     record.description = req.body.description // array of strings
     record.prepTime = req.body.prepTime // TBD, min
     record.ingrident = req.body.ingrident // array of strings
-    record.instructions = req.body.instructions // array of strings
+    record.instruction = req.body.instruction // array of strings
     record.tags = req.body.tags // array of strings
     record.nutrition = req.body.nutrition // string
     record.public = req.body.public //boolean
@@ -173,9 +173,14 @@ router.get("/item/getAllPub", async (req, res) => {
 router.get("/item/getFav", async (req, res) => {
   try {
     const dbRes = await db.getFavByUser(req.query.email) // use req.query for params
+    let recipes = []
+    for (let id in dbRes) {
+      let recipe = await db.getItemDetailById(id)
+      recipes.push(recipe)
+    }
     res.send({
       val: 1,
-      favIds: dbRes,
+      recipes: recipes,
     })
   } catch (e) {
     console.log("Error", e);
@@ -218,6 +223,20 @@ router.get("/item/delete", async (req, res) => {
     res.send({
       val: 1,
       comment: "Successfully deleted recipe"
+    })
+  } catch (e) {
+    console.log("Error", e);
+    res.status(200).send({ val: -1, err: e });
+  }
+})
+
+router.get("/item/detail", async (req, res) => {
+  try {
+    console.log(req.query)
+    const dbRes = await db.getItemDetailById(req.query.id)
+    res.send({
+      val: 1,
+      detail: dbRes
     })
   } catch (e) {
     console.log("Error", e);
