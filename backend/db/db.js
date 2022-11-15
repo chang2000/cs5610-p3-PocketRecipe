@@ -66,6 +66,7 @@ const db = () => {
       await client.connect();
       const db = client.db(DB_NAME);
       const repCol = db.collection("recipe");
+      record.deleted = false
       const res = await repCol.insertOne(record);
       console.log("Inserted", res);
       return res;
@@ -87,6 +88,7 @@ const db = () => {
       const objId = ObjectId(`${record._id}`)
       await col.deleteOne({ _id: objId }) // may cause chaos here
       record._id = objId
+      record.deleted = false
       const res = await col.insertOne(record)
       console.log("Updated", res);
       return res;
@@ -181,7 +183,12 @@ const db = () => {
       await client.connect();
       const db = client.db(DB_NAME);
       const col = db.collection("recipe");
-      const res = await col.find({ public: true }).toArray()
+      const res = await col.find({
+        $and: [
+          { public: true },
+          { deleted: false }
+        ]
+      }).toArray()
       return res;
     } finally {
       console.log("Closing the connection");
@@ -198,7 +205,13 @@ const db = () => {
       const col = db.collection("user");
       // TODO
       // recheck if a recipe is public when calling this api
-      const res = await col.findOne({ email: email })
+      const res = await col.findOne({
+        $and: [
+          { email: email },
+          { deleted: false }
+        ]
+      }
+      )
       return res.favs;
     } finally {
       console.log("Closing the connection");
@@ -228,13 +241,37 @@ const db = () => {
       await client.connect();
       const db = client.db(DB_NAME);
       const col = db.collection("recipe");
-      const res = await col.find({ user: email }).toArray()
+      const res = await col.find({
+        $and: [
+          { user: email },
+          { deleted: false }
+        ]
+      }).toArray()
       return res
     } finally {
       console.log("Closing the connection");
       client.close();
     }
   }
+
+  mydb.deleteItem = async (id) => {
+    let client
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const res = await col.findOneAndUpdate(
+        { _id: ObjectId(`${id}`) },
+        { $set: { deleted: true } }
+      )
+      return res
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
 
 
 

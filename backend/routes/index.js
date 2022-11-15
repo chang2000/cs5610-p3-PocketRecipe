@@ -214,8 +214,7 @@ router.get("/item/getByUser", async (req, res) => {
 
 router.get("/item/delete", async (req, res) => {
   try {
-
-    const dbRes = await db.deleteItem(req.body.id)
+    await db.deleteItem(req.query.id)
     res.send({
       val: 1,
       comment: "Successfully deleted recipe"
