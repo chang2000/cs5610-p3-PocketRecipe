@@ -1,25 +1,24 @@
-const express = require("express");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import logger from "morgan";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+import indexRouter from "./routes/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
-const port = 5555;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json
+app.use(logger("dev"));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(cors());
-
-var indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
-// Static Hosting
-// should only be used during production phase
-app.use(express.static("../frontend/build"));
-
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
-
-module.exports = app;
-
+export default app;
