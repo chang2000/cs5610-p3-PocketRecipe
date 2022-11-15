@@ -12,6 +12,25 @@ Slides Presentation:
 
 Design Document [./design-document.md](./design-document.md).
 
+# 60% CHECKPOINT
+
+What we already done:
+
+- All backend APIs (13 routes)
+- Integrate React Router, implemented all possible client routing
+- All read-only function, swithcing between different tabs and view different recipes
+- Like/unlike a recipe and make it public/private
+
+What's left:
+
+- Client side: user create/login(will reuse the project 2)
+- Client side: Edit A recipe
+- Add CSS
+- Both client side and server side: Filter by tag
+- Client side: delete a recipe
+
+
+
 ## Project Objective
 
 
