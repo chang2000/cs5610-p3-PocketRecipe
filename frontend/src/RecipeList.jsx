@@ -22,8 +22,7 @@ function RecipeList(props) {
       requestAPI = `/item/getFav?email=${user}`
     }
 
-    let query = "http://localhost:5555" + requestAPI
-    axios.get(query).then(
+    axios.get(requestAPI).then(
       res => {
         console.log(res.data)
         setRecipes(res.data.recipes)
