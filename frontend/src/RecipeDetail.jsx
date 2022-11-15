@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom';
 
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 export async function loader({ params }) {
   console.log("the id is", params.id)
   return {
@@ -14,21 +17,50 @@ function RecipeDetail() {
   const id = data.id;
 
   const [detail, setDetail] = useState({})
+  const [ifPublic, setIfPublic] = useState()
+  const [favorited, setFavorited] = useState()
 
-
+  const currUser = "wang"
 
   useEffect(() => {
     // get detail by id
-    let requestAPI = `/item/detail?id=${id}`
+    let requestAPI = `/item/detail?id=${id}&email=${currUser}`
     let query = "http://localhost:5555" + requestAPI
     axios.get(query).then(
       res => {
         console.log(res.data.detail)
         setDetail(res.data.detail)
-        console.log(res.data.detail.ingrident)
       }
     )
-  }, [id])
+  }, [id, ifPublic, favorited])
+
+
+  const togglePublic = () => {
+    let requestAPI = "/item/pub"
+    let query = "http://localhost:5555" + requestAPI
+    let target = !detail.public
+    axios.post(query, {
+      id: detail._id,
+      public: target
+    }).then(res => {
+      setIfPublic(target)
+    })
+  }
+
+  const toggleFavorite = () => {
+    let requestAPI = "/item/fav"
+    let query = "http://localhost:5555" + requestAPI
+    let target = !detail.favorite
+    axios.post(query, {
+      email: currUser,
+      id: detail._id,
+      favorite: target
+    }).then(res => {
+      setFavorited(target)
+    })
+  }
+
+
 
 
   return (
@@ -62,12 +94,34 @@ function RecipeDetail() {
         }
       </div>
 
+      {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
       <div>Visibility:
-        {detail.public ? (
-          " Public"
-        ) : (
-          " Private"
-        )}
+        {
+          detail.user === currUser ? (
+            detail.public ? (
+              <button onClick={togglePublic}>Public</button>
+            ) : (
+              <button onClick={togglePublic}>Private</button>
+            )
+          ) : (
+            detail.public ? (
+              <div>Public</div>
+            ) : (
+              <div>Private</div>
+            )
+          )
+        }
+      </div>
+
+      <div id="favorite-control" onClick={toggleFavorite}>
+        {
+          detail.favorite ? (
+            <FavoriteIcon />
+          ) : (
+            <FavoriteBorderIcon />
+          )
+        }
+
       </div>
 
     </div >
