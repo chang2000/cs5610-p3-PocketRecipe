@@ -136,7 +136,6 @@ const db = () => {
   };
 
   mydb.editItemPublic = async (query) => {
-    console.log('enter edit item')
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -156,6 +155,26 @@ const db = () => {
     }
   };
 
+  mydb.editItemTags = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const objId = ObjectId(`${query.id}`)
+      const res = await col.findOneAndUpdate(
+        { _id: objId },
+        { $set: { tags: query.newTags } })
+      console.log("Tags Updated", res);
+      return res;
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+
   // needs to lookup both collections
   mydb.getFavByUser = async (email) => {
     let client;
@@ -172,9 +191,6 @@ const db = () => {
       client.close();
     }
   };
-
-
-
   return mydb;
 }
 
