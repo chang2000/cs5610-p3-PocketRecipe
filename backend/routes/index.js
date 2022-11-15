@@ -225,4 +225,17 @@ router.get("/item/delete", async (req, res) => {
   }
 })
 
+router.get("/item/detail", async (req, res) => {
+  try {
+    const dbRes = await db.getItemDetailById(req.query.id)
+    res.send({
+      val: 1,
+      detail: dbRes
+    })
+  } catch (e) {
+    console.log("Error", e);
+    res.status(200).send({ val: -1, err: e });
+  }
+})
+
 module.exports = router;

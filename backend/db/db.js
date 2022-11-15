@@ -275,6 +275,23 @@ const db = () => {
     }
   }
 
+  mydb.getItemDetailById = async (id) => {
+    let client
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const res = await col.findOne(
+        { _id: ObjectId(`${id}`) })
+      return res
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
+
 
 
 
