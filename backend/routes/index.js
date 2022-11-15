@@ -172,10 +172,10 @@ router.get("/item/getAllPub", async (req, res) => {
 
 router.get("/item/getFav", async (req, res) => {
   try {
-    const dbRes = await db.getFavByUser(req.body.email)
+    const dbRes = await db.getFavByUser(req.query.email) // use req.query for params
     res.send({
       val: 1,
-      recipes: dbRes.recipes, // return a bunch of ids?
+      favIds: dbRes,
     })
   } catch (e) {
     console.log("Error", e);

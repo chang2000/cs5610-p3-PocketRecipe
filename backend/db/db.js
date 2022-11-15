@@ -189,27 +189,25 @@ const db = () => {
     }
   };
 
-  // needs to lookup both collections
   mydb.getFavByUser = async (email) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
-      const repCol = db.collection("recipe");
-      const res = await repCol.insertOne(record);
-      console.log("Inserted", res);
-      return res;
+      const col = db.collection("user");
+      // TODO
+      // recheck if a recipe is public when calling this api
+      const res = await col.findOne({ email: email })
+      return res.favs;
     } finally {
       console.log("Closing the connection");
       client.close();
     }
   };
-  return mydb;
+
+
+
+  return mydb
 }
-
-
-
-
-
 module.exports = db();
