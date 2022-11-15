@@ -206,6 +206,36 @@ const db = () => {
     }
   };
 
+  mydb.getItemByTag = async (tag) => {
+    let client
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      // TODO: find by tags
+      return []
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
+  mydb.getItemByUser = async (email) => {
+    let client
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const res = await col.find({ user: email }).toArray()
+      return res
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  }
+
 
 
   return mydb

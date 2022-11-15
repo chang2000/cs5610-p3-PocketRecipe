@@ -191,7 +191,7 @@ router.get("/item/getByTag", async (req, res) => {
     const dbRes = await db.getItemByTag(query)
     res.send({
       val: 1,
-      recipes: dbRes.recipes
+      recipes: dbRes
     })
   } catch (e) {
     console.log("Error", e);
@@ -201,11 +201,10 @@ router.get("/item/getByTag", async (req, res) => {
 
 router.get("/item/getByUser", async (req, res) => {
   try {
-
-    const dbRes = await db.getItemByUser(req.body.email)
+    const dbRes = await db.getItemByUser(req.query.email)
     res.send({
       val: 1,
-      recipes: dbRes.recipes
+      recipes: dbRes
     })
   } catch (e) {
     console.log("Error", e);
