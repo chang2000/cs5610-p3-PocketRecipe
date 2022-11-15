@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const db = require("../db/db.js");
-console.log(db)
 
 router.get("/user/login", async (req, res) => {
   try {
-    const dbRes = await db.userLogin(req)
+    let user = {};
+    user.email = req.body.email;
+    user.password = req.body.password;
+    await db.userLogin(user)
     res.send({
       val: 1,
-      comment: ""
+      comment: "Successfully logged in"
     })
   } catch (e) {
     console.log("Error", e);
@@ -17,9 +19,12 @@ router.get("/user/login", async (req, res) => {
   }
 })
 
-router.get("/user/create", async (req, res) => {
+router.post("/user/create", async (req, res) => {
   try {
-    const dbRes = await db.createUser(req)
+    let user = {};
+    user.email = req.body.email;
+    user.password = req.body.password;
+    await db.createUser(user)
     res.send({
       val: 1,
       comment: ""
@@ -38,15 +43,15 @@ router.post("/item/create", async (req, res) => {
     record.description = req.body.description // array of strings
     record.prepTime = req.body.prepTime // TBD, min
     record.ingrident = req.body.ingrident // array of strings
-    record.instructions = req.body.instructions // array of strings
+    record.instruction = req.body.instruction // array of strings
     record.tags = req.body.tags // array of strings
     record.nutrition = req.body.nutrition // string
     record.public = req.body.public //boolean
 
     const dbRes = await db.createItem(record)
-
+    // console.log(dbRes.insertedId.toString())
     res.send({
-      id: dbRes.id,
+      id: dbRes.insertedId.toString(),
       val: 1,
       comment: "Successfully created new recipe"
     })
@@ -63,6 +68,7 @@ router.post("/item/create", async (req, res) => {
 router.post("/item/edit", async (req, res) => {
   try {
     let record = {}
+    record._id = req.body.id
     record.user = req.body.email
     record.name = req.body.itemName //string
     record.description = req.body.description // array of strings
@@ -73,11 +79,11 @@ router.post("/item/edit", async (req, res) => {
     record.nutrition = req.body.nutrition // string
     record.public = req.body.public //boolean
 
-    const dbRes = await db.editIterm(record)
+    const dbRes = await db.editItem(record)
     res.send({
-      id: dbRes.id,
+      id: dbRes.insertedId.toString(),
       val: 1,
-      comment: "operation"
+      comment: "Edited!"
     })
 
   } catch (e) {
@@ -95,7 +101,8 @@ router.post("/item/fav", async (req, res) => {
     query.email = req.body.email
     query.id = req.body.id
     query.favorite = req.body.favorite // boolean
-    const dbRes = await db.editItemFav(query)
+    console.log(query);
+    await db.editItemFav(query)
     res.send({
       val: 1,
       comment: "Successfully changed fav status"
