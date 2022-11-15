@@ -1,3 +1,4 @@
+import './App.css';
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import RecipeDetail from './RecipeDetail'
@@ -25,15 +26,9 @@ function RecipeList(props) {
     axios.get(query).then(
       res => {
         console.log(res.data)
+        setRecipes(res.data.recipes)
       }
     )
-
-
-
-
-
-
-
   }, [type])
 
   /**
@@ -55,16 +50,18 @@ function RecipeList(props) {
       {`Current List Type: ${type}`}
       <br></br>
       {/* The following items should be dynamic */}
-      <Link to={`/${type}/1`}>
-        Link to recipe 1
-      </Link>
-
-      <Link to={`/${type}/2`}>
-        Link to recipe 2
-      </Link>
-
+      <div id="main-list">
+        {/* Dynamic render */}
+        {
+          recipes.map((item, i) => (
+            <Link key={i} to={`/${type}/${item._id}`}>
+              {item.name}
+            </Link>
+          ))
+        }
+      </div>
       <Outlet />
-    </div>
+    </div >
   )
 }
 

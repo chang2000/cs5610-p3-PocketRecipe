@@ -4,3 +4,13 @@
 #recipe-list {
   margin-top: 50px;
 }
+
+#main-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#recipe-detail {
+  display: flex;
+  flex-direction: column;
+}
