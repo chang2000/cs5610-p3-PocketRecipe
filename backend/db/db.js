@@ -212,6 +212,9 @@ const db = () => {
         ]
       }
       )
+      if (res == null) {
+        return []
+      }
       return res.favs;
     } finally {
       console.log("Closing the connection");
