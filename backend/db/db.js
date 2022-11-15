@@ -116,10 +116,8 @@ const db = () => {
           { email: query.email },
           { $push: { favs: query.id } }
         )
-        console.log("Updated Fav", res);
         return res;
       } else {
-        // 
         let newFav = curFav.favs
         let index = newFav.indexOf(query.id);
         if (index !== -1) {
@@ -129,9 +127,29 @@ const db = () => {
           { email: query.email },
           { $set: { favs: newFav } }
         )
-        console.log("Updated Fav", res);
         return { res };
       }
+    } finally {
+      console.log("Closing the connection");
+      client.close();
+    }
+  };
+
+  mydb.editItemPublic = async (query) => {
+    console.log('enter edit item')
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const col = db.collection("recipe");
+      const objId = ObjectId(`${query.id}`)
+      const visibility = query.public
+      const res = await col.findOneAndUpdate(
+        { _id: objId },
+        { $set: { public: visibility } })
+      console.log("Public Updated", res);
+      return res;
     } finally {
       console.log("Closing the connection");
       client.close();
