@@ -16,9 +16,9 @@ Design Document [./design-document.md](./design-document.md).
 
 What we already done:
 
-- All backend APIs (13 routes)
+- **All backend apis** (13 routes)
 - Integrate React Router, implemented all possible client routing
-- All read-only function, swithcing between different tabs and view different recipes
+- **All read-only function**, swithcing between different tabs and view different recipes
 - Like/unlike a recipe and make it public/private
 
 What's left:
@@ -41,6 +41,13 @@ What's left:
 
 ## Instruction on Build
 
+**Development Mode**
+
+Pre-requiste: MongoDB running on `localhost:27017`
+
+1. `cd frontend`->`yarn` -> `yarn start`
+2. `cd ../backend` -> `yarn`->`yarn run dev`
+3. Visit `localhost:3000`
 
 
 ## MISC
