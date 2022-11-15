@@ -25,8 +25,7 @@ function RecipeDetail() {
   useEffect(() => {
     // get detail by id
     let requestAPI = `/item/detail?id=${id}&email=${currUser}`
-    let query = "http://localhost:5555" + requestAPI
-    axios.get(query).then(
+    axios.get(requestAPI).then(
       res => {
         console.log(res.data.detail)
         setDetail(res.data.detail)
@@ -37,9 +36,8 @@ function RecipeDetail() {
 
   const togglePublic = () => {
     let requestAPI = "/item/pub"
-    let query = "http://localhost:5555" + requestAPI
     let target = !detail.public
-    axios.post(query, {
+    axios.post(requestAPI, {
       id: detail._id,
       public: target
     }).then(res => {
@@ -49,9 +47,8 @@ function RecipeDetail() {
 
   const toggleFavorite = () => {
     let requestAPI = "/item/fav"
-    let query = "http://localhost:5555" + requestAPI
     let target = !detail.favorite
-    axios.post(query, {
+    axios.post(requestAPI, {
       email: currUser,
       id: detail._id,
       favorite: target
