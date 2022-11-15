@@ -112,6 +112,7 @@ const db = () => {
       if (query.favorite == true) {
         if (curFav.favs.includes(query.id)) {
           console.log("Alreay existed")
+          return {}
         }
 
         const res = await col.updateOne(
@@ -205,13 +206,7 @@ const db = () => {
       const col = db.collection("user");
       // TODO
       // recheck if a recipe is public when calling this api
-      const res = await col.findOne({
-        $and: [
-          { email: email },
-          { deleted: false }
-        ]
-      }
-      )
+      const res = await col.findOne({ email: email })
       if (res == null) {
         return []
       }
@@ -275,26 +270,38 @@ const db = () => {
     }
   }
 
-  mydb.getItemDetailById = async (id) => {
+  mydb.getItemDetailById = async (query) => {
     let client
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
       const col = db.collection("recipe");
-      const res = await col.findOne(
-        { _id: ObjectId(`${id}`) })
-      return res
+      const res = await col.findOne({ _id: ObjectId(`${query.id}`) })
+
+      // get all favs
+      console.log(query.id)
+      console.log(query.email)
+      const userCol = db.collection("user")
+      const favRes = await userCol.findOne(
+        { email: query.email }
+      )
+      const favs = favRes.favs
+      console.log()
+      let ret = res
+      if (favs.includes(res._id.toString())) {
+        ret.favorite = true
+      } else {
+        ret.favorite = false
+      }
+      return ret
+
+
     } finally {
       console.log("Closing the connection");
       client.close();
     }
   }
-
-
-
-
-
   return mydb
 }
 module.exports = db();

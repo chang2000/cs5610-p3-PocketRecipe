@@ -173,9 +173,13 @@ router.get("/item/getAllPub", async (req, res) => {
 router.get("/item/getFav", async (req, res) => {
   try {
     const dbRes = await db.getFavByUser(req.query.email) // use req.query for params
+    console.log('dbRes', dbRes)
     let recipes = []
     for (let id in dbRes) {
-      let recipe = await db.getItemDetailById(id)
+      let query = {}
+      query.id = dbRes[id]
+      query.email = req.query.email
+      let recipe = await db.getItemDetailById(query)
       recipes.push(recipe)
     }
     res.send({
@@ -233,7 +237,10 @@ router.get("/item/delete", async (req, res) => {
 router.get("/item/detail", async (req, res) => {
   try {
     console.log(req.query)
-    const dbRes = await db.getItemDetailById(req.query.id)
+    let query = {}
+    query.id = req.query.id
+    query.email = req.query.email
+    const dbRes = await db.getItemDetailById(query)
     res.send({
       val: 1,
       detail: dbRes
