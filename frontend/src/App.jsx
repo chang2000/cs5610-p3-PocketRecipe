@@ -143,7 +143,15 @@ function IndexPage() {
     <BasePage>
       <h1>Pocket Recipe</h1>
     </BasePage>
-    // <RouterProvider router={router} />
+    
+  );
+}
+
+function MainPage() {
+  return (
+    <div id="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
@@ -173,11 +181,10 @@ function App() {
     getUser();
   }, []);
   return (
-    // <div id="App">
-    //   <RouterProvider router={router} />
-    // </div>
+    
 
    <Router>
+
 
       <div>User: {JSON.stringify(user)}</div>
       <Routes>
