@@ -1,0 +1,13 @@
+.editable-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.editable-wrapper .delete-icon {
+  display: none;
+}
+
+.editable-wrapper:hover .delete-icon{
+  display: block;  
+}

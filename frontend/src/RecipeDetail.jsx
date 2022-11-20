@@ -4,6 +4,9 @@ import { useLoaderData } from 'react-router-dom';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import EditableItem from './components/EditableItem';
+import DeleteIcon from '@mui/icons-material/Delete';
+import "./RecipeDetail.css"
 
 export async function loader({ params }) {
   console.log("the id is", params.id)
@@ -59,65 +62,89 @@ function RecipeDetail() {
 
 
 
-
   return (
     <div id="recipe-detail">
-      <div> <b>Recipe Detail: </b></div>
-      <div>Name: {detail.name}</div>
-      <div>ID: {detail._id}</div>
-      <div>Author: {detail.user}</div>
-      <div>Description: {detail.description}</div>
-      <div>Prep Time: {detail.prepTime} seconds</div>
-
-      <div>Ingrident:
-        {
-          detail.ingrident?.map((item, i) => <li key={i}> {item} </li>)
-        }
-      </div>
-
-      <div>Instruction:
-        {
-          detail.instruction?.map((item, i) => <li key={i}> {item} </li>)
-        }
-      </div>
-      <div>Nurtrition:
-        {
-          detail.nutrition?.map((item, i) => <li key={i}> {item} </li>)
-        }
-      </div>
-      <div>Tags:
-        {
-          detail.tags?.map((item, i) => <li key={i}> {item} </li>)
-        }
-      </div>
-
-      {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
-      <div>Visibility:
-        {
-          detail.user === currUser ? (
-            detail.public ? (
-              <button onClick={togglePublic}>Public</button>
+      <div> <b>Recipe Detail: </b>
+        {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
+        <div>Visibility:
+          {
+            detail.user === currUser ? (
+              detail.public ? (
+                <button onClick={togglePublic}>Public</button>
+              ) : (
+                <button onClick={togglePublic}>Private</button>
+              )
             ) : (
-              <button onClick={togglePublic}>Private</button>
+              detail.public ? (
+                <div>Public</div>
+              ) : (
+                <div>Private</div>
+              )
             )
-          ) : (
-            detail.public ? (
-              <div>Public</div>
-            ) : (
-              <div>Private</div>
-            )
-          )
-        }
-      </div>
+          }
+        </div>
 
-      <div id="favorite-control" onClick={toggleFavorite}>
-        {
-          detail.favorite ? (
-            <FavoriteIcon />
-          ) : (
-            <FavoriteBorderIcon />
-          )
-        }
+        <div id="favorite-control" onClick={toggleFavorite}>
+          {
+            detail.favorite ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )
+          }
+
+        </div>
+      </div>
+      <div className="">
+        <div className="">
+          <EditableItem title={"Name"} defaultText={detail.name} />
+        </div>
+
+        <div>ID: {detail._id}</div>
+        <div>Author: {detail.user}</div>
+        <div className="">
+          <EditableItem title={"Description"} defaultText={detail.description} />
+        </div>
+
+        <div className="">
+          <EditableItem title={"Prep Time"} defaultText={detail.prepTime + " seconds"} />
+        </div>
+
+        <div>Ingrident:
+          {
+            detail.ingrident?.map((item, i) =>
+              <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <div className="delete-icon" key={i + "icon-wrapper"} >
+                  <DeleteIcon key={i + "icon"} />
+                </div>
+              </div>
+            )
+          }
+        </div>
+
+        <div>Instruction:
+          {
+            detail.instruction?.map((item, i) =>
+              <EditableItem key={i} title={i + 1} defaultText={item} />
+            )
+          }
+        </div>
+
+        <div>Nurtrition:
+          {
+            detail.nutrition?.map((item, i) =>
+              <EditableItem key={i} title={i + 1} defaultText={item} />
+            )
+          }
+        </div>
+        <div>Tags:
+          {
+            detail.tags?.map((item, i) =>
+              <EditableItem key={i} title={i + 1} defaultText={item} />)
+          }
+        </div>
+
 
       </div>
 

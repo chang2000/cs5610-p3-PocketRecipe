@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import RecipeDetail from './RecipeDetail'
 import axios from 'axios'
 
 function RecipeList(props) {
@@ -29,19 +28,6 @@ function RecipeList(props) {
       }
     )
   }, [type])
-
-  /**
-   * TODO
-   * Design a recipe object here
-   * set a recipe as state
-   * fetch the list while useEffect()=>{, []}  // page loading
-   * Automatically render the the first recipe it found
-   * 
-   */
-  // const detail = {
-  //   name: "Medium Rare Steak",
-  //   id: 1
-  // }
 
   return (
     // also create a bunch of Link here
