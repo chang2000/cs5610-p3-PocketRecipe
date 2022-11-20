@@ -70,8 +70,8 @@ router.post("/item/edit", async (req, res) => {
   try {
     let record = {}
     record._id = req.body.id
-    record.user = req.body.email
-    record.name = req.body.itemName //string
+    record.user = req.body.user
+    record.name = req.body.name //string
     record.description = req.body.description // array of strings
     record.prepTime = req.body.prepTime // TBD, min
     record.ingrident = req.body.ingrident // array of strings
