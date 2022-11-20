@@ -10,6 +10,8 @@ import RecipeDetail, {
   loader as recipeDetailLoader
 } from './RecipeDetail';
 
+import LoginPage from './LoginPage';
+
 
 const router = createBrowserRouter([
   {
@@ -57,49 +59,6 @@ const router = createBrowserRouter([
   }
 ])
 
-
-function LoginPage() {
-  return (
-    <BasePage>
-      <div>
-        <h1>Sign in</h1>
-        <form action="/login/password" method="post">
-          <div>
-            <label className="form-label" htmlFor="username">
-              Username
-            </label>
-            <input
-              className="form-control"
-              id="username"
-              name="username"
-              type="text"
-              autoComplete="username"
-              required
-              autoFocus
-            />
-          </div>
-          <div>
-            <label className="form-label" htmlFor="current-password">
-              Password
-            </label>
-            <input
-              className="form-control"
-              id="current-password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-            />
-          </div>
-          <br />
-          <button className="btn btn-primary" type="submit">
-            Sign in
-          </button>
-        </form>
-      </div>
-    </BasePage>
-  );
-}
 
 function NavBar() {
   return (
@@ -170,29 +129,34 @@ function BasePage({ children }) {
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    async function getUser() {
-      const res = await fetch("/getCurrentUser");
-      const currentUser = await res.json();
-      console.log("got user", currentUser);
-      setUser(currentUser.user);
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    getUser();
+  useEffect(() => {
+    let email = window.localStorage.getItem("email")
+    if (email == null) {
+      setIsLoggedIn(false)
+    } else {
+      setIsLoggedIn(true)
+    }
   }, []);
   return (
+    isLoggedIn ? (
+
+      <div id="App">
+        <RouterProvider router={router} />
+      </div>
+    ) : (
+      <LoginPage />
+    )
     
+  //  <Router>
+  //     <div>User: {JSON.stringify(user)}</div>
+  //     <Routes>
+  //       <Route path="/login" element={<LoginPage />}></Route>
 
-   <Router>
-
-
-      <div>User: {JSON.stringify(user)}</div>
-      <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-
-        <Route path="/" element={<IndexPage />}></Route>
-      </Routes>
-    </Router>
+  //       <Route path="/" element={<IndexPage />}></Route>
+  //     </Routes>
+  //   </Router>
   );
 }
 

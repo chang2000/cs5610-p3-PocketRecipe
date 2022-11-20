@@ -1,19 +1,35 @@
 import express from "express";
 import passport from "passport";
 import LocalStrategy from "passport-local";
+import db from "../db/db.js";
 
 const router = express.Router();
 
-const strategy = new LocalStrategy(function verify(username, password, cb) {
+const strategy = new LocalStrategy(async function verify(username, password, cb) {
   console.log("verify", username, password);
-
-  //database code
+  // let user = {
+  //   email: username,
+  //   password: password
+  // };
+  // console.log("userrrrrr: ", user);
+  // try {
+  //   let res = await db.userLogin(user)
+  //   console.log("res here", res)
+  //   res.send({
+  //     val: 1,
+  //     comment: "Successfully logged in"
+  //   })
+  // } catch (error) {
+  //   console.log("Error", error);
+  //   res.status(200).send({ val: -1, err: error });
+  // }
 
   const user = {
     id: 1,
-    username: "John",
+    username: "Johns",
     password: "John",
   };
+
 
   // Authentication successful
   return cb(null, user);
@@ -36,15 +52,24 @@ passport.deserializeUser(function(user, cb) {
 
 router.post(
   "/login/password",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-  })
-);
+  passport.authenticate('local', 
+  { failureRedirect: '/login', failureMessage: true }),
+  function(req, res) {
+    console.log("herrrrrrrrrr name of user:", req.user.username)
+    res.redirect('/');
+  });
 
-router.get("/getCurrentUser", (req, res) => {
-  console.log("get user", req.user);
-  res.json({ user: req.user, msg: "something" });
-});
+
+  // passport.authenticate("local", {
+  //   successRedirect: "/",
+  //   failureRedirect: "/login",
+  // })
+// );
+
+// router.get("/getCurrentUser", (req, res) => {
+//   // console.log("-----------",req)
+//   console.log("get user", req.user);
+//   res.json({ user: req.user, msg: "something" });
+// });
 
 export default router;
