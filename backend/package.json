@@ -14,8 +14,11 @@
     "cookie-parser": "^1.4.6",
     "debug": "^4.3.4",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mongodb": "^4.11.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
