@@ -2,13 +2,16 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import "./EditableItem.css"
 const EditableItem = (props) => {
-  const { title, defaultText } = props
+  const { title, defaultText, submitFunc } = props
   const [isE, setIsE] = useState(false)
   useEffect(() => {
     console.log()
   }, [isE])
 
-  const toggleEditing = () => {
+  const toggleEditing = (e) => {
+    if (isE) {
+      submitFunc(e)
+    }
     setIsE(!isE)
   }
 

@@ -5,6 +5,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
 import EditableItem from './components/EditableItem';
 import "./RecipeDetail.css"
@@ -23,7 +27,7 @@ function RecipeDetail() {
   const [detail, setDetail] = useState({})
   const [ifPublic, setIfPublic] = useState()
   const [favorited, setFavorited] = useState()
-
+  const [editTimes, setEditTimes] = useState(0)
   const currUser = "wang"
 
   useEffect(() => {
@@ -36,7 +40,7 @@ function RecipeDetail() {
       setDetail(data.detail)
     }
     fetchData()
-  }, [id, ifPublic, favorited])
+  }, [id, ifPublic, favorited, editTimes])
 
 
   const togglePublic = () => {
@@ -79,11 +83,129 @@ function RecipeDetail() {
       })
       setFavorited(target)
     }
-
     sendRequest()
   }
 
+  const applyChange = (e) => {
+    console.log(e.target.value)
+    console.log('enter apply change')
+  }
 
+  const applyNameChange = async (e) => {
+    let newName = e.target.value
+    if (newName == null || newName === "") {
+      alert("New Name cannot be empty")
+      return
+    }
+    let newDetail = JSON.parse(JSON.stringify(detail))
+    newDetail.name = newName
+    newDetail.id = newDetail._id
+    let requestAPI = "/item/edit"
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newDetail)
+    })
+
+    let data = await res.json()
+    console.log(data)
+    setEditTimes(editTimes + 1)
+  }
+
+  const applyDescChange = async (e) => {
+    let newVal = e.target.value
+    if (newVal == null || newVal === "") {
+      alert("New description cannot be empty")
+      return
+    }
+    let newDetail = JSON.parse(JSON.stringify(detail))
+    newDetail.description = newVal
+    newDetail.id = newDetail._id
+    let requestAPI = "/item/edit"
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newDetail)
+    })
+    let data = await res.json()
+    console.log(data)
+    setEditTimes(editTimes + 1)
+  }
+
+  const applyPrepTimeChange = async (e) => {
+    let newVal = e.target.value
+    if (newVal == null || newVal === "") {
+      alert("New prepTime cannot be empty")
+      return
+    }
+    let newDetail = JSON.parse(JSON.stringify(detail))
+    newDetail.prepTime = newVal
+    newDetail.id = newDetail._id
+    let requestAPI = "/item/edit"
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newDetail)
+    })
+    let data = await res.json()
+    console.log(data)
+    setEditTimes(editTimes + 1)
+  }
+
+
+  const addSubItem = async (e) => {
+    let type = e.currentTarget.id
+    console.log(type)
+    if (type === "ingri-add-btn") {
+      let newDetail = JSON.parse(JSON.stringify(detail))
+      newDetail.id = newDetail._id
+      newDetail.ingrident.push("New ingri")
+      let requestAPI = "/item/edit"
+      let res = await fetch(requestAPI, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newDetail)
+      })
+      let data = await res.json()
+      console.log(data)
+      setEditTimes(editTimes + 1)
+      // Do some auto-focus here
+    } else {
+
+    }
+  }
+
+  const deleteSubItem = async (e) => {
+    let htmlEleID = e.currentTarget.id
+    console.log(htmlEleID)
+    let idx = parseInt(htmlEleID.split("-")[0], 10)
+    let type = htmlEleID.split("-")[1]
+    console.log(type)
+    let newDetail = JSON.parse(JSON.stringify(detail))
+    if (type === "ingri") {
+      newDetail.ingrident.splice(idx, 1) // remove the idx-th item
+    }
+    newDetail.id = newDetail._id
+    let requestAPI = "/item/edit"
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newDetail)
+    })
+    let data = await res.json()
+    console.log(data)
+    setEditTimes(editTimes + 1)
+  }
 
   return (
     <div id="recipe-detail">
@@ -120,33 +242,38 @@ function RecipeDetail() {
       </div>
       <div className="">
         <div className="">
-          <EditableItem title={"Name"} defaultText={detail.name} />
+          <EditableItem title={"Name"} defaultText={detail.name} submitFunc={applyNameChange} />
         </div>
 
         <div>ID: {detail._id}</div>
         <div>Author: {detail.user}</div>
         <div className="">
-          <EditableItem title={"Description"} defaultText={detail.description} />
+          <EditableItem title={"Description"} defaultText={detail.description} submitFunc={applyDescChange} />
         </div>
 
         <div className="">
-          <EditableItem title={"Prep Time"} defaultText={detail.prepTime + " seconds"} />
+          <EditableItem title={"Prep Time"} defaultText={detail.prepTime} submitFunc={applyPrepTimeChange} />
+          seconds
         </div>
 
         <div className=''>
           Ingrident:
-          <button className='btn'><AddCircleIcon /> </button>
+          <button className='btn' id='ingri-add-btn' onClick={addSubItem}>
+            <AddCircleIcon />
+          </button>
 
-          {
-            detail.ingrident?.map((item, i) =>
-              <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} />
-                <button className="btn delete-icon" key={i + "icon-wrapper"}>
-                  <DeleteIcon key={i + "icon"} />
-                </button>
-              </div>
-            )
-          }
+          <div id='ingri-list'>
+            {
+              detail.ingrident?.map((item, i) =>
+                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
+                  <button className="btn delete-icon" id={i + "-ingri-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + "icon"} />
+                  </button>
+                </div>
+              )
+            }
+          </div>
         </div>
 
         <div>Instruction:
@@ -154,7 +281,7 @@ function RecipeDetail() {
           {
             detail.instruction?.map((item, i) =>
               <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
                 <button className="btn delete-icon" key={i + "icon-wrapper"}>
                   <DeleteIcon key={i + "icon"} />
                 </button>
@@ -168,7 +295,7 @@ function RecipeDetail() {
           {
             detail.nutrition?.map((item, i) =>
               <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
                 <button className="btn delete-icon" key={i + "icon-wrapper"}>
                   <DeleteIcon key={i + "icon"} />
                 </button>
@@ -181,7 +308,7 @@ function RecipeDetail() {
           {
             detail.tags?.map((item, i) =>
               <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
                 <button className="btn delete-icon" key={i + "icon-wrapper"}>
                   <DeleteIcon key={i + "icon"} />
                 </button>
