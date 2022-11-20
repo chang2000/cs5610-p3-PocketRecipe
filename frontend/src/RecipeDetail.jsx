@@ -167,6 +167,10 @@ function RecipeDetail() {
       newDetail.ingrident.push("New ingri")
     } else if (type === "instru-add-btn") {
       newDetail.instruction.push("New step...")
+    } else if (type === "nurtri-add-btn") {
+      newDetail.nutrition.push("New nurtrition item...")
+    } else if (type === "tag-add-btn") {
+      newDetail.tags.push("New Tag...")
     }
     newDetail.id = newDetail._id
     let requestAPI = "/item/edit"
@@ -197,6 +201,10 @@ function RecipeDetail() {
         newDetail.ingrident.splice(idx, 1) // remove the idx-th item
       } else if (type === "instru") {
         newDetail.instruction.splice(idx, 1)
+      } else if (type === "nurtri") {
+        newDetail.nutrition.splice(idx, 1)
+      } else if (type === "tag") {
+        newDetail.tags.splice(idx, 1)
       }
       newDetail.id = newDetail._id
       let requestAPI = "/item/edit"
@@ -225,6 +233,10 @@ function RecipeDetail() {
       newDetail.ingrident[idx] = targetValue
     } else if (type === "instru") {
       newDetail.instruction[idx] = targetValue
+    } else if (type === "nurtri") {
+      newDetail.nutrition[idx] = targetValue
+    } else if (type === "tag") {
+      newDetail.tags[idx] = targetValue
     }
     newDetail.id = newDetail._id
     let requestAPI = "/item/edit"
@@ -329,30 +341,38 @@ function RecipeDetail() {
         </div>
 
         <div>Nurtrition:
-          <button className='btn'><AddCircleIcon /> </button>
-          {
-            detail.nutrition?.map((item, i) =>
-              <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
-                <button className="btn delete-icon" key={i + "icon-wrapper"}>
-                  <DeleteIcon key={i + "icon"} />
-                </button>
-              </div>
-            )
-          }
+          <button className='btn' id="nurtri-add-btn" onClick={addSubItem}>
+            <AddCircleIcon />
+          </button>
+          <div className="nurtri-list">
+            {
+              detail.nutrition?.map((item, i) =>
+                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="nurtri" idx={i} />
+                  <button className="btn delete-icon" id={i + "-nurtri-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + "icon"} />
+                  </button>
+                </div>
+              )
+            }
+          </div>
         </div>
         <div>Tags:
-          <button className='btn'><AddCircleIcon /> </button>
-          {
-            detail.tags?.map((item, i) =>
-              <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
-                <button className="btn delete-icon" key={i + "icon-wrapper"}>
-                  <DeleteIcon key={i + "icon"} />
-                </button>
-              </div>
-            )
-          }
+          <button className='btn' id="tag-add-btn" onClick={addSubItem}>
+            <AddCircleIcon />
+          </button>
+          <div className="tag-list">
+            {
+              detail.tags?.map((item, i) =>
+                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="tag" idx={i} />
+                  <button className="btn delete-icon" id={i + "-tag-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + "icon"} />
+                  </button>
+                </div>
+              )
+            }
+          </div>
         </div>
 
 
