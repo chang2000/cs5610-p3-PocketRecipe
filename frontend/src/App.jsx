@@ -143,7 +143,7 @@ function IndexPage() {
     <BasePage>
       <h1>Pocket Recipe</h1>
     </BasePage>
-    
+
   );
 }
 
@@ -162,37 +162,19 @@ function BasePage({ children }) {
         <NavBar></NavBar>
       </header>
       <main>{children}</main>
-      
+
     </div>
   );
 }
 
 function App() {
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    async function getUser() {
-      const res = await fetch("/getCurrentUser");
-      const currentUser = await res.json();
-      console.log("got user", currentUser);
-      setUser(currentUser.user);
-    }
-
-    getUser();
   }, []);
   return (
-    
-
-   <Router>
-
-
-      <div>User: {JSON.stringify(user)}</div>
-      <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-
-        <Route path="/" element={<IndexPage />}></Route>
-      </Routes>
-    </Router>
+    <div id="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 

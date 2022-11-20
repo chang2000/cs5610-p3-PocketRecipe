@@ -124,7 +124,7 @@ router.post("/item/pub", async (req, res) => {
     query.id = req.body.id
     query.public = req.body.public
 
-    const dbRes = await db.editItemPublic(query)
+    await db.editItemPublic(query)
     res.send({
       val: 1,
       comment: "Successfully changed public status"
