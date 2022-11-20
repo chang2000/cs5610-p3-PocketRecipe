@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import axios from 'axios'
 
 function RecipeList(props) {
   const type = props.type

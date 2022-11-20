@@ -27,25 +27,40 @@ function RecipeDetail() {
 
   useEffect(() => {
     // get detail by id
-    let requestAPI = `/item/detail?id=${id}&email=${currUser}`
-    axios.get(requestAPI).then(
-      res => {
-        console.log(res.data.detail)
-        setDetail(res.data.detail)
-      }
-    )
+    const fetchData = async () => {
+      let requestAPI = `/item/detail?id=${id}&email=${currUser}`
+      let res = await fetch(requestAPI)
+      let data = await res.json()
+      console.log(data.detail)
+      setDetail(data.detail)
+    }
+    fetchData()
   }, [id, ifPublic, favorited])
 
 
   const togglePublic = () => {
-    let requestAPI = "/item/pub"
-    let target = !detail.public
-    axios.post(requestAPI, {
-      id: detail._id,
-      public: target
-    }).then(res => {
+    const sendRequest = async () => {
+      console.log('enter toggel public')
+      let requestAPI = "/item/pub"
+      let target = !detail.public
+
+      const res = await fetch(requestAPI, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            id: detail._id,
+            public: target
+          }
+        )
+      })
+      let data = await res.json()
+      console.log(data)
       setIfPublic(target)
-    })
+    }
+    sendRequest()
   }
 
   const toggleFavorite = () => {
