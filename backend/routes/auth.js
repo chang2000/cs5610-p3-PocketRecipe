@@ -7,6 +7,8 @@ const router = express.Router();
 const strategy = new LocalStrategy(function verify(username, password, cb) {
   console.log("verify", username, password);
 
+  //database code
+
   const user = {
     id: 1,
     username: "John",
