@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom';
 
@@ -44,7 +43,7 @@ function RecipeDetail() {
       let requestAPI = "/item/pub"
       let target = !detail.public
 
-      const res = await fetch(requestAPI, {
+      await fetch(requestAPI, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -56,23 +55,30 @@ function RecipeDetail() {
           }
         )
       })
-      let data = await res.json()
-      console.log(data)
       setIfPublic(target)
     }
     sendRequest()
   }
 
   const toggleFavorite = () => {
-    let requestAPI = "/item/fav"
-    let target = !detail.favorite
-    axios.post(requestAPI, {
-      email: currUser,
-      id: detail._id,
-      favorite: target
-    }).then(res => {
+    const sendRequest = async () => {
+      let requestAPI = "/item/fav"
+      let target = !detail.favorite
+      await fetch(requestAPI, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: currUser,
+          id: detail._id,
+          favorite: target
+        })
+      })
       setFavorited(target)
-    })
+    }
+
+    sendRequest()
   }
 
 
