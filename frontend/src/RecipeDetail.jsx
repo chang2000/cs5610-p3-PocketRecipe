@@ -86,11 +86,6 @@ function RecipeDetail() {
     sendRequest()
   }
 
-  const applyChange = (e) => {
-    console.log(e.target.value)
-    console.log('enter apply change')
-  }
-
   const applyNameChange = async (e) => {
     let newName = e.target.value
     if (newName == null || newName === "") {
@@ -157,7 +152,6 @@ function RecipeDetail() {
     console.log(data)
     setEditTimes(editTimes + 1)
   }
-
 
   const addSubItem = async (e) => {
     let type = e.currentTarget.id

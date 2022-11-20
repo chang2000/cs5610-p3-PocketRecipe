@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-
+import "./Root.css"
 function Root() {
   return (
-    <div>
+    <div id='router-root'>
       <div id='category-bar'>
         <nav>
           <li>
