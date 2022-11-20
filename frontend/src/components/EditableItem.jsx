@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import "./EditableItem.css"
 const EditableItem = (props) => {
-  const { title, defaultText, submitFunc } = props
+  const { title, defaultText, submitFunc, optType, idx } = props
   const [isE, setIsE] = useState(false)
   useEffect(() => {
     console.log()
@@ -21,7 +21,8 @@ const EditableItem = (props) => {
       {
 
         isE ?
-          <input className='editable-item-input'
+          <input className="editable-item-input"
+            id={`${idx}-${optType}`}
             autoFocus
             defaultValue={defaultText}
             onBlur={toggleEditing}

@@ -162,10 +162,43 @@ function RecipeDetail() {
   const addSubItem = async (e) => {
     let type = e.currentTarget.id
     console.log(type)
+    let newDetail = JSON.parse(JSON.stringify(detail))
     if (type === "ingri-add-btn") {
-      let newDetail = JSON.parse(JSON.stringify(detail))
-      newDetail.id = newDetail._id
       newDetail.ingrident.push("New ingri")
+    } else if (type === "instru-add-btn") {
+      newDetail.instruction.push("New step...")
+    }
+    newDetail.id = newDetail._id
+    let requestAPI = "/item/edit"
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newDetail)
+    })
+    let data = await res.json()
+    console.log(data)
+    setEditTimes(editTimes + 1)
+  }
+
+  const deleteSubItem = async (e) => {
+    let deleteConfirm = window.confirm("Want to delete?")
+    console.log(deleteConfirm)
+
+    if (deleteConfirm) {
+      let htmlEleID = e.currentTarget.id
+      console.log(htmlEleID)
+      let idx = parseInt(htmlEleID.split("-")[0], 10)
+      let type = htmlEleID.split("-")[1]
+      console.log(type)
+      let newDetail = JSON.parse(JSON.stringify(detail))
+      if (type === "ingri") {
+        newDetail.ingrident.splice(idx, 1) // remove the idx-th item
+      } else if (type === "instru") {
+        newDetail.instruction.splice(idx, 1)
+      }
+      newDetail.id = newDetail._id
       let requestAPI = "/item/edit"
       let res = await fetch(requestAPI, {
         method: "POST",
@@ -177,21 +210,21 @@ function RecipeDetail() {
       let data = await res.json()
       console.log(data)
       setEditTimes(editTimes + 1)
-      // Do some auto-focus here
-    } else {
-
     }
   }
 
-  const deleteSubItem = async (e) => {
-    let htmlEleID = e.currentTarget.id
-    console.log(htmlEleID)
-    let idx = parseInt(htmlEleID.split("-")[0], 10)
-    let type = htmlEleID.split("-")[1]
-    console.log(type)
+  const applyItemChange = async (e) => {
+    let targetValue = e.target.value
+    let targetID = e.currentTarget.id
+    let idx = targetID.split('-')[0]
+    let type = targetID.split('-')[1]
+    console.log(targetValue)
+    console.log(targetID)
     let newDetail = JSON.parse(JSON.stringify(detail))
     if (type === "ingri") {
-      newDetail.ingrident.splice(idx, 1) // remove the idx-th item
+      newDetail.ingrident[idx] = targetValue
+    } else if (type === "instru") {
+      newDetail.instruction[idx] = targetValue
     }
     newDetail.id = newDetail._id
     let requestAPI = "/item/edit"
@@ -266,7 +299,7 @@ function RecipeDetail() {
             {
               detail.ingrident?.map((item, i) =>
                 <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
+                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="ingri" idx={i} />
                   <button className="btn delete-icon" id={i + "-ingri-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
                     <DeleteIcon key={i + "icon"} />
                   </button>
@@ -277,17 +310,22 @@ function RecipeDetail() {
         </div>
 
         <div>Instruction:
-          <button className='btn'><AddCircleIcon /> </button>
-          {
-            detail.instruction?.map((item, i) =>
-              <div className="editable-wrapper" key={i + "editable-wrapper"}>
-                <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyChange} />
-                <button className="btn delete-icon" key={i + "icon-wrapper"}>
-                  <DeleteIcon key={i + "icon"} />
-                </button>
-              </div>
-            )
-          }
+          <button className='btn' id='instru-add-btn' onClick={addSubItem}>
+            <AddCircleIcon />
+          </button>
+
+          <div className="instru-list">
+            {
+              detail.instruction?.map((item, i) =>
+                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="instru" idx={i} />
+                  <button className="btn delete-icon" id={i + "-instru-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + "icon"} />
+                  </button>
+                </div>
+              )
+            }
+          </div>
         </div>
 
         <div>Nurtrition:
