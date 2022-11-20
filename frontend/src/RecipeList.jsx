@@ -11,7 +11,6 @@ function RecipeList(props) {
   useEffect(() => {
     // TODO: remove hardcode later
     const fetchData = async () => {
-      console.log('entering fetch data')
       let user = "wang"
       let requestAPI = ""
       if (type === "mine") {

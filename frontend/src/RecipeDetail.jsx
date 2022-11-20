@@ -3,8 +3,10 @@ import { useLoaderData } from 'react-router-dom';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import EditableItem from './components/EditableItem';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import EditableItem from './components/EditableItem';
 import "./RecipeDetail.css"
 
 export async function loader({ params }) {
@@ -105,7 +107,7 @@ function RecipeDetail() {
           }
         </div>
 
-        <div id="favorite-control" onClick={toggleFavorite}>
+        <button className='btn' onClick={toggleFavorite}>
           {
             detail.favorite ? (
               <FavoriteIcon />
@@ -114,7 +116,7 @@ function RecipeDetail() {
             )
           }
 
-        </div>
+        </button>
       </div>
       <div className="">
         <div className="">
@@ -131,38 +133,60 @@ function RecipeDetail() {
           <EditableItem title={"Prep Time"} defaultText={detail.prepTime + " seconds"} />
         </div>
 
-        <div>Ingrident:
+        <div className=''>
+          Ingrident:
+          <button className='btn'><AddCircleIcon /> </button>
+
           {
             detail.ingrident?.map((item, i) =>
               <div className="editable-wrapper" key={i + "editable-wrapper"}>
                 <EditableItem key={i} title={i + 1} defaultText={item} />
-                <div className="delete-icon" key={i + "icon-wrapper"} >
+                <button className="btn delete-icon" key={i + "icon-wrapper"}>
                   <DeleteIcon key={i + "icon"} />
-                </div>
+                </button>
               </div>
             )
           }
         </div>
 
         <div>Instruction:
+          <button className='btn'><AddCircleIcon /> </button>
           {
             detail.instruction?.map((item, i) =>
-              <EditableItem key={i} title={i + 1} defaultText={item} />
+              <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <button className="btn delete-icon" key={i + "icon-wrapper"}>
+                  <DeleteIcon key={i + "icon"} />
+                </button>
+              </div>
             )
           }
         </div>
 
         <div>Nurtrition:
+          <button className='btn'><AddCircleIcon /> </button>
           {
             detail.nutrition?.map((item, i) =>
-              <EditableItem key={i} title={i + 1} defaultText={item} />
+              <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <button className="btn delete-icon" key={i + "icon-wrapper"}>
+                  <DeleteIcon key={i + "icon"} />
+                </button>
+              </div>
             )
           }
         </div>
         <div>Tags:
+          <button className='btn'><AddCircleIcon /> </button>
           {
             detail.tags?.map((item, i) =>
-              <EditableItem key={i} title={i + 1} defaultText={item} />)
+              <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <EditableItem key={i} title={i + 1} defaultText={item} />
+                <button className="btn delete-icon" key={i + "icon-wrapper"}>
+                  <DeleteIcon key={i + "icon"} />
+                </button>
+              </div>
+            )
           }
         </div>
 
