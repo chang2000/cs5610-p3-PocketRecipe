@@ -11,22 +11,24 @@ function RecipeList(props) {
   // Do this once page reloaded
   useEffect(() => {
     // TODO: remove hardcode later
-    let user = "wang"
-    let requestAPI = ""
-    if (type === "mine") {
-      requestAPI = `/item/getByUser?email=${user}`
-    } else if (type === "discover") {
-      requestAPI = `/item/getAllPub`
-    } else if (type === "fav") {
-      requestAPI = `/item/getFav?email=${user}`
+    const fetchData = async () => {
+      console.log('entering fetch data')
+      let user = "wang"
+      let requestAPI = ""
+      if (type === "mine") {
+        requestAPI = `/item/getByUser?email=${user}`
+      } else if (type === "discover") {
+        requestAPI = `/item/getAllPub`
+      } else if (type === "fav") {
+        requestAPI = `/item/getFav?email=${user}`
+      }
+      let res = await fetch(requestAPI)
+      let data = await res.json()
+      setRecipes(data.recipes)
     }
 
-    axios.get(requestAPI).then(
-      res => {
-        console.log(res.data)
-        setRecipes(res.data.recipes)
-      }
-    )
+    fetchData()
+
   }, [type])
 
   return (
