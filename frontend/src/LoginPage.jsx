@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import './LoginPage.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginPage = () => {
 
@@ -17,8 +19,8 @@ const LoginPage = () => {
         )
     }
   return (
-    <div>
-      <h1>Sign in</h1>
+    <div className="wrapper">
+      <div className="text-center mt-4 name">Pocket Recipe</div>
       <form
         onSubmit={login}
         className="p-3 mt-3"
