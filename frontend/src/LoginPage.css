@@ -10,14 +10,16 @@
     /* background-color: #ecf0f3; */
 }
 
-body {
+.back-page {
+    height: 100%;
+    width: 100%;
     background: #ecf0f3;
 }
 
 .wrapper {
     max-width: 350px;
     min-height: 350px; 
-    margin: 80px auto;
+    margin:  auto;
     padding: 40px 30px 30px 30px;
     background-color: #ecf0f3;
     border-radius: 15px;
