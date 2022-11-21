@@ -10,7 +10,7 @@ import RecipeDetail, {
   loader as recipeDetailLoader
 } from './RecipeDetail';
 
-import LoginPage from './LoginPage';
+import LoginPage from './LoginPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -108,9 +108,9 @@ function IndexPage() {
 
 function MainPage() {
   return (
-    <div id="App">
+    // <div id="App">
       <RouterProvider router={router} />
-    </div>
+    // </div>
   );
 }
 
@@ -142,9 +142,8 @@ function App() {
   return (
     isLoggedIn ? (
 
-      <div id="App">
         <RouterProvider router={router} />
-      </div>
+ 
     ) : (
       <LoginPage />
     )
