@@ -23,7 +23,13 @@
 html {
   box-sizing: border-box;
 }
-*,
+* {
+  /* margin: 0;
+  padding: 0; */
+  /* box-sizing: border-box; */
+  font-family: 'Poppins', sans-serif;
+  /* background-color: #FFF; */
+}
 *:before,
 *:after {
   box-sizing: inherit;
