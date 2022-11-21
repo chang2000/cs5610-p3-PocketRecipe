@@ -4,7 +4,8 @@ import { Link, Outlet } from "react-router-dom";
 function Root() {
   return (
     <>
-      <div id="category-bar">
+    <div id="whole-page">
+    <div id="category-bar">
         <h1>Current user:</h1>
         <button id="log-out">Log Out</button>
         <div>
@@ -43,6 +44,8 @@ function Root() {
       <div id="content">
         <Outlet />
       </div>
+    </div>
+      
     </>
   );
 }

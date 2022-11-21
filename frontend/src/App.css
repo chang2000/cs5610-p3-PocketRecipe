@@ -124,8 +124,14 @@ form[action$="destroy"] button {
   border-width: 0;
 }
 
-#root {
+#whole-page {
   display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  /* display: flex; */
   height: 100%;
   width: 100%;
 }
