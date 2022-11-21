@@ -56,7 +56,7 @@ const LoginPage = () => {
         </form>
         <div class="text-center fs-6">
         
-        <a href="./html/createUser.html">Sign up</a>
+        <a href="">Sign up</a>
       </div>
       </div>
     </div>
