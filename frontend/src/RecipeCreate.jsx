@@ -6,12 +6,10 @@ const RecipeCreate = () => {
   const [ingridients, setIngridients] = useState(["Click here to edit..."])
   const [instructions, setInstructions] = useState(["Click here to edit..."])
   const [nurtritions, setNurtritions] = useState(["Click here to edit..."])
-
+  const [tags, setTags] = useState(["Click here to edit..."])
 
   useEffect(() => {
-    // console.log(ingridients)
-    console.log(instructions)
-  }, [ingridients, instructions, nurtritions])
+  }, [ingridients, instructions, nurtritions, tags])
 
 
   const addSubItem = (e) => {
@@ -29,6 +27,10 @@ const RecipeCreate = () => {
       let tmp = JSON.parse(JSON.stringify(nurtritions))
       tmp.push("Click here to add a new instruction....")
       setNurtritions(tmp)
+    } else if (type === 'newrecipe-tag-add-btn') {
+      let tmp = JSON.parse(JSON.stringify(tags))
+      tmp.push("Click here to add a new instruction....")
+      setTags(tmp)
     }
 
   }
@@ -52,6 +54,10 @@ const RecipeCreate = () => {
       let tmp = JSON.parse(JSON.stringify(nurtritions))
       tmp[idx] = targetValue
       setNurtritions(tmp)
+    } else if (type === "tag") {
+      let tmp = JSON.parse(JSON.stringify(tags))
+      tmp[idx] = targetValue
+      setTags(tmp)
     }
   }
 
@@ -75,6 +81,10 @@ const RecipeCreate = () => {
         let tmp = JSON.parse(JSON.stringify(nurtritions))
         tmp.splice(idx, 1)
         setNurtritions(tmp)
+      } else if (type === "tag") {
+        let tmp = JSON.parse(JSON.stringify(tags))
+        tmp.splice(idx, 1)
+        setTags(tmp)
       }
     }
 
@@ -160,6 +170,25 @@ const RecipeCreate = () => {
                 <EditableItem key={i} title={i + 1} defaultText={item}
                   submitFunc={applyItemChange} optType='nurtri' idx={i} />
                 <button className="btn delete-icon" id={i + "-nurtri-delete-icon-newrecipe"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
+                  <DeleteIcon key={i + "icon"} />
+                </button>
+              </div>
+            )
+          }
+        </div>
+
+        <div className="newrecipe-tags">
+          <h2>Tags: </h2>
+          <button className='btn' id='newrecipe-tag-add-btn' onClick={addSubItem}>
+            <AddCircleIcon />
+          </button>
+
+          {
+            tags?.map((item, i) =>
+              <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <EditableItem key={i} title={i + 1} defaultText={item}
+                  submitFunc={applyItemChange} optType='tag' idx={i} />
+                <button className="btn delete-icon" id={i + "-tag-delete-icon-newrecipe"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
                   <DeleteIcon key={i + "icon"} />
                 </button>
               </div>
