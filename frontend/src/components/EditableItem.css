@@ -1,0 +1,14 @@
+.editable-item {
+  background-color: aqua;  
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+}
+
+.editable-item:hover {
+  cursor: pointer; 
+}
+
+.editable-item-input {
+  width: 500px;
+}

@@ -1,8 +1,6 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Link, } from 'react-router-dom'
 import { useState, useEffect } from "react";
-
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Root from './routes/Root';
 import ErrorPage from './ErrorPage';
 import RecipeList from './RecipeList';

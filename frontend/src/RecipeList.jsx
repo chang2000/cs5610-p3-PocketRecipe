@@ -1,8 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import RecipeDetail from './RecipeDetail'
-import axios from 'axios'
 
 function RecipeList(props) {
   const type = props.type
@@ -12,36 +10,24 @@ function RecipeList(props) {
   // Do this once page reloaded
   useEffect(() => {
     // TODO: remove hardcode later
-    let user = "wang"
-    let requestAPI = ""
-    if (type === "mine") {
-      requestAPI = `/item/getByUser?email=${user}`
-    } else if (type === "discover") {
-      requestAPI = `/item/getAllPub`
-    } else if (type === "fav") {
-      requestAPI = `/item/getFav?email=${user}`
+    const fetchData = async () => {
+      let user = "wang"
+      let requestAPI = ""
+      if (type === "mine") {
+        requestAPI = `/item/getByUser?email=${user}`
+      } else if (type === "discover") {
+        requestAPI = `/item/getAllPub`
+      } else if (type === "fav") {
+        requestAPI = `/item/getFav?email=${user}`
+      }
+      let res = await fetch(requestAPI)
+      let data = await res.json()
+      setRecipes(data.recipes)
     }
 
-    axios.get(requestAPI).then(
-      res => {
-        console.log(res.data)
-        setRecipes(res.data.recipes)
-      }
-    )
-  }, [type])
+    fetchData()
 
-  /**
-   * TODO
-   * Design a recipe object here
-   * set a recipe as state
-   * fetch the list while useEffect()=>{, []}  // page loading
-   * Automatically render the the first recipe it found
-   * 
-   */
-  // const detail = {
-  //   name: "Medium Rare Steak",
-  //   id: 1
-  // }
+  }, [type])
 
   return (
     // also create a bunch of Link here

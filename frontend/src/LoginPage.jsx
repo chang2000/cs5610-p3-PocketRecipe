@@ -12,7 +12,7 @@ const LoginPage = () => {
         password: e.target.password.value,
       })
       .then((res) => {
-        console.log("res in login page", res);
+        console.log("res in login page", res.data);
         window.localStorage.setItem("email", e.target.username.value);
       });
   };
