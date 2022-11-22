@@ -37,14 +37,14 @@ const strategy = new LocalStrategy(async function verify(username, password, cb)
 
 passport.use(strategy);
 
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
+passport.serializeUser(function (user, cb) {
+  process.nextTick(function () {
     cb(null, { id: user.id, username: user.username });
   });
 });
 
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
+passport.deserializeUser(function (user, cb) {
+  process.nextTick(function () {
     return cb(null, user);
   });
 });
@@ -52,18 +52,18 @@ passport.deserializeUser(function(user, cb) {
 
 router.post(
   "/login/password",
-  passport.authenticate('local', 
-  { failureRedirect: '/login', failureMessage: true }),
-  function(req, res) {
+  passport.authenticate('local',
+    { failureRedirect: '/login', failureMessage: true }),
+  function (req, res) {
     console.log("herrrrrrrrrr name of user:", req.user.username)
     res.redirect('/');
   });
 
 
-  // passport.authenticate("local", {
-  //   successRedirect: "/",
-  //   failureRedirect: "/login",
-  // })
+// passport.authenticate("local", {
+//   successRedirect: "/",
+//   failureRedirect: "/login",
+// })
 // );
 
 // router.get("/getCurrentUser", (req, res) => {
