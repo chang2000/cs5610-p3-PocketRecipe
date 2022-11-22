@@ -1,25 +1,35 @@
-import axios from "axios";
 import React from "react";
 import "./LoginPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const LoginPage = () => {
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    axios
-      .post("/login/password", {
-        username: e.target.username.value,
-        password: e.target.password.value,
-      })
-      .then((res) => {
-        console.log("res in login page", res.data);
-        window.localStorage.setItem("email", e.target.username.value);
-      });
+    let requestAPI = "/login/password"
+
+    // let res = fetch(requestAPI, {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(
+    //     {
+    //       username: e.target.username.value,
+    //       password: e.target.password.value,
+    //     }
+    //   )
+
+    // })
+    // let data = await res.json()
+    // console.log(data)
+    // // TODO
+    // console.log("res in login page", res.data);
+    window.localStorage.setItem("email", e.target.username.value);
   };
   return (
     <div className="back-page">
       <div className="wrapper">
-        
+
         <div className="text-center mt-4 name">Pocket Recipe</div>
         <form onSubmit={login} className="p-3 mt-3">
           <div>
@@ -54,12 +64,12 @@ const LoginPage = () => {
             Sign in
           </button>
         </form>
-        <div class="text-center fs-6">
-        
-        <a href="">Sign up</a>
+        <div className="text-center fs-6">
+
+          <a href="">Sign up</a>
+        </div>
       </div>
-      </div>
-    </div>
+    </div >
   );
 };
 
