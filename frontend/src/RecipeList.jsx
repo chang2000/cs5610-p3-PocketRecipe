@@ -6,12 +6,11 @@ function RecipeList(props) {
   const type = props.type
   // the recipes stores ids of recipe of the current list 
   const [recipes, setRecipes] = useState([])
-
+  const user = window.localStorage.getItem("email")
   // Do this once page reloaded
   useEffect(() => {
     // TODO: remove hardcode later
     const fetchData = async () => {
-      let user = "wang"
       let requestAPI = ""
       if (type === "mine") {
         requestAPI = `/item/getByUser?email=${user}`
@@ -24,10 +23,8 @@ function RecipeList(props) {
       let data = await res.json()
       setRecipes(data.recipes)
     }
-
     fetchData()
-
-  }, [type])
+  }, [type, user])
 
   return (
     // also create a bunch of Link here

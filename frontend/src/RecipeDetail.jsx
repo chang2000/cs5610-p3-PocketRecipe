@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -19,13 +19,13 @@ export async function loader({ params }) {
 function RecipeDetail() {
   const data = useLoaderData()
   const id = data.id;
-
+  const currUser = window.localStorage.getItem("email")
   const [detail, setDetail] = useState({})
   const [ifPublic, setIfPublic] = useState()
   const [favorited, setFavorited] = useState()
   const [editTimes, setEditTimes] = useState(0)
-  const currUser = "wang"
 
+  const navigate = useNavigate()
   useEffect(() => {
     // get detail by id
     const fetchData = async () => {
@@ -36,7 +36,7 @@ function RecipeDetail() {
       setDetail(data.detail)
     }
     fetchData()
-  }, [id, ifPublic, favorited, editTimes])
+  }, [id, ifPublic, favorited, editTimes, currUser])
 
 
   const togglePublic = () => {
@@ -242,46 +242,13 @@ function RecipeDetail() {
     setEditTimes(editTimes + 1)
   }
 
-  return (
-    <div id="recipe-detail">
-      <div> <b>Recipe Detail: </b>
-        {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
-        <div>Visibility:
-          {
-            detail.user === currUser ? (
-              detail.public ? (
-                <button onClick={togglePublic}>Public</button>
-              ) : (
-                <button onClick={togglePublic}>Private</button>
-              )
-            ) : (
-              detail.public ? (
-                <div>Public</div>
-              ) : (
-                <div>Private</div>
-              )
-            )
-          }
-        </div>
-
-        <button className='btn' onClick={toggleFavorite}>
-          {
-            detail.favorite ? (
-              <FavoriteIcon />
-            ) : (
-              <FavoriteBorderIcon />
-            )
-          }
-
-        </button>
-      </div>
-      <div className="">
+  const EditableDetail = () => {
+    return (
+      <>
         <div className="">
           <EditableItem title={"Name"} defaultText={detail.name} submitFunc={applyNameChange} />
         </div>
 
-        <div>ID: {detail._id}</div>
-        <div>Author: {detail.user}</div>
         <div className="">
           <EditableItem title={"Description"} defaultText={detail.description} submitFunc={applyDescChange} />
         </div>
@@ -364,11 +331,142 @@ function RecipeDetail() {
             }
           </div>
         </div>
+      </>
+    )
+  }
+
+  const ViewOnlyDetail = () => {
+    return (
+      <>
+        <h1>View Only.....</h1>
+        <div className="">
+          <div className="view-name">Name: {detail.name}</div>
+        </div>
+
+        <div className="">
+          <div className="view-desc">Description: {detail.desc}</div>
+        </div>
+
+        <div className="">
+          <div className="view-preptime">Prep Time: {detail.prepTime} seconds</div>
+        </div>
+
+        <div className=''>
+          <h2>Ingrident:</h2>
+          <div id='ingri-list'>
+            {
+              detail.ingrident?.map((item, i) =>
+                <div className="view-ingri" key={i}>{i + 1}: {item}</div>
+              )
+            }
+          </div>
+        </div>
+
+        <div>
+          <h2>Instruction:</h2>
+
+          <div className="instru-list">
+            {
+              detail.instruction?.map((item, i) =>
+                <div className="view-instru" key={i}>{i + 1}: {item}</div>
+              )
+            }
+          </div>
+        </div>
+
+        <div>
+          <h2>Nurtrition:</h2>
+
+          <div className="nurtri-list">
+            {
+              detail.nutrition?.map((item, i) =>
+                <div className="view-nurtri" key={i}>{i + 1}: {item}</div>
+              )
+            }
+          </div>
+        </div>
+
+        <div>
+          <h2>Tags:</h2>
+
+          <div className="tag-list">
+            {
+              detail.tags?.map((item, i) =>
+                <div className="view-tag" key={i}>{i + 1}: {item}</div>
+              )
+            }
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  const deleteRecipe = async () => {
+    let deleteConfirm = window.confirm("Want to delete?")
+    if (deleteConfirm) {
+      let requestAPI = `/item/delete?id=${detail._id}`
+      let res = await fetch(requestAPI)
+      let data = await res.json()
+      console.log(data)
+      let curTab = (window.location.pathname).split("/")[1]
+      navigate("/" + curTab)
+      window.location.reload()
+    }
+  }
+
+  return (
+    <div id="recipe-detail">
+      <div> <b>Recipe Detail: </b>
+        {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
+        {
+          detail.user === currUser ? (
+            <button onClick={deleteRecipe}>Delete</button>
+          )
+            :
+            <></>
+        }
+        <div>Visibility:
+          {
+            detail.user === currUser ? (
+              detail.public ? (
+                <button onClick={togglePublic}>Public</button>
+              ) : (
+                <button onClick={togglePublic}>Private</button>
+              )
+            ) : (
+              detail.public ? (
+                <div>Public</div>
+              ) : (
+                <div>Private</div>
+              )
+            )
+          }
+        </div>
+
+        <button className='btn' onClick={toggleFavorite}>
+          {
+            detail.favorite ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )
+          }
+
+        </button>
+      </div>
+      <div className="">
+        <div>ID: {detail._id}</div>
+        <div>Author: {detail.user}</div>
+
+        {
+          detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />
+        }
 
 
       </div>
 
     </div >
+
   )
 }
 

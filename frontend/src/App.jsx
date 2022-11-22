@@ -63,8 +63,6 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  const [user, setUser] = useState(null);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {

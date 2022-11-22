@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditableItem from './components/EditableItem';
+import { useNavigate } from "react-router-dom";
+
+
 const RecipeCreate = () => {
   const [ingridients, setIngridients] = useState(["Click here to edit..."])
   const [instructions, setInstructions] = useState(["Click here to edit..."])
   const [nurtritions, setNurtritions] = useState(["Click here to edit..."])
   const [tags, setTags] = useState(["Click here to edit..."])
 
+  const navigate = useNavigate()
   useEffect(() => {
   }, [ingridients, instructions, nurtritions, tags])
 
@@ -92,31 +96,62 @@ const RecipeCreate = () => {
 
   const createRecipe = (e) => {
     e.preventDefault()
-    console.log('created')
   }
 
-  const submitRecipe = (e) => {
-    console.log(e.target)
-    console.log('I mean it...')
+  const submitRecipe = async (e) => {
+    console.log('I mean it... please submit')
+    let currUser = window.localStorage.getItem("email")
+    let name = document.getElementById('newrecipe-input-name').value
+    let desc = document.getElementById('newrecipe-input-desc').value
+    let prepTime = document.getElementById('newrecipe-input-preptime').value
+    let visibility = document.getElementById('visibility-select').value
+    let ifPublic = (visibility === "public")
+    let recipeInfo = {
+      email: currUser,
+      itemName: name,
+      description: desc,
+      prepTime: prepTime,
+      ingrident: ingridients,
+      instruction: instructions,
+      nurtritions: nurtritions,
+      tags: tags,
+      public: ifPublic
+    }
+
+    let apiURL = "/item/create"
+    let res = await fetch(apiURL, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipeInfo)
+    })
+    let data = await res.json()
+    let curRecipeID = data.id
+    navigate(`/mine/${curRecipeID}`)
+    window.location.reload()
   }
-
-
 
   return (
     <div className="recipe-create-view">
       <h1>Create a New Recipe</h1>
+      Visibility:
+      <select name="visibility" id="visibility-select">
+        <option value="private">Private</option>
+        <option value="public">Public</option>
+      </select>
       <form onSubmit={createRecipe}>
         <div className="newrecipe-name">
-          Name: <input></input>
+          Name: <input id='newrecipe-input-name'></input>
         </div>
 
         <div className="newrecipe-desc">
-          Description: <input></input>
+          Description: <input id='newrecipe-input-desc'></input>
         </div>
 
         <div className="newrecipe-preptime">
           Prep Time
-          <input></input>
+          <input id='newrecipe-input-preptime'></input>
           minutes
         </div>
 
