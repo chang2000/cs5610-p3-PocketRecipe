@@ -28,11 +28,13 @@ function Root() {
     console.log('enter create new recipe')
     navigate("/mine/new")
   }
+
+  let curUser = window.localStorage.getItem("email");
   return (
     <>
       <div id="whole-page">
         <div id="category-bar">
-          <h1>Current user:</h1>
+          <h1 >Current user: {curUser}</h1>
 
           <button id="log-out" onClick={logOut}>
             Log Out

@@ -1,79 +1,103 @@
-import React, { useState, useEffect } from 'react'
-import md5 from 'md5'
+import React, { useState, useEffect } from "react";
+import md5 from "md5";
 import "./LoginPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const LoginPage = () => {
-  const [pageStatus, setPageStatus] = useState("login")
+  const [pageStatus, setPageStatus] = useState("login");
+
+  useEffect(() => {}, [pageStatus]);
+
+  const [createState, setCreatestate] = useState("initialState");
 
   useEffect(() => {
     
-  }, [pageStatus])
+  }, [createState]);
+
+  
 
   const login = async (e) => {
     e.preventDefault();
-    let requestAPI = "/user/login"
-    let hashedPwd = md5(e.target.password.value)
-    console.log(hashedPwd)
+    let requestAPI = "/user/login";
+    let hashedPwd = md5(e.target.password.value);
+    console.log(hashedPwd);
     let res = await fetch(requestAPI, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        {
-          email: e.target.username.value,
-          password: hashedPwd,
-        }
-      )
-
-    })
-    let data = await res.json()
+      body: JSON.stringify({
+        email: e.target.username.value,
+        password: hashedPwd,
+      }),
+    });
+    let data = await res.json();
     if (data.val == 1) {
-      console.log("here")
+      console.log("here");
       window.localStorage.setItem("email", e.target.username.value);
       window.location.reload(true);
     } else {
-      console.log("not here")
-      //TODO: add alert, not successful
-
+      console.log("not here");
+      document.getElementById("login-fail-alert").style.display = "block";
     }
-
-    // // TODO: judge if successful user login, if so, add to localstorage and refresh page
     
   };
 
   const createUser = async (e) => {
     e.preventDefault();
-    let requestAPI = "/user/create"
-    let hashedPwd = md5(e.target.password.value)
-    console.log("sign up email:", e.target.username.value)
-    console.log("sign up page:", hashedPwd)
+    let requestAPI = "/user/create";
+    let hashedPwd = md5(e.target.password.value);
+    console.log("sign up email:", e.target.username.value);
+    console.log("sign up page:", hashedPwd);
 
     let res = await fetch(requestAPI, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        {
-          email: e.target.username.value,
-          password: hashedPwd,
-        }
-      )
+      body: JSON.stringify({
+        email: e.target.username.value,
+        password: hashedPwd,
+      }),
+    });
 
-    })
-    let data = await res.json()
-    console.log(data)
+    let data = await res.json();
+    console.log(data);
+    if (data.val == 1) {
+      console.log("here data is 1");
+      setCreatestate(false);
 
-  }
+      setPageStatus(true);
+    } else {
+      document.getElementById("create-fail-alert").style.display = "block";
+      setCreatestate(false);
+      // setPageStatus(true);
+    }
+  };
 
+  
 
-  return (
-    pageStatus ? (// true => sign in page
-      <div className="back-page">
+  return pageStatus ? ( // true => sign in page
+    <div className="back-page">
       <div className="wrapper">
+        <Stack sx={{ width: "100%" }} spacing={2}>
+          <Alert
+            id="create-success"
+            severity="success"
+            style={{ display: "none" }}
+          >
+            Successfully created the account
+          </Alert>
+          <Alert
+            id="login-fail-alert"
+            severity="error"
+            style={{ display: "none" }}
+          >
+            Wrong email or password
+          </Alert>
+        </Stack>
 
         <div className="text-center mt-4 name">Pocket Recipe</div>
         <form onSubmit={login} className="p-3 mt-3">
@@ -110,16 +134,38 @@ const LoginPage = () => {
           </button>
         </form>
         <div className="text-center fs-6 ">
-          <a className='small-text' onClick={() => {setPageStatus(false)}}>Sign Up</a>
+          <a
+            className="small-text"
+            onClick={() => {
+              setPageStatus(false);
+            }}
+          >
+            Sign Up
+          </a>
         </div>
       </div>
-    </div >
-    ) : (//false => sign up page
-      <div className="back-page">
+    </div>
+  ) : (
+    //false => sign up page
+    <div className="back-page">
       <div className="wrapper">
-      <div className="text">
-        <a className='small-text' onClick={() => {setPageStatus(true)}}>&lt; back</a>
-      </div>
+        <div className="text">
+          <a
+            className="small-text"
+            onClick={() => {
+              setPageStatus(true);
+            }}
+          >
+            &lt; back
+          </a>
+        </div>
+        <Alert
+          id="create-fail-alert"
+          severity="error"
+          style={{ display: "none" }}
+        >
+          User already exists
+        </Alert>
 
         <div className="text-center mt-4 name">Create new account</div>
         <form onSubmit={createUser} className="p-3 mt-3">
@@ -155,14 +201,9 @@ const LoginPage = () => {
             Sign up
           </button>
         </form>
-        
       </div>
-    </div >
-    )
-    
+    </div>
   );
 };
-
-
 
 export default LoginPage;
