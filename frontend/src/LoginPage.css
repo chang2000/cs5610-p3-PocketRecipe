@@ -105,6 +105,10 @@
     color: #e58e03;
 }
 
+.small-text {
+    color: #e58e03;
+}
+
 @media(max-width: 380px) {
     .wrapper {
         margin: 30px 20px;

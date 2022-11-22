@@ -1,7 +1,27 @@
 import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 function Root() {
+  function logOut() {
+    confirmAlert({
+      title: 'Want to log out?',
+      // message: 'Are you sure to log out?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            window.localStorage.removeItem("email");
+            window.location.reload(true);
+          }
+        },
+        {
+          label: 'No',
+        }
+      ]
+    });
+  }
   const navigate = useNavigate()
   const createNewRecipe = (e) => {
     e.preventDefault()
@@ -13,7 +33,11 @@ function Root() {
       <div id="whole-page">
         <div id="category-bar">
           <h1>Current user:</h1>
-          <button id="log-out">Log Out</button>
+
+          <button id="log-out" onClick={logOut}>
+            Log Out
+          </button>
+
           <div>
             <form id="search-form" role="search">
               <input
@@ -26,7 +50,9 @@ function Root() {
               <div id="search-spinner" aria-hidden hidden={true} />
               <div className="sr-only" aria-live="polite"></div>
             </form>
+
             <form onSubmit={createNewRecipe}>
+
               <button type="submit">New</button>
             </form>
           </div>
@@ -51,9 +77,10 @@ function Root() {
           <Outlet />
         </div>
       </div>
-
     </>
   );
 }
+
+
 
 export default Root;

@@ -2,9 +2,7 @@ import express from "express";
 import db from "../db/db.js"
 const router = express.Router();
 
-// const db = require("../db/db.js");
-
-router.get("/user/login", async (req, res) => {
+router.post("/user/login", async (req, res) => {
   try {
     let user = {};
     user.email = req.body.email;
