@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
@@ -22,18 +22,22 @@ function Root() {
       ]
     });
   }
-
-  function sayHello() {
-    alert('Hello!');
+  const navigate = useNavigate()
+  const createNewRecipe = (e) => {
+    e.preventDefault()
+    console.log('enter create new recipe')
+    navigate("/mine/new")
   }
   return (
     <>
       <div id="whole-page">
         <div id="category-bar">
           <h1>Current user:</h1>
+
           <button id="log-out" onClick={logOut}>
             Log Out
           </button>
+
           <div>
             <form id="search-form" role="search">
               <input
@@ -46,7 +50,9 @@ function Root() {
               <div id="search-spinner" aria-hidden hidden={true} />
               <div className="sr-only" aria-live="polite"></div>
             </form>
-            <form method="post">
+
+            <form onSubmit={createNewRecipe}>
+
               <button type="submit">New</button>
             </form>
           </div>
