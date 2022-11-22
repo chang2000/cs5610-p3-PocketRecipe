@@ -23,20 +23,55 @@ const LoginPage = () => {
       },
       body: JSON.stringify(
         {
-          username: e.target.username.value,
-          password: e.target.password.value,
+          email: e.target.username.value,
+          password: hashedPwd,
+        }
+      )
+
+    })
+    let data = await res.json()
+    if (data.val == 1) {
+      console.log("here")
+      window.localStorage.setItem("email", e.target.username.value);
+      window.location.reload(true);
+    } else {
+      console.log("not here")
+      //TODO: add alert, not successful
+
+    }
+
+    // // TODO: judge if successful user login, if so, add to localstorage and refresh page
+    
+  };
+
+  const createUser = async (e) => {
+    e.preventDefault();
+    let requestAPI = "/user/create"
+    let hashedPwd = md5(e.target.password.value)
+    console.log("sign up email:", e.target.username.value)
+    console.log("sign up page:", hashedPwd)
+
+    let res = await fetch(requestAPI, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          email: e.target.username.value,
+          password: hashedPwd,
         }
       )
 
     })
     let data = await res.json()
     console.log(data)
-    // // TODO
-    // console.log("res in login page", res.data);
-    window.localStorage.setItem("email", e.target.username.value);
-  };
+
+  }
+
+
   return (
-    pageStatus ? (// true => sign in
+    pageStatus ? (// true => sign in page
       <div className="back-page">
       <div className="wrapper">
 
@@ -75,12 +110,11 @@ const LoginPage = () => {
           </button>
         </form>
         <div className="text-center fs-6 ">
-
           <a className='small-text' onClick={() => {setPageStatus(false)}}>Sign Up</a>
         </div>
       </div>
     </div >
-    ) : (//false => sign up
+    ) : (//false => sign up page
       <div className="back-page">
       <div className="wrapper">
       <div className="text">
@@ -88,7 +122,7 @@ const LoginPage = () => {
       </div>
 
         <div className="text-center mt-4 name">Create new account</div>
-        <form onSubmit={login} className="p-3 mt-3">
+        <form onSubmit={createUser} className="p-3 mt-3">
           <div>
             <label className="form-label" htmlFor="username">
               Username
