@@ -12,6 +12,19 @@ Slides Presentation:
 
 Design Document [./design-document.md](./design-document.md).
 
+# 80% CHECKPOINT for Nov 22
+
+What we already done:
+
+- **All functionalities**, for both frontend and backend
+
+What's left:
+
+- Styling
+- Mock Data
+- Deployment
+- Report, Slides & demo videos
+
 # 60% CHECKPOINT
 
 What we already done:
