@@ -190,7 +190,14 @@ const db = () => {
           { deleted: false }
         ]
       }).toArray()
-      return res;
+      // fitered out 
+      let filtered = [];
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].deleted == false) {
+          filtered.push(res[i]);
+        }
+      }
+      return filtered;
     } finally {
       console.log("Closing the connection");
       client.close();
@@ -245,7 +252,13 @@ const db = () => {
           { deleted: false }
         ]
       }).toArray()
-      return res
+      let filtered = [];
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].deleted == false) {
+          filtered.push(res[i]);
+        }
+      }
+      return filtered;
     } finally {
       console.log("Closing the connection");
       client.close();

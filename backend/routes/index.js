@@ -179,7 +179,9 @@ router.get("/item/getFav", async (req, res) => {
       query.id = dbRes[id]
       query.email = req.query.email
       let recipe = await db.getItemDetailById(query)
-      recipes.push(recipe)
+      if (recipe.deleted === false) {
+        recipes.push(recipe)
+      }
     }
     res.send({
       val: 1,

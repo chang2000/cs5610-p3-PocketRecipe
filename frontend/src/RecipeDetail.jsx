@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -25,6 +25,7 @@ function RecipeDetail() {
   const [favorited, setFavorited] = useState()
   const [editTimes, setEditTimes] = useState(0)
 
+  const navigate = useNavigate()
   useEffect(() => {
     // get detail by id
     const fetchData = async () => {
@@ -399,10 +400,31 @@ function RecipeDetail() {
       </>
     )
   }
+
+  const deleteRecipe = async () => {
+    let deleteConfirm = window.confirm("Want to delete?")
+    if (deleteConfirm) {
+      let requestAPI = `/item/delete?id=${detail._id}`
+      let res = await fetch(requestAPI)
+      let data = await res.json()
+      console.log(data)
+      let curTab = (window.location.pathname).split("/")[1]
+      navigate("/" + curTab)
+      window.location.reload()
+    }
+  }
+
   return (
     <div id="recipe-detail">
       <div> <b>Recipe Detail: </b>
         {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
+        {
+          detail.user === currUser ? (
+            <button onClick={deleteRecipe}>Delete</button>
+          )
+            :
+            <></>
+        }
         <div>Visibility:
           {
             detail.user === currUser ? (
