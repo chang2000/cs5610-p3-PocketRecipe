@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 
-import EditableItem from './components/EditableItem'
+import EditableItem from '../components/EditableItem'
 import './RecipeDetail.css'
 
 export async function loader({ params }) {

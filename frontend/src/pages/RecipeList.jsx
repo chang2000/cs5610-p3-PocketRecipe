@@ -1,22 +1,23 @@
-import './App.css';
+import '../App.css'
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 function RecipeList(props) {
+  // eslint-disable-next-line react/prop-types
   const type = props.type
   // the recipes stores ids of recipe of the current list 
   const [recipes, setRecipes] = useState([])
-  const user = window.localStorage.getItem("email")
+  const user = window.localStorage.getItem('email')
   // Do this once page reloaded
   useEffect(() => {
     // TODO: remove hardcode later
     const fetchData = async () => {
-      let requestAPI = ""
-      if (type === "mine") {
+      let requestAPI = ''
+      if (type === 'mine') {
         requestAPI = `/item/getByUser?email=${user}`
-      } else if (type === "discover") {
-        requestAPI = `/item/getAllPub`
-      } else if (type === "fav") {
+      } else if (type === 'discover') {
+        requestAPI = '/item/getAllPub'
+      } else if (type === 'fav') {
         requestAPI = `/item/getFav?email=${user}`
       }
       let res = await fetch(requestAPI)
