@@ -22,6 +22,7 @@ function RecipeList(props) {
       }
       let res = await fetch(requestAPI)
       let data = await res.json()
+      console.log(data)
       setRecipes(data.recipes)
     }
     fetchData()
@@ -36,7 +37,7 @@ function RecipeList(props) {
       <div id="main-list">
         {/* Dynamic render */}
         {
-          recipes.map((item, i) => (
+          recipes?.map((item, i) => (
             <Link key={i} to={`/${type}/${item._id}`}>
               {item.name}
             </Link>

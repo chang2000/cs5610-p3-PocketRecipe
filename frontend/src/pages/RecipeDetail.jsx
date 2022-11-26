@@ -254,7 +254,7 @@ function RecipeDetail() {
         </div>
 
         <div className="">
-          <EditableItem title={'Prep Time'} defaultText={detail.prepTime} submitFunc={applyPrepTimeChange} />
+          <EditableItem title={'Prep Time'} defaultText={detail.prepTime.toString()} submitFunc={applyPrepTimeChange} />
           seconds
         </div>
 
