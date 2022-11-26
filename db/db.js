@@ -290,18 +290,20 @@ const db = () => {
       await client.connect();
       const db = client.db(DB_NAME);
       const col = db.collection("recipe");
-      const res = await col.findOne({ _id: ObjectId(`${query.id}`) })
+      console.log(query.email)
+      console.log('query id', query.id)
+
+      const res = await col.findOne({ _id: ObjectId(query.id) })
+      console.log('res is', res)
 
       // get all favs
-      console.log(query.id)
-      console.log(query.email)
       const userCol = db.collection("user")
       const favRes = await userCol.findOne(
         { email: query.email }
       )
+      console.log('favRes', favRes)
       const favs = favRes.favs
-      console.log()
-      let ret = res
+      let ret = JSON.parse(JSON.stringify(res))
       if (favs.includes(res._id.toString())) {
         ret.favorite = true
       } else {

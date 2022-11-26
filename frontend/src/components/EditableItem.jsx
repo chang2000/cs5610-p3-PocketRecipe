@@ -42,11 +42,11 @@ const EditableItem = (props) => {
 }
 
 EditableItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  defaultText: PropTypes.string.isRequired,
+  title: PropTypes.any.isRequired,
+  defaultText: PropTypes.string,
   submitFunc: PropTypes.func.isRequired,
-  optType: PropTypes.string.isRequired,
-  idx: PropTypes.number.isRequired
+  optType: PropTypes.string,
+  idx: PropTypes.number
 }
 
 export default EditableItem
