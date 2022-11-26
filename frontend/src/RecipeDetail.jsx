@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom'
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import DeleteIcon from '@mui/icons-material/Delete'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 
-import EditableItem from './components/EditableItem';
-import "./RecipeDetail.css"
+import EditableItem from './components/EditableItem'
+import './RecipeDetail.css'
 
 export async function loader({ params }) {
-  console.log("the id is", params.id)
+  console.log('the id is', params.id)
   return {
     id: params.id,
   }
@@ -18,8 +18,8 @@ export async function loader({ params }) {
 
 function RecipeDetail() {
   const data = useLoaderData()
-  const id = data.id;
-  const currUser = window.localStorage.getItem("email")
+  const id = data.id
+  const currUser = window.localStorage.getItem('email')
   const [detail, setDetail] = useState({})
   const [ifPublic, setIfPublic] = useState()
   const [favorited, setFavorited] = useState()
@@ -42,11 +42,11 @@ function RecipeDetail() {
   const togglePublic = () => {
     const sendRequest = async () => {
       console.log('enter toggel public')
-      let requestAPI = "/item/pub"
+      let requestAPI = '/item/pub'
       let target = !detail.public
 
       await fetch(requestAPI, {
-        method: "POST",
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -64,10 +64,10 @@ function RecipeDetail() {
 
   const toggleFavorite = () => {
     const sendRequest = async () => {
-      let requestAPI = "/item/fav"
+      let requestAPI = '/item/fav'
       let target = !detail.favorite
       await fetch(requestAPI, {
-        method: "POST",
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -84,16 +84,16 @@ function RecipeDetail() {
 
   const applyNameChange = async (e) => {
     let newName = e.target.value
-    if (newName == null || newName === "") {
-      alert("New Name cannot be empty")
+    if (newName == null || newName === '') {
+      alert('New Name cannot be empty')
       return
     }
     let newDetail = JSON.parse(JSON.stringify(detail))
     newDetail.name = newName
     newDetail.id = newDetail._id
-    let requestAPI = "/item/edit"
+    let requestAPI = '/item/edit'
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -107,16 +107,16 @@ function RecipeDetail() {
 
   const applyDescChange = async (e) => {
     let newVal = e.target.value
-    if (newVal == null || newVal === "") {
-      alert("New description cannot be empty")
+    if (newVal == null || newVal === '') {
+      alert('New description cannot be empty')
       return
     }
     let newDetail = JSON.parse(JSON.stringify(detail))
     newDetail.description = newVal
     newDetail.id = newDetail._id
-    let requestAPI = "/item/edit"
+    let requestAPI = '/item/edit'
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -129,16 +129,16 @@ function RecipeDetail() {
 
   const applyPrepTimeChange = async (e) => {
     let newVal = e.target.value
-    if (newVal == null || newVal === "") {
-      alert("New prepTime cannot be empty")
+    if (newVal == null || newVal === '') {
+      alert('New prepTime cannot be empty')
       return
     }
     let newDetail = JSON.parse(JSON.stringify(detail))
     newDetail.prepTime = newVal
     newDetail.id = newDetail._id
-    let requestAPI = "/item/edit"
+    let requestAPI = '/item/edit'
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -153,19 +153,19 @@ function RecipeDetail() {
     let type = e.currentTarget.id
     console.log(type)
     let newDetail = JSON.parse(JSON.stringify(detail))
-    if (type === "ingri-add-btn") {
-      newDetail.ingrident.push("New ingri")
-    } else if (type === "instru-add-btn") {
-      newDetail.instruction.push("New step...")
-    } else if (type === "nurtri-add-btn") {
-      newDetail.nutrition.push("New nurtrition item...")
-    } else if (type === "tag-add-btn") {
-      newDetail.tags.push("New Tag...")
+    if (type === 'ingri-add-btn') {
+      newDetail.ingrident.push('New ingri')
+    } else if (type === 'instru-add-btn') {
+      newDetail.instruction.push('New step...')
+    } else if (type === 'nurtri-add-btn') {
+      newDetail.nutrition.push('New nurtrition item...')
+    } else if (type === 'tag-add-btn') {
+      newDetail.tags.push('New Tag...')
     }
     newDetail.id = newDetail._id
-    let requestAPI = "/item/edit"
+    let requestAPI = '/item/edit'
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -177,29 +177,29 @@ function RecipeDetail() {
   }
 
   const deleteSubItem = async (e) => {
-    let deleteConfirm = window.confirm("Want to delete?")
+    let deleteConfirm = window.confirm('Want to delete?')
     console.log(deleteConfirm)
 
     if (deleteConfirm) {
       let htmlEleID = e.currentTarget.id
       console.log(htmlEleID)
-      let idx = parseInt(htmlEleID.split("-")[0], 10)
-      let type = htmlEleID.split("-")[1]
+      let idx = parseInt(htmlEleID.split('-')[0], 10)
+      let type = htmlEleID.split('-')[1]
       console.log(type)
       let newDetail = JSON.parse(JSON.stringify(detail))
-      if (type === "ingri") {
+      if (type === 'ingri') {
         newDetail.ingrident.splice(idx, 1) // remove the idx-th item
-      } else if (type === "instru") {
+      } else if (type === 'instru') {
         newDetail.instruction.splice(idx, 1)
-      } else if (type === "nurtri") {
+      } else if (type === 'nurtri') {
         newDetail.nutrition.splice(idx, 1)
-      } else if (type === "tag") {
+      } else if (type === 'tag') {
         newDetail.tags.splice(idx, 1)
       }
       newDetail.id = newDetail._id
-      let requestAPI = "/item/edit"
+      let requestAPI = '/item/edit'
       let res = await fetch(requestAPI, {
-        method: "POST",
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -219,19 +219,19 @@ function RecipeDetail() {
     console.log(targetValue)
     console.log(targetID)
     let newDetail = JSON.parse(JSON.stringify(detail))
-    if (type === "ingri") {
+    if (type === 'ingri') {
       newDetail.ingrident[idx] = targetValue
-    } else if (type === "instru") {
+    } else if (type === 'instru') {
       newDetail.instruction[idx] = targetValue
-    } else if (type === "nurtri") {
+    } else if (type === 'nurtri') {
       newDetail.nutrition[idx] = targetValue
-    } else if (type === "tag") {
+    } else if (type === 'tag') {
       newDetail.tags[idx] = targetValue
     }
     newDetail.id = newDetail._id
-    let requestAPI = "/item/edit"
+    let requestAPI = '/item/edit'
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -246,15 +246,15 @@ function RecipeDetail() {
     return (
       <>
         <div className="">
-          <EditableItem title={"Name"} defaultText={detail.name} submitFunc={applyNameChange} />
+          <EditableItem title={'Name'} defaultText={detail.name} submitFunc={applyNameChange} />
         </div>
 
         <div className="">
-          <EditableItem title={"Description"} defaultText={detail.description} submitFunc={applyDescChange} />
+          <EditableItem title={'Description'} defaultText={detail.description} submitFunc={applyDescChange} />
         </div>
 
         <div className="">
-          <EditableItem title={"Prep Time"} defaultText={detail.prepTime} submitFunc={applyPrepTimeChange} />
+          <EditableItem title={'Prep Time'} defaultText={detail.prepTime} submitFunc={applyPrepTimeChange} />
           seconds
         </div>
 
@@ -267,10 +267,10 @@ function RecipeDetail() {
           <div id='ingri-list'>
             {
               detail.ingrident?.map((item, i) =>
-                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
                   <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="ingri" idx={i} />
-                  <button className="btn delete-icon" id={i + "-ingri-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + "icon"} />
+                  <button className="btn delete-icon" id={i + '-ingri-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + 'icon'} />
                   </button>
                 </div>
               )
@@ -286,10 +286,10 @@ function RecipeDetail() {
           <div className="instru-list">
             {
               detail.instruction?.map((item, i) =>
-                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
                   <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="instru" idx={i} />
-                  <button className="btn delete-icon" id={i + "-instru-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + "icon"} />
+                  <button className="btn delete-icon" id={i + '-instru-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + 'icon'} />
                   </button>
                 </div>
               )
@@ -304,10 +304,10 @@ function RecipeDetail() {
           <div className="nurtri-list">
             {
               detail.nutrition?.map((item, i) =>
-                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
                   <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="nurtri" idx={i} />
-                  <button className="btn delete-icon" id={i + "-nurtri-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + "icon"} />
+                  <button className="btn delete-icon" id={i + '-nurtri-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + 'icon'} />
                   </button>
                 </div>
               )
@@ -321,10 +321,10 @@ function RecipeDetail() {
           <div className="tag-list">
             {
               detail.tags?.map((item, i) =>
-                <div className="editable-wrapper" key={i + "editable-wrapper"}>
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
                   <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="tag" idx={i} />
-                  <button className="btn delete-icon" id={i + "-tag-delete-icon"} key={i + "icon-wrapper"} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + "icon"} />
+                  <button className="btn delete-icon" id={i + '-tag-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
+                    <DeleteIcon key={i + 'icon'} />
                   </button>
                 </div>
               )
@@ -402,14 +402,14 @@ function RecipeDetail() {
   }
 
   const deleteRecipe = async () => {
-    let deleteConfirm = window.confirm("Want to delete?")
+    let deleteConfirm = window.confirm('Want to delete?')
     if (deleteConfirm) {
       let requestAPI = `/item/delete?id=${detail._id}`
       let res = await fetch(requestAPI)
       let data = await res.json()
       console.log(data)
-      let curTab = (window.location.pathname).split("/")[1]
-      navigate("/" + curTab)
+      let curTab = (window.location.pathname).split('/')[1]
+      navigate('/' + curTab)
       window.location.reload()
     }
   }

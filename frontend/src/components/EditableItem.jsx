@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import "./EditableItem.css"
+import './EditableItem.css'
 const EditableItem = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { title, defaultText, submitFunc, optType, idx } = props
   const [isE, setIsE] = useState(false)
   useEffect(() => {
@@ -17,7 +18,7 @@ const EditableItem = (props) => {
 
   return (
     <div className="editable-item">
-      {title + ": "}
+      {title + ': '}
       {
 
         isE ?
