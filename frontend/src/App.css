@@ -1,16 +1,14 @@
-/* #App {
-}
 
-#recipe-list {
+/* #recipe-list {
   margin-top: 50px;
-}
+} */
 
 #main-list {
   display: flex;
   flex-direction: column;
 }
 
-#recipe-detail {
+/* #recipe-detail {
   display: flex;
   flex-direction: column;
 }
@@ -144,13 +142,14 @@ form[action$="destroy"] button {
   flex-direction: column;
 }
 
-#recipe-list {
-  width: 22rem;
+#contents {
+  width: 20rem;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   display: flex;
   flex-direction: column;
 }
+
 
 #category-bar > * {
   padding-left: 2rem;

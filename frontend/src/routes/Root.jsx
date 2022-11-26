@@ -75,7 +75,7 @@ function Root() {
           </nav>
         </div>
 
-        <div id="content">
+        <div id="contents">
           <Outlet />
         </div>
       </div>
