@@ -17,4 +17,5 @@ function ErrorPage() {
 }
 
 ErrorPage.propsType = {}
-export default ErrorPage()
+
+export default ErrorPage
