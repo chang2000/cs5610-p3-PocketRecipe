@@ -21,14 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
-  session({
-    secret: "Pocket Recipe passport local",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
 app.use("/", indexRouter);
 
 export default app;

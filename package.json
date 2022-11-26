@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./bin/www.js",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
-    "product": "cd ../frontend; npm run build; cd ../backend; node app.js"
+    "product": "cd frontend; npm run build; cd ../backend; node app.js",
+    "postinstall": "cd frontend && npm install && npm run build",
+    "importdata": "mongoimport -d CABallotDonations -c propositions --file ./data/propositions.json --drop"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,9 +18,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "mongodb": "^4.11.0",
-    "morgan": "^1.10.0",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
