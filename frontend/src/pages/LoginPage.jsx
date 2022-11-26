@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import md5 from 'md5'
-import "./LoginPage.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import './LoginPage.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 const LoginPage = () => {
-  const [pageStatus, setPageStatus] = useState("login")
+  const [pageStatus, setPageStatus] = useState('login')
 
   useEffect(() => {
 
   }, [pageStatus])
 
   const login = async (e) => {
-    e.preventDefault();
-    let requestAPI = "/user/login"
+    e.preventDefault()
+    let requestAPI = '/user/login'
     let hashedPwd = md5(e.target.password.value)
     console.log(hashedPwd)
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -31,28 +31,28 @@ const LoginPage = () => {
     })
     let data = await res.json()
     if (data.val === 1) {
-      console.log("here")
-      window.localStorage.setItem("email", e.target.username.value);
-      window.location.reload(true);
+      console.log('here')
+      window.localStorage.setItem('email', e.target.username.value)
+      window.location.reload(true)
     } else {
-      console.log("not here")
+      console.log('not here')
       //TODO: add alert, not successful
 
     }
 
     // // TODO: judge if successful user login, if so, add to localstorage and refresh page
 
-  };
+  }
 
   const createUser = async (e) => {
-    e.preventDefault();
-    let requestAPI = "/user/create"
+    e.preventDefault()
+    let requestAPI = '/user/create'
     let hashedPwd = md5(e.target.password.value)
-    console.log("sign up email:", e.target.username.value)
-    console.log("sign up page:", hashedPwd)
+    console.log('sign up email:', e.target.username.value)
+    console.log('sign up page:', hashedPwd)
 
     let res = await fetch(requestAPI, {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -160,9 +160,9 @@ const LoginPage = () => {
       </div >
     )
 
-  );
-};
+  )
+}
 
+LoginPage.propTypes = {}
 
-
-export default LoginPage;
+export default LoginPage

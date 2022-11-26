@@ -1,7 +1,7 @@
-import React from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import React from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function Root() {
   function logOut() {
@@ -12,21 +12,21 @@ function Root() {
         {
           label: 'Yes',
           onClick: () => {
-            window.localStorage.removeItem("email");
-            window.location.reload(true);
+            window.localStorage.removeItem('email')
+            window.location.reload(true)
           }
         },
         {
           label: 'No',
         }
       ]
-    });
+    })
   }
   const navigate = useNavigate()
   const createNewRecipe = (e) => {
     e.preventDefault()
     console.log('enter create new recipe')
-    navigate("/mine/new")
+    navigate('/mine/new')
   }
   return (
     <>
@@ -59,15 +59,15 @@ function Root() {
           <nav>
             <ul>
               <li>
-                <Link to={`mine`}>My Recipes</Link>
+                <Link to={'mine'}>My Recipes</Link>
               </li>
 
               <li>
-                <Link to={`fav`}>Favorites</Link>
+                <Link to={'fav'}>Favorites</Link>
               </li>
 
               <li>
-                <Link to={`discover`}>Discover</Link>
+                <Link to={'discover'}>Discover</Link>
               </li>
             </ul>
           </nav>
@@ -78,9 +78,9 @@ function Root() {
         </div>
       </div>
     </>
-  );
+  )
 }
+Root.propsType = {}
 
 
-
-export default Root;
+export default Root

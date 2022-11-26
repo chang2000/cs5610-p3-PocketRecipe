@@ -8,9 +8,11 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.13",
     "bootstrap": "^5.2.2",
+    "eslint-config-prettier": "^8.5.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "md5": "^2.3.0",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-confirm-alert": "^3.0.6",
@@ -44,5 +46,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:5555/"
+  "proxy": "http://127.0.0.1:5555/",
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-plugin-react": "^7.31.11"
+  }
 }

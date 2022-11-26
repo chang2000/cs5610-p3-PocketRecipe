@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import "./EditableItem.css"
+import './EditableItem.css'
+import PropTypes from 'prop-types'
+
 const EditableItem = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { title, defaultText, submitFunc, optType, idx } = props
   const [isE, setIsE] = useState(false)
   useEffect(() => {
@@ -17,7 +20,7 @@ const EditableItem = (props) => {
 
   return (
     <div className="editable-item">
-      {title + ": "}
+      {title + ': '}
       {
 
         isE ?
@@ -36,6 +39,14 @@ const EditableItem = (props) => {
       }
     </div>
   )
+}
+
+EditableItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  defaultText: PropTypes.string.isRequired,
+  submitFunc: PropTypes.func.isRequired,
+  optType: PropTypes.string.isRequired,
+  idx: PropTypes.number.isRequired
 }
 
 export default EditableItem
