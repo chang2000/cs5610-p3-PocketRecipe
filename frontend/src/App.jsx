@@ -12,7 +12,6 @@ import RecipeDetail, {
 
 import LoginPage from './pages/LoginPage.jsx'
 
-
 const router = createBrowserRouter([
   {
     path: '/',
@@ -83,6 +82,6 @@ function App() {
   )
 }
 
-
+App.propTypes = {}
 
 export default App

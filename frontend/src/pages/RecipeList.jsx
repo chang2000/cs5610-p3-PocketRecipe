@@ -1,9 +1,9 @@
 import '../App.css'
 import React, { useState, useEffect } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 function RecipeList(props) {
-  // eslint-disable-next-line react/prop-types
   const type = props.type
   // the recipes stores ids of recipe of the current list 
   const [recipes, setRecipes] = useState([])
@@ -46,6 +46,10 @@ function RecipeList(props) {
       <Outlet />
     </div >
   )
+}
+
+RecipeList.propTypes = {
+  type: PropTypes.string.isRequired
 }
 
 export default RecipeList

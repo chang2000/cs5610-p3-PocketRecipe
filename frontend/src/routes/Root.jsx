@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css' 
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function Root() {
   function logOut() {
@@ -80,7 +80,7 @@ function Root() {
     </>
   )
 }
-
+Root.propsType = {}
 
 
 export default Root

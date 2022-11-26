@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import './EditableItem.css'
+import PropTypes from 'prop-types'
+
 const EditableItem = (props) => {
   // eslint-disable-next-line react/prop-types
   const { title, defaultText, submitFunc, optType, idx } = props
@@ -37,6 +39,14 @@ const EditableItem = (props) => {
       }
     </div>
   )
+}
+
+EditableItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  defaultText: PropTypes.string.isRequired,
+  submitFunc: PropTypes.func.isRequired,
+  optType: PropTypes.string.isRequired,
+  idx: PropTypes.number.isRequired
 }
 
 export default EditableItem

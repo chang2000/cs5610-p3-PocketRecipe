@@ -163,6 +163,6 @@ const LoginPage = () => {
   )
 }
 
-
+LoginPage.propTypes = {}
 
 export default LoginPage

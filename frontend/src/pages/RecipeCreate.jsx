@@ -240,4 +240,6 @@ const RecipeCreate = () => {
   )
 }
 
+RecipeCreate.propTypes = {}
+
 export default RecipeCreate

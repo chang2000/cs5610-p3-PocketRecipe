@@ -470,4 +470,5 @@ function RecipeDetail() {
   )
 }
 
+RecipeDetail.propsType = {}
 export default RecipeDetail
