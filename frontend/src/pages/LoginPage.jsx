@@ -4,12 +4,16 @@ import './LoginPage.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
+import Alert from '@mui/material/Alert'
+import Stack from '@mui/material/Stack'
+
+
+
 const LoginPage = () => {
   const [pageStatus, setPageStatus] = useState('login')
-
-  useEffect(() => {
-
-  }, [pageStatus])
+  const [createState, setCreatestate] = useState('initialState')
+  useEffect(() => { }, [pageStatus])
+  useEffect(() => { }, [createState])
 
   const login = async (e) => {
     e.preventDefault()
@@ -36,8 +40,7 @@ const LoginPage = () => {
       window.location.reload(true)
     } else {
       console.log('not here')
-      //TODO: add alert, not successful
-
+      document.getElementById('login-fail-alert').style.display = 'block'
     }
 
     // // TODO: judge if successful user login, if so, add to localstorage and refresh page
@@ -66,103 +69,145 @@ const LoginPage = () => {
     })
     let data = await res.json()
     console.log(data)
+    if (data.val == 1) {
+      console.log('here data is 1')
+      setCreatestate(false)
 
+      setPageStatus(true)
+    } else {
+      document.getElementById('create-fail-alert').style.display = 'block'
+      setCreatestate(false)
+      // setPageStatus(true);
+    }
   }
 
 
-  return (
-    pageStatus ? (// true => sign in page
-      <div className="back-page">
-        <div className="wrapper">
+  return pageStatus ? ( // true => sign in page
+    <div className="back-page">
+      <div className="wrapper">
+        <Stack sx={{ width: '100%' }} spacing={2}>
+          <Alert
+            id="create-success"
+            severity="success"
+            style={{ display: 'none' }}
+          >
+            Successfully created the account
+          </Alert>
+          <Alert
+            id="login-fail-alert"
+            severity="error"
+            style={{ display: 'none' }}
+          >
+            Wrong email or password
+          </Alert>
+        </Stack>
 
-          <div className="text-center mt-4 name">Pocket Recipe</div>
-          <form onSubmit={login} className="p-3 mt-3">
-            <div>
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
-              <input
-                className="form-control"
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                required
-                autoFocus
-              />
-            </div>
-            <div>
-              <label className="form-label" htmlFor="current-password">
-                Password
-              </label>
-              <input
-                className="form-control"
-                id="current-password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-              />
-            </div>
-            <br />
-            <button className="btn btn-primary" type="submit">
-              Sign in
-            </button>
-          </form>
-          <div className="text-center fs-6 ">
-            <a className='small-text' onClick={() => { setPageStatus(false) }}>Sign Up</a>
+        <div className="text-center mt-4 name">Pocket Recipe</div>
+        <form onSubmit={login} className="p-3 mt-3">
+          <div>
+            <label className="form-label" htmlFor="username">
+              Username
+            </label>
+            <input
+              className="form-control"
+              id="username"
+              name="username"
+              type="text"
+              autoComplete="username"
+              required
+              autoFocus
+            />
           </div>
-        </div>
-      </div >
-    ) : (//false => sign up page
-      <div className="back-page">
-        <div className="wrapper">
-          <div className="text">
-            <a className='small-text' onClick={() => { setPageStatus(true) }}>&lt; back</a>
+          <div>
+            <label className="form-label" htmlFor="current-password">
+              Password
+            </label>
+            <input
+              className="form-control"
+              id="current-password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+            />
           </div>
-
-          <div className="text-center mt-4 name">Create new account</div>
-          <form onSubmit={createUser} className="p-3 mt-3">
-            <div>
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
-              <input
-                className="form-control"
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                required
-                autoFocus
-              />
-            </div>
-            <div>
-              <label className="form-label" htmlFor="current-password">
-                Password
-              </label>
-              <input
-                className="form-control"
-                id="current-password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-              />
-            </div>
-            <br />
-            <button className="btn btn-primary" type="submit">
-              Sign up
-            </button>
-          </form>
-
+          <br />
+          <button className="btn btn-primary" type="submit">
+            Sign in
+          </button>
+        </form>
+        <div className="text-center fs-6 ">
+          <a
+            className="small-text"
+            onClick={() => {
+              setPageStatus(false)
+            }}
+          >
+            Sign Up
+          </a>
         </div>
-      </div >
-    )
+      </div>
+    </div>
+  ) : (
+    //false => sign up page
+    <div className="back-page">
+      <div className="wrapper">
+        <div className="text">
+          <a
+            className="small-text"
+            onClick={() => {
+              setPageStatus(true)
+            }}
+          >
+            &lt; back
+          </a>
+        </div>
+        <Alert
+          id="create-fail-alert"
+          severity="error"
+          style={{ display: 'none' }}
+        >
+          User already exists
+        </Alert>
 
+        <div className="text-center mt-4 name">Create new account</div>
+        <form onSubmit={createUser} className="p-3 mt-3">
+          <div>
+            <label className="form-label" htmlFor="username">
+              Username
+            </label>
+            <input
+              className="form-control"
+              id="username"
+              name="username"
+              type="text"
+              autoComplete="username"
+              required
+              autoFocus
+            />
+          </div>
+          <div>
+            <label className="form-label" htmlFor="current-password">
+              Password
+            </label>
+            <input
+              className="form-control"
+              id="current-password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+            />
+          </div>
+          <br />
+          <button className="btn btn-primary" type="submit">
+            Sign up
+          </button>
+        </form>
+      </div>
+    </div>
   )
 }
-
 LoginPage.propTypes = {}
 
 export default LoginPage

@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+
+/* #recipe-list {
+  margin-top: 50px;
+} */
+
+#main-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #recipe-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+#favorite-control{
+  cursor: pointer;
+} */
+
+
+=======
+>>>>>>> 21bf9c772bae9c7af8c83d88c5d556e552fac025
 html {
   box-sizing: border-box;
 }
@@ -123,12 +146,13 @@ form[action$="destroy"] button {
 }
 
 #recipe-list {
-  width: 22rem;
+  width:18rem;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   display: flex;
   flex-direction: column;
 }
+
 
 #category-bar > * {
   padding-left: 2rem;
@@ -265,13 +289,13 @@ i {
   color: hsl(224, 98%, 58%);
 }
 
-#content {
+#contact {
   flex: 1;
   padding: 2rem 4rem;
   width: 100%;
 }
 
-#content.loading {
+#contact.loading {
   opacity: 0.25;
   transition: opacity 200ms;
   transition-delay: 200ms;

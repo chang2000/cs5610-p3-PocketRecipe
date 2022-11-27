@@ -29,23 +29,25 @@ function RecipeList(props) {
   }, [type, user])
 
   return (
-    // also create a bunch of Link here
-    <div id="recipe-list">
-      {`Current List Type: ${type}`}
-      <br></br>
-      {/* The following items should be dynamic */}
-      <div id="main-list">
-        {/* Dynamic render */}
-        {
-          recipes?.map((item, i) => (
+    <>
+      {/* also create a bunch of Link here */}
+      <div id="recipe-list">
+        {`Current List Type: ${type}`}
+        <br></br>
+        {/* The following items should be dynamic */}
+        <div id="main-list">
+          {/* Dynamic render */}
+          {recipes.map((item, i) => (
             <Link key={i} to={`/${type}/${item._id}`}>
               {item.name}
             </Link>
-          ))
-        }
+          ))}
+        </div>
       </div>
-      <Outlet />
-    </div >
+      <div id="contact">
+        <Outlet />
+      </div>
+    </>
   )
 }
 
