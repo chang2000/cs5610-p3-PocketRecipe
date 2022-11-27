@@ -1,45 +1,45 @@
-import './App.css';
+import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useState, useEffect } from "react";
-import Root from './routes/Root';
-import ErrorPage from './ErrorPage';
-import RecipeList from './RecipeList';
-import RecipeCreate from './RecipeCreate'
+import React from 'react'
+import { useState, useEffect } from 'react'
+import Root from './routes/Root'
+import ErrorPage from './pages/ErrorPage'
+import RecipeList from './pages/RecipeList'
+import RecipeCreate from './pages/RecipeCreate'
 import RecipeDetail, {
   loader as recipeDetailLoader
-} from './RecipeDetail';
+} from './pages/RecipeDetail'
 
-import LoginPage from './LoginPage.jsx';
-
+import LoginPage from './pages/LoginPage.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "mine",
+        path: 'mine',
         element: <RecipeList type="mine" />,
         children: [
           {
-            path: ":id",
+            path: ':id',
             element: <RecipeDetail />,
             loader: recipeDetailLoader,
           },
           {
-            path: "new",
+            path: 'new',
             element: <RecipeCreate />,
           }
         ]
       },
 
       {
-        path: "fav",
+        path: 'fav',
         element: <RecipeList type="fav" />,
         children: [
           {
-            path: ":id",
+            path: ':id',
             element: <RecipeDetail />,
             loader: recipeDetailLoader,
           },
@@ -47,11 +47,11 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "discover",
+        path: 'discover',
         element: <RecipeList type="discover" />,
         children: [
           {
-            path: ":id",
+            path: ':id',
             element: <RecipeDetail />,
             loader: recipeDetailLoader,
           },
@@ -63,27 +63,25 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  const [user, setUser] = useState(null);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
-    let email = window.localStorage.getItem("email")
+    let email = window.localStorage.getItem('email')
     if (email == null) {
       setIsLoggedIn(false)
     } else {
       setIsLoggedIn(true)
     }
-  }, []);
+  }, [])
   return (
     isLoggedIn ? (
       <RouterProvider router={router} />
     ) : (
       <LoginPage />
     )
-  );
+  )
 }
 
+App.propTypes = {}
 
-
-export default App;
+export default App

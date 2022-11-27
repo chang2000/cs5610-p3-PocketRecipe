@@ -12,6 +12,19 @@ Slides Presentation:
 
 Design Document [./design-document.md](./design-document.md).
 
+# 80% CHECKPOINT for Nov 22
+
+What we already done:
+
+- **All functionalities**, for both frontend and backend
+
+What's left:
+
+- Styling
+- Mock Data
+- Deployment
+- Report, Slides & demo videos
+
 # 60% CHECKPOINT
 
 What we already done:
@@ -23,21 +36,15 @@ What we already done:
 
 What's left:
 
-- Client side: user create/login(passport local)
+- Client side: user create/login
 - Client side: Edit A recipe
 - Add CSS
 - Both client side and server side: Filter by tag
 - Client side: delete a recipe
 
-
-
 ## Project Objective
 
-
-
 ## Thumbnails
-
-
 
 ## Instruction on Build
 
@@ -48,6 +55,5 @@ Pre-requiste: MongoDB running on `localhost:27017`
 1. `cd frontend`->`yarn` -> `yarn start`
 2. `cd ../backend` -> `yarn`->`yarn run dev`
 3. Visit `localhost:3000`
-
 
 ## MISC

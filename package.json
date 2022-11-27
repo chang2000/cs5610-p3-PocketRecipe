@@ -1,5 +1,26 @@
 {
-  "dependencies": {
-    "md5": "^2.3.0"
-  }
+    "name": "pocketrecipe",
+    "version": "1.0.0",
+    "description": "PocketRecipe, build up with express",
+    "type": "module",
+    "scripts": {
+        "start": "node ./bin/www.js",
+        "dev": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
+        "product": "cd frontend; yarn build; cd ../backend; node ./bin/www.js",
+        "postinstall": "cd frontend && yarn && yarn build",
+        "importdata": "mongoimport -d pocketrecipe -c user --file ./data/user.json --drop --jsonArray && mongoimport -d pocketrecipe -c recipe --file ./data/recipe.json --drop --jsonArray"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.20.1",
+        "cookie-parser": "^1.4.6",
+        "debug": "^4.3.4",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "mongodb": "^4.11.0",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
 }
