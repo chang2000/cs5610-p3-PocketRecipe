@@ -142,8 +142,8 @@ form[action$="destroy"] button {
   flex-direction: column;
 }
 
-#contents {
-  width: 20rem;
+#recipe-list {
+  width:18rem;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
   display: flex;
@@ -286,13 +286,13 @@ i {
   color: hsl(224, 98%, 58%);
 }
 
-#content {
+#contact {
   flex: 1;
   padding: 2rem 4rem;
   width: 100%;
 }
 
-#content.loading {
+#contact.loading {
   opacity: 0.25;
   transition: opacity 200ms;
   transition-delay: 200ms;
