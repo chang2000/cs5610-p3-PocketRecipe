@@ -6,8 +6,13 @@
     "scripts": {
         "start": "node ./bin/www.js",
         "dev": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
+<<<<<<< HEAD
         "product": "cd frontend; yarn build; cd ../backend; node ./bin/www.js",
         "postinstall": "cd frontend && yarn && yarn build",
+=======
+        "product": "cd frontend; npm run build; cd ../backend; node app.js",
+        "postinstall": "cd frontend && npm install && npm run build",
+>>>>>>> 21bf9c772bae9c7af8c83d88c5d556e552fac025
         "importdata": "mongoimport -d pocketrecipe -c user --file ./data/user.json --drop --jsonArray && mongoimport -d pocketrecipe -c recipe --file ./data/recipe.json --drop --jsonArray"
     },
     "license": "MIT",
@@ -23,4 +28,8 @@
     "devDependencies": {
         "nodemon": "^2.0.20"
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 21bf9c772bae9c7af8c83d88c5d556e552fac025
