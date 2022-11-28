@@ -31,11 +31,11 @@
   flex-direction: row;
   gap: 1rem;
 }
-.editable-item > p:first-child {
+/* .editable-item > p:first-child {
   margin: 0;
   padding: 0;
-}
-.editable-item > p:first-child > :nth-child(2) {
+} */
+/* .editable-item > p:first-child > :nth-child(2) {
   margin-right: 1rem;
 }
 .editable-item > p:first-child,
@@ -50,9 +50,9 @@
 .editable-item label input,
 .editable-item label textarea {
   flex-grow: 2;
-}
+} */
 
-.editable-item-avatar {
+/* .editable-item-avatar {
   margin-right: 2rem;
 }
 
@@ -76,4 +76,4 @@
 
 .editable-item p:last-child button[type="button"] {
   color: inherit;
-}
+} */
