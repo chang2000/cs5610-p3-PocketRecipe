@@ -245,7 +245,6 @@ function RecipeDetail() {
   const EditableDetail = () => {
     return (
       <>
-        <br></br>
         <div className="">
           <EditableItem title={'Name'} defaultText={detail.name} submitFunc={applyNameChange} />
         </div>
@@ -260,7 +259,7 @@ function RecipeDetail() {
         </div>
 
         <br></br>
-        <div className=''>
+        <div className='ingridients'>
           Ingrident:
           <button className='btn' id='ingri-add-btn' onClick={addSubItem}>
             <AddCircleIcon />
@@ -281,7 +280,7 @@ function RecipeDetail() {
         </div>
 
         <br></br>
-        <div>Instruction:
+        <div className='instruction'>Instruction:
           <button className='btn' id='instru-add-btn' onClick={addSubItem}>
             <AddCircleIcon />
           </button>
@@ -301,7 +300,7 @@ function RecipeDetail() {
         </div>
 
         <br></br>
-        <div>Nurtrition:
+        <div className='nutrition'>Nurtrition:
           <button className='btn' id="nurtri-add-btn" onClick={addSubItem}>
             <AddCircleIcon />
           </button>
@@ -320,7 +319,7 @@ function RecipeDetail() {
         </div>
         
         <br></br>
-        <div>Tags:
+        <div className='tags'>Tags:
           <button className='btn' id="tag-add-btn" onClick={addSubItem}>
             <AddCircleIcon />
           </button>

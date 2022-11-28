@@ -139,7 +139,7 @@ const RecipeCreate = () => {
       </label>
 
 
-      <form onSubmit={createRecipe} id="contact-form">
+      <form onSubmit={createRecipe} id="new-recipe">
 
         <label className="newrecipe-name">
           <span>Name:</span>
