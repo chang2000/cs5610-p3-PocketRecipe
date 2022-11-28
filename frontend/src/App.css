@@ -3,11 +3,6 @@
   margin-top: 50px;
 } */
 
-#main-list {
-  display: flex;
-  flex-direction: column;
-}
-
 /* #recipe-detail {
   display: flex;
   flex-direction: column;
@@ -135,7 +130,6 @@ form[action$="destroy"] button {
 }
 
 #root {
-  /* display: flex; */
   height: 100%;
   width: 100%;
 }
@@ -262,11 +256,35 @@ i {
   list-style: none;
 }
 
+#recipe-list ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 #category-bar li {
   margin: 0.25rem 0;
 }
 
+#recipe-list li {
+  margin: 0.25rem 0;
+}
+
 #category-bar nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  white-space: pre;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  gap: 1rem;
+}
+
+#recipe-list nav a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -290,6 +308,19 @@ i {
 }
 
 #category-bar nav a.pending {
+  color: hsl(224, 98%, 58%);
+}
+
+#recipe-list nav a:hover {
+  background: #e3e3e3;
+}
+
+#recipe-list nav a.active {
+  background: hsl(224, 98%, 58%);
+  color: white;
+}
+
+#recipe-list nav a.pending {
   color: hsl(224, 98%, 58%);
 }
 
@@ -404,9 +435,9 @@ i {
   margin: 0 0 0 8rem;
 }
 
-/* #contact-form p:last-child button[type="button"] {
+#contact-form p:last-child button[type="button"] {
   color: inherit;
-} */
+}
 
 #zero-state {
   margin: 2rem auto;
