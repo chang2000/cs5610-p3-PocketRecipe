@@ -67,6 +67,10 @@ button {
   font-weight: 500;
 }
 
+.visible-button {
+  color: #fc9c26;
+}
+
 
 textarea:hover,
 input:hover,

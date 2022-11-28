@@ -245,6 +245,7 @@ function RecipeDetail() {
   const EditableDetail = () => {
     return (
       <>
+        <br></br>
         <div className="">
           <EditableItem title={'Name'} defaultText={detail.name} submitFunc={applyNameChange} />
         </div>
@@ -258,6 +259,7 @@ function RecipeDetail() {
           seconds
         </div>
 
+        <br></br>
         <div className=''>
           Ingrident:
           <button className='btn' id='ingri-add-btn' onClick={addSubItem}>
@@ -278,6 +280,7 @@ function RecipeDetail() {
           </div>
         </div>
 
+        <br></br>
         <div>Instruction:
           <button className='btn' id='instru-add-btn' onClick={addSubItem}>
             <AddCircleIcon />
@@ -297,6 +300,7 @@ function RecipeDetail() {
           </div>
         </div>
 
+        <br></br>
         <div>Nurtrition:
           <button className='btn' id="nurtri-add-btn" onClick={addSubItem}>
             <AddCircleIcon />
@@ -314,6 +318,8 @@ function RecipeDetail() {
             }
           </div>
         </div>
+        
+        <br></br>
         <div>Tags:
           <button className='btn' id="tag-add-btn" onClick={addSubItem}>
             <AddCircleIcon />
@@ -429,9 +435,9 @@ function RecipeDetail() {
           {
             detail.user === currUser ? (
               detail.public ? (
-                <button  onClick={togglePublic}>Public</button>
+                <button className="visible-button" onClick={togglePublic}>Public</button>
               ) : (
-                <button  onClick={togglePublic}>Private</button>
+                <button className="visible-button" onClick={togglePublic}>Private</button>
               )
             ) : (
               detail.public ? (

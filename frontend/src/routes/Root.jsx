@@ -1,34 +1,34 @@
-import React from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
+import React from "react";
+import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Root() {
   function logOut() {
     confirmAlert({
-      title: 'Want to log out?',
+      title: "Want to log out?",
       // message: 'Are you sure to log out?',
       buttons: [
         {
-          label: 'Yes',
+          label: "Yes",
           onClick: () => {
-            window.localStorage.removeItem('email')
-            window.location.reload(true)
-          }
+            window.localStorage.removeItem("email");
+            window.location.reload(true);
+          },
         },
         {
-          label: 'No',
-        }
-      ]
-    })
+          label: "No",
+        },
+      ],
+    });
   }
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const createNewRecipe = (e) => {
-    e.preventDefault()
-    console.log('enter create new recipe')
-    navigate('/mine/new')
-  }
-  let curUser = window.localStorage.getItem('email')
+    e.preventDefault();
+    console.log("enter create new recipe");
+    navigate("/mine/new");
+  };
+  let curUser = window.localStorage.getItem("email");
   return (
     <>
       <div id="whole-page">
@@ -53,22 +53,42 @@ function Root() {
             </form>
 
             <form onSubmit={createNewRecipe}>
-
               <button type="submit">New</button>
             </form>
           </div>
           <nav>
             <ul>
               <li>
-                <Link to={'mine'}>My Recipes</Link>
+                <NavLink
+                  to={"mine"}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                >
+                  My Recipes
+                </NavLink>
               </li>
 
               <li>
-                <Link to={'fav'}>Favorites</Link>
+                <NavLink
+                  to={"fav"}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                >
+                  Favorites
+                </NavLink>
               </li>
 
               <li>
-                <Link to={'discover'}>Discover</Link>
+                <NavLink
+                  to={"discover"}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                >
+                  Discover
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -77,9 +97,8 @@ function Root() {
         <Outlet />
       </div>
     </>
-  )
+  );
 }
-Root.propsType = {}
+Root.propsType = {};
 
-
-export default Root
+export default Root;

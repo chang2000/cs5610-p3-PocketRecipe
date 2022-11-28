@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function RecipeList(props) {
@@ -40,9 +40,15 @@ function RecipeList(props) {
             {/* Dynamic render */}
             {recipes.map((item, i) => (
               <li>
-                <Link key={i} to={`/${type}/${item._id}`}>
+                <NavLink
+                  key={i}
+                  to={`/${type}/${item._id}`}
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                >
                   {item.name}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
