@@ -44,9 +44,9 @@ function Root() {
 
           <div className='whole-title'>
             <div className='whole-title-text'>
-            Pocket recipe
+              Pocket recipe
             </div>
-            
+
             <form onSubmit={createNewRecipe}>
               <button className="normal-btn" type="submit">New Recipe</button>
             </form>

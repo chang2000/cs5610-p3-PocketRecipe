@@ -2,7 +2,7 @@
     "name": "pocketrecipe",
     "version": "1.0.0",
     "description": "PocketRecipe, build up with express",
-    "type": "module",
+    "type": "commonjs",
     "scripts": {
         "start": "node ./bin/www.js",
         "dev": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www.js",
@@ -21,6 +21,11 @@
         "morgan": "^1.10.0"
     },
     "devDependencies": {
-        "nodemon": "^2.0.20"
+        "eslint": "^8.28.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.31.11",
+        "nodemon": "^2.0.20",
+        "prettier": "^2.8.0"
     }
 }
