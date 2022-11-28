@@ -265,7 +265,7 @@ function RecipeDetail() {
               defaultText={detail.prepTime.toString()}
               submitFunc={applyPrepTimeChange}
             />
-            seconds
+            
           </div>
 
           <div className="ingridients">
@@ -502,11 +502,15 @@ function RecipeDetail() {
       <div>
         {' '}
         <div className='detail-recipe-text'>Recipe Detail: </div>
+        <div className="list-name-title">
+          <div className="author-title">Author:</div>
+          <div className='detail-user'> {detail.user}</div>
+        </div>
         {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
         <div className='visible-box'>
           {/* <div> */}
-            <div className='visible-text'>Visibility: </div>
-            <div className='visible-btn-whole'>
+          <div className='visible-text'>Visibility: </div>
+          <div className='visible-btn-whole'>
             {detail.user === currUser ? (
               detail.public ? (
                 <button className="visible-btn" onClick={togglePublic}>
@@ -522,19 +526,13 @@ function RecipeDetail() {
             ) : (
               <div>Private</div>
             )}
-            </div>
+          </div>
           <button className="btn" onClick={toggleFavorite}>
             {detail.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </button>
         </div>
       </div>
       <div className="">
-        <div className="list-name-title">
-          <div className="author-title">Author:</div>
-          <div className='detail-user'> {detail.user}</div>
-        </div>
-        
-
         {detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />}
       </div>
 

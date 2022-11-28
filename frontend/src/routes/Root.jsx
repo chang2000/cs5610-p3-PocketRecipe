@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, Outlet, useNavigate, NavLink } from 'react-router-dom'
+import { Outlet, useNavigate, NavLink } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
