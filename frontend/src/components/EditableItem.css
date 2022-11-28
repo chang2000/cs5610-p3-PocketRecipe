@@ -32,6 +32,10 @@
   max-width: 30rem;
 }
 
+.item-title {
+  font-weight: 600;
+}
+
 .view-only-item {
   display: flex;
   flex-direction: column;

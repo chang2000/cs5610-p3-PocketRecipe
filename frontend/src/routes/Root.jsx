@@ -1,34 +1,37 @@
-import React from "react";
-import { Link, Outlet, useNavigate, NavLink } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import React, { useEffect } from 'react'
+import { Link, Outlet, useNavigate, NavLink } from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function Root() {
   function logOut() {
     confirmAlert({
-      title: "Want to log out?",
+      title: 'Want to log out?',
       // message: 'Are you sure to log out?',
       buttons: [
         {
-          label: "Yes",
+          label: 'Yes',
           onClick: () => {
-            window.localStorage.removeItem("email");
-            window.location.reload(true);
+            window.localStorage.removeItem('email')
+            window.location.reload(true)
           },
         },
         {
-          label: "No",
+          label: 'No',
         },
       ],
-    });
+    })
   }
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const createNewRecipe = (e) => {
-    e.preventDefault();
-    console.log("enter create new recipe");
-    navigate("/mine/new");
-  };
-  let curUser = window.localStorage.getItem("email");
+    e.preventDefault()
+    console.log('enter create new recipe')
+    navigate('/mine/new')
+  }
+  let curUser = window.localStorage.getItem('email')
+  useEffect(() => {
+    navigate('/mine')
+  }, [])
   return (
     <>
       <div id="whole-page">
@@ -39,30 +42,22 @@ function Root() {
             Log Out
           </button>
 
-          <div>
-            <form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search contacts"
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div id="search-spinner" aria-hidden hidden={true} />
-              <div className="sr-only" aria-live="polite"></div>
-            </form>
-
+          <div className='whole-title'>
+            <div className='whole-title-text'>
+            Pocket recipe
+            </div>
+            
             <form onSubmit={createNewRecipe}>
-              <button className="normal-btn" type="submit">New</button>
+              <button className="normal-btn" type="submit">New Recipe</button>
             </form>
           </div>
           <nav>
             <ul>
               <li>
                 <NavLink
-                  to={"mine"}
+                  to={'mine'}
                   className={({ isActive, isPending }) =>
-                    isActive ? "active" : isPending ? "pending" : ""
+                    isActive ? 'active' : isPending ? 'pending' : ''
                   }
                 >
                   My Recipes
@@ -71,9 +66,9 @@ function Root() {
 
               <li>
                 <NavLink
-                  to={"fav"}
+                  to={'fav'}
                   className={({ isActive, isPending }) =>
-                    isActive ? "active" : isPending ? "pending" : ""
+                    isActive ? 'active' : isPending ? 'pending' : ''
                   }
                 >
                   Favorites
@@ -82,9 +77,9 @@ function Root() {
 
               <li>
                 <NavLink
-                  to={"discover"}
+                  to={'discover'}
                   className={({ isActive, isPending }) =>
-                    isActive ? "active" : isPending ? "pending" : ""
+                    isActive ? 'active' : isPending ? 'pending' : ''
                   }
                 >
                   Discover
@@ -97,8 +92,8 @@ function Root() {
         <Outlet />
       </div>
     </>
-  );
+  )
 }
-Root.propsType = {};
+Root.propsType = {}
 
-export default Root;
+export default Root

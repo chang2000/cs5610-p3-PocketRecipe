@@ -104,6 +104,27 @@ button, .normal-btn {
   padding-top: 0.5rem;
 }
 
+.whole-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.whole-title-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.author-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  
+}
+
+.detail-user {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-left: 1rem;
+}
 
 textarea:hover,
 input:hover,
@@ -488,6 +509,29 @@ i {
 .list-name {
   font-size: 1.1rem;
   font-weight: 600;
+  padding-right: 1rem;
+}
+
+.detail-recipe {
+  display: flex;
+}
+
+.detail-recipe-text, .visible-text {
+  font-weight: 600;
+}
+
+.visible-text {
+  padding-top: 0.5rem;
+}
+
+.visible-box {
+  display: flex;
+  flex-direction: row;
+  padding-top: 1rem;
+}
+
+.visible-btn-whole {
+  padding-left: 1rem;
   padding-right: 1rem;
 }
 
