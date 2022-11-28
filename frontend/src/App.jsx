@@ -1,5 +1,5 @@
 import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Root from './routes/Root'
@@ -12,7 +12,7 @@ import RecipeDetail, {
 
 import LoginPage from './pages/LoginPage.jsx'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Root />,

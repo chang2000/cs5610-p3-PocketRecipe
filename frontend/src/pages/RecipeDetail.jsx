@@ -265,13 +265,13 @@ function RecipeDetail() {
               defaultText={detail.prepTime.toString()}
               submitFunc={applyPrepTimeChange}
             />
-            
+
           </div>
 
           <div className="ingridients">
             <div className="list-name-title">
               <div className="list-name">Ingrident:</div>
-              
+
               <button className="btn" id="ingri-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
@@ -304,7 +304,7 @@ function RecipeDetail() {
           <div className="instruction">
             <div className="list-name-title">
               <div className="list-name">Instruction:</div>
-              
+
               <button className="btn" id="instru-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
@@ -337,7 +337,7 @@ function RecipeDetail() {
           <div className="nutrition">
             <div className="list-name-title">
               <div className="list-name">Nurtrition:</div>
-              
+
               <button className="btn" id="nurtri-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
@@ -370,7 +370,7 @@ function RecipeDetail() {
           <div className="tags">
             <div className="list-name-title">
               <div className="list-name">Tags:</div>
-              
+
               <button className="btn" id="tag-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
@@ -491,9 +491,7 @@ function RecipeDetail() {
       let res = await fetch(requestAPI)
       let data = await res.json()
       console.log(data)
-      let curTab = window.location.pathname.split('/')[1]
-      navigate('/' + curTab)
-      window.location.reload()
+      navigate(0)
     }
   }
 
@@ -514,11 +512,11 @@ function RecipeDetail() {
             {detail.user === currUser ? (
               detail.public ? (
                 <button className="visible-btn" onClick={togglePublic}>
-                Public
+                  Public
                 </button>
               ) : (
                 <button className="visible-btn" onClick={togglePublic}>
-                Private
+                  Private
                 </button>
               )
             ) : detail.public ? (
