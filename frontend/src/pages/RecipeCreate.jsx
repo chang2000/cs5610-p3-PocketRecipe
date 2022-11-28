@@ -142,7 +142,7 @@ const RecipeCreate = () => {
 
       <form onSubmit={createRecipe} id="new-recipe">
         <label className="newrecipe-name">
-          <div className="list-title1">Name:</div>
+          <span>Name:</span>
           <input id="newrecipe-input-name"></input>
         </label>
 
