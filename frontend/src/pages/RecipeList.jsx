@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, NavLink } from "react-router-dom";
+import { Link, Outlet, NavLink, useNavigation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function RecipeList(props) {
@@ -8,6 +8,8 @@ function RecipeList(props) {
   // the recipes stores ids of recipe of the current list
   const [recipes, setRecipes] = useState([]);
   const user = window.localStorage.getItem("email");
+  const navigation = useNavigation();
+
   // Do this once page reloaded
   useEffect(() => {
     // TODO: remove hardcode later
@@ -32,16 +34,15 @@ function RecipeList(props) {
     <>
       {/* also create a bunch of Link here */}
       <div id="recipe-list">
-        {`Current List Type: ${type}`}
-        <br></br>
+        {/* {`Current List Type: ${type}`} */}
+        {/* <br></br> */}
         <nav>
           <ul>
             {/* The following items should be dynamic */}
             {/* Dynamic render */}
             {recipes.map((item, i) => (
-              <li>
+              <li key={i}>
                 <NavLink
-                  key={i}
                   to={`/${type}/${item._id}`}
                   className={({ isActive, isPending }) =>
                     isActive ? "active" : isPending ? "pending" : ""
@@ -54,7 +55,10 @@ function RecipeList(props) {
           </ul>
         </nav>
       </div>
-      <div id="contact">
+      <div
+        id="contact"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>
