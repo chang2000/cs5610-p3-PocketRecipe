@@ -128,19 +128,20 @@ const RecipeCreate = () => {
 
   return (
     <div className="recipe-create-view">
+      <div className="top-menu">
       <h1>Create a New Recipe</h1>
       <label>
-        <span>Visibility:</span>
+        <span className="visible">Visibility:</span>
 
-        <select name="visibility" id="visibility-select">
+        <select className="visibility" id="visibility-select">
           <option value="private">Private</option>
           <option value="public">Public</option>
         </select>
       </label>
-
+      </div>
+      
 
       <form onSubmit={createRecipe} id="new-recipe">
-
         <label className="newrecipe-name">
           <span>Name:</span>
           <input id="newrecipe-input-name"></input>
@@ -293,9 +294,22 @@ const RecipeCreate = () => {
         </div>
 
         <br></br>
-        <button type="submit" onClick={submitRecipe}>
-          Save
-        </button>
+        <div className="btn-down">
+          <button className="normal-btn" type="submit" onClick={submitRecipe}>
+            Save
+          </button>
+          
+          <button
+            id="cancel-btn"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Cancel
+          </button>
+          
+          
+        </div>
       </form>
     </div>
   );

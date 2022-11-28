@@ -53,7 +53,7 @@ function Root() {
             </form>
 
             <form onSubmit={createNewRecipe}>
-              <button type="submit">New</button>
+              <button className="normal-btn" type="submit">New</button>
             </form>
           </div>
           <nav>

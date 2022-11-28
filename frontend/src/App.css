@@ -62,13 +62,46 @@ button {
   line-height: 1.5;
   margin: 0;
 }
-button {
+button, .normal-btn {
   color: #3992ff;
+  background-color: #e8f0fc;
   font-weight: 500;
+  border-radius: 8px;
 }
 
-.visible-button {
+#cancel-btn {
   color: #fc9c26;
+  background-color: #fcebe8;
+  border-radius: 8px;
+}
+
+.visible-btn {
+  color: #fc9c26;
+  background-color: #fcf9f4;
+  border-radius: 8px;
+}
+
+#delete-btn {
+  color: red;
+  background-color: #fcebe8;
+  border-radius: 8px;
+}
+
+.list-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.list-title1 {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 0.5rem 0.5rem 0;
+}
+
+.list-title2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-top: 0.5rem;
 }
 
 
@@ -125,6 +158,27 @@ form[action$="destroy"] button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.view-ingri, .view-instru, .view-nurtri, .view-tag {
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.basic-info {
+  display: flex;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.view-name, .view-preptime, .view-desc {
+  padding-left: 1rem;
+}
+
+.foot-delete {
+  padding-top: 1rem;
 }
 
 #whole-page {
@@ -390,11 +444,41 @@ i {
   margin: 1rem 0;
 }
 
-#new-recipe {
+#new-recipe, .view-only-item, .editable-item-page {
   display: flex;
   max-width: 40rem;
   flex-direction: column;
   gap: 1rem;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+  background-color: #fafafb;
+  line-height: 1.5;
+  margin-top: 1rem;
+  
+}
+
+.top-menu {
+  padding-left: 1rem;
+}
+
+.btn-down {
+  display: flex;
+  gap:1rem;
+}
+
+.visible {
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.editable-wrapper {
+  /* padding: 5rem; */
+  /* padding: 1rem 1rem; */
+  /* background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2); */
 }
 #new-recipe > p:first-child {
   margin: 0;
