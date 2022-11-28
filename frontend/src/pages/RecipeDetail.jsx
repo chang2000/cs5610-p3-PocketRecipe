@@ -429,9 +429,9 @@ function RecipeDetail() {
           {
             detail.user === currUser ? (
               detail.public ? (
-                <button onClick={togglePublic}>Public</button>
+                <button  onClick={togglePublic}>Public</button>
               ) : (
-                <button onClick={togglePublic}>Private</button>
+                <button  onClick={togglePublic}>Private</button>
               )
             ) : (
               detail.public ? (

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 /* #recipe-list {
   margin-top: 50px;
@@ -19,8 +18,6 @@
 } */
 
 
-=======
->>>>>>> 21bf9c772bae9c7af8c83d88c5d556e552fac025
 html {
   box-sizing: border-box;
 }
@@ -58,6 +55,7 @@ body {
 }
 textarea,
 input,
+select,
 button {
   font-size: 1rem;
   font-family: inherit;
@@ -74,6 +72,7 @@ button {
   font-weight: 500;
 }
 
+
 textarea:hover,
 input:hover,
 button:hover {
@@ -83,6 +82,10 @@ button:hover {
 button:active {
   box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.4);
   transform: translateY(1px);
+}
+
+#contact {
+  overflow-y: auto;
 }
 
 #contact h1 {
@@ -146,6 +149,7 @@ form[action$="destroy"] button {
 }
 
 #recipe-list {
+  overflow-y: auto;
   width:18rem;
   background-color: #f7f7f7;
   border-right: solid 1px #e3e3e3;
@@ -400,9 +404,9 @@ i {
   margin: 0 0 0 8rem;
 }
 
-#contact-form p:last-child button[type="button"] {
+/* #contact-form p:last-child button[type="button"] {
   color: inherit;
-}
+} */
 
 #zero-state {
   margin: 2rem auto;
