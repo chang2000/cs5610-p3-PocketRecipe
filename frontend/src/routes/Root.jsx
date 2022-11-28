@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useNavigate, NavLink } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 
@@ -14,12 +14,12 @@ function Root() {
           onClick: () => {
             window.localStorage.removeItem('email')
             window.location.reload(true)
-          }
+          },
         },
         {
           label: 'No',
-        }
-      ]
+        },
+      ],
     })
   }
   const navigate = useNavigate()
@@ -29,6 +29,9 @@ function Root() {
     navigate('/mine/new')
   }
   let curUser = window.localStorage.getItem('email')
+  useEffect(() => {
+    navigate('/mine')
+  }, [])
   return (
     <>
       <div id="whole-page">
@@ -39,36 +42,48 @@ function Root() {
             Log Out
           </button>
 
-          <div>
-            <form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search contacts"
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div id="search-spinner" aria-hidden hidden={true} />
-              <div className="sr-only" aria-live="polite"></div>
-            </form>
-
+          <div className='whole-title'>
+            <div className='whole-title-text'>
+            Pocket recipe
+            </div>
+            
             <form onSubmit={createNewRecipe}>
-
-              <button type="submit">New</button>
+              <button className="normal-btn" type="submit">New Recipe</button>
             </form>
           </div>
           <nav>
             <ul>
               <li>
-                <Link to={'mine'}>My Recipes</Link>
+                <NavLink
+                  to={'mine'}
+                  className={({ isActive, isPending }) =>
+                    isActive ? 'active' : isPending ? 'pending' : ''
+                  }
+                >
+                  My Recipes
+                </NavLink>
               </li>
 
               <li>
-                <Link to={'fav'}>Favorites</Link>
+                <NavLink
+                  to={'fav'}
+                  className={({ isActive, isPending }) =>
+                    isActive ? 'active' : isPending ? 'pending' : ''
+                  }
+                >
+                  Favorites
+                </NavLink>
               </li>
 
               <li>
-                <Link to={'discover'}>Discover</Link>
+                <NavLink
+                  to={'discover'}
+                  className={({ isActive, isPending }) =>
+                    isActive ? 'active' : isPending ? 'pending' : ''
+                  }
+                >
+                  Discover
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -80,6 +95,5 @@ function Root() {
   )
 }
 Root.propsType = {}
-
 
 export default Root

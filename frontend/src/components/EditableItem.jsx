@@ -20,7 +20,7 @@ const EditableItem = (props) => {
 
   return (
     <div className="editable-item">
-      {title + ': '}
+      <div className="item-title">{title + ': '}</div>
       {
 
         isE ?

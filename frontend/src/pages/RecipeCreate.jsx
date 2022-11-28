@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditableItem from '../components/EditableItem'
 import { useNavigate } from 'react-router-dom'
 
-
 const RecipeCreate = () => {
   const [ingridients, setIngridients] = useState(['Click here to edit...'])
   const [instructions, setInstructions] = useState(['Click here to edit...'])
@@ -12,9 +11,7 @@ const RecipeCreate = () => {
   const [tags, setTags] = useState(['Click here to edit...'])
 
   const navigate = useNavigate()
-  useEffect(() => {
-  }, [ingridients, instructions, nurtritions, tags])
-
+  useEffect(() => {}, [ingridients, instructions, nurtritions, tags])
 
   const addSubItem = (e) => {
     console.log('enter add sub item')
@@ -36,7 +33,6 @@ const RecipeCreate = () => {
       tmp.push('Click here to add a new instruction....')
       setTags(tmp)
     }
-
   }
 
   const applyItemChange = (e) => {
@@ -65,7 +61,6 @@ const RecipeCreate = () => {
     }
   }
 
-
   const deleteSubItem = (e) => {
     let deleteConfirm = window.confirm('Want to delete?')
 
@@ -91,7 +86,6 @@ const RecipeCreate = () => {
         setTags(tmp)
       }
     }
-
   }
 
   const createRecipe = (e) => {
@@ -105,7 +99,7 @@ const RecipeCreate = () => {
     let desc = document.getElementById('newrecipe-input-desc').value
     let prepTime = document.getElementById('newrecipe-input-preptime').value
     let visibility = document.getElementById('visibility-select').value
-    let ifPublic = (visibility === 'public')
+    let ifPublic = visibility === 'public'
     let recipeInfo = {
       email: currUser,
       itemName: name,
@@ -115,16 +109,16 @@ const RecipeCreate = () => {
       instruction: instructions,
       nurtritions: nurtritions,
       tags: tags,
-      public: ifPublic
+      public: ifPublic,
     }
 
     let apiURL = '/item/create'
     let res = await fetch(apiURL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(recipeInfo)
+      body: JSON.stringify(recipeInfo),
     })
     let data = await res.json()
     let curRecipeID = data.id
@@ -134,108 +128,188 @@ const RecipeCreate = () => {
 
   return (
     <div className="recipe-create-view">
-      <h1>Create a New Recipe</h1>
-      Visibility:
-      <select name="visibility" id="visibility-select">
-        <option value="private">Private</option>
-        <option value="public">Public</option>
-      </select>
-      <form onSubmit={createRecipe}>
-        <div className="newrecipe-name">
-          Name: <input id='newrecipe-input-name'></input>
-        </div>
+      <div className="top-menu">
+        <div className="create-title">Create a New Recipe</div>
+        <label>
+          <span className="visible">Visibility:</span>
 
-        <div className="newrecipe-desc">
-          Description: <input id='newrecipe-input-desc'></input>
-        </div>
+          <select className="visibility" id="visibility-select">
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+          </select>
+        </label>
+      </div>
 
-        <div className="newrecipe-preptime">
-          Prep Time
-          <input id='newrecipe-input-preptime'></input>
-          minutes
-        </div>
+      <form onSubmit={createRecipe} id="new-recipe">
+        <label className="newrecipe-name">
+          <div className="list-title1">Name:</div>
+          <input id="newrecipe-input-name"></input>
+        </label>
+
+        <label className="newrecipe-desc">
+          <span>Description:</span>
+          <input id="newrecipe-input-desc"></input>
+        </label>
+
+        <label className="newrecipe-preptime">
+          <span>Prep Time</span>
+
+          <input id="newrecipe-input-preptime"></input>
+          {/* right align */}
+          <span>minutes</span>
+        </label>
 
         <div className="newrecipe-ingridient">
-          <h2>Ingridients</h2>
-          <button className='btn' id='newrecipe-ingri-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Ingridients:</div>
+            <button
+              className="btn"
+              id="newrecipe-ingri-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
-          {
-            ingridients?.map((item, i) =>
-              <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                <EditableItem key={i} title={i + 1} defaultText={item}
-                  submitFunc={applyItemChange} optType='ingri' idx={i} />
-                <button className="btn delete-icon" id={i + '-ingri-delete-icon-newrecipe'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                  <DeleteIcon key={i + 'icon'} />
-                </button>
-              </div>
-            )
-          }
+          {ingridients?.map((item, i) => (
+            <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+              <EditableItem
+                key={i}
+                title={i + 1}
+                defaultText={item}
+                submitFunc={applyItemChange}
+                optType="ingri"
+                idx={i}
+              />
+              <button
+                className="btn delete-icon"
+                id={i + '-ingri-delete-icon-newrecipe'}
+                key={i + 'icon-wrapper'}
+                onClick={deleteSubItem}
+              >
+                <DeleteIcon key={i + 'icon'} />
+              </button>
+            </div>
+          ))}
         </div>
 
         <div className="newrecipe-instruction">
-          <h2>Instructions: </h2>
-          <button className='btn' id='newrecipe-instru-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Instructions:</div>
+            <button
+              className="btn"
+              id="newrecipe-instru-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
-          {
-            instructions?.map((item, i) =>
-              <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                <EditableItem key={i} title={i + 1} defaultText={item}
-                  submitFunc={applyItemChange} optType='instru' idx={i} />
-                <button className="btn delete-icon" id={i + '-instru-delete-icon-newrecipe'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                  <DeleteIcon key={i + 'icon'} />
-                </button>
-              </div>
-            )
-          }
+          {instructions?.map((item, i) => (
+            <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+              <EditableItem
+                key={i}
+                title={i + 1}
+                defaultText={item}
+                submitFunc={applyItemChange}
+                optType="instru"
+                idx={i}
+              />
+              <button
+                className="btn delete-icon"
+                id={i + '-instru-delete-icon-newrecipe'}
+                key={i + 'icon-wrapper'}
+                onClick={deleteSubItem}
+              >
+                <DeleteIcon key={i + 'icon'} />
+              </button>
+            </div>
+          ))}
         </div>
 
         <div className="newrecipe-nurtritions">
-          <h2>Nurtritions: </h2>
-          <button className='btn' id='newrecipe-nurtri-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Nurtritions:</div>
+            <button
+              className="btn"
+              id="newrecipe-nurtri-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
-          {
-            nurtritions?.map((item, i) =>
-              <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                <EditableItem key={i} title={i + 1} defaultText={item}
-                  submitFunc={applyItemChange} optType='nurtri' idx={i} />
-                <button className="btn delete-icon" id={i + '-nurtri-delete-icon-newrecipe'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                  <DeleteIcon key={i + 'icon'} />
-                </button>
-              </div>
-            )
-          }
+          {nurtritions?.map((item, i) => (
+            <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+              <EditableItem
+                key={i}
+                title={i + 1}
+                defaultText={item}
+                submitFunc={applyItemChange}
+                optType="nurtri"
+                idx={i}
+              />
+              <button
+                className="btn delete-icon"
+                id={i + '-nurtri-delete-icon-newrecipe'}
+                key={i + 'icon-wrapper'}
+                onClick={deleteSubItem}
+              >
+                <DeleteIcon key={i + 'icon'} />
+              </button>
+            </div>
+          ))}
         </div>
 
         <div className="newrecipe-tags">
-          <h2>Tags: </h2>
-          <button className='btn' id='newrecipe-tag-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Tags:</div>
+            <button
+              className="btn"
+              id="newrecipe-tag-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
-          {
-            tags?.map((item, i) =>
-              <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                <EditableItem key={i} title={i + 1} defaultText={item}
-                  submitFunc={applyItemChange} optType='tag' idx={i} />
-                <button className="btn delete-icon" id={i + '-tag-delete-icon-newrecipe'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                  <DeleteIcon key={i + 'icon'} />
-                </button>
-              </div>
-            )
-          }
+          {tags?.map((item, i) => (
+            <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+              <EditableItem
+                key={i}
+                title={i + 1}
+                defaultText={item}
+                submitFunc={applyItemChange}
+                optType="tag"
+                idx={i}
+              />
+              <button
+                className="btn delete-icon"
+                id={i + '-tag-delete-icon-newrecipe'}
+                key={i + 'icon-wrapper'}
+                onClick={deleteSubItem}
+              >
+                <DeleteIcon key={i + 'icon'} />
+              </button>
+            </div>
+          ))}
         </div>
 
-        <button type='submit' onClick={submitRecipe}>
-          Save
-        </button>
-      </form>
+        <div className="btn-down">
+          <button className="normal-btn" type="submit" onClick={submitRecipe}>
+            Save
+          </button>
 
+          <button
+            id="cancel-btn"
+            onClick={() => {
+              navigate(-1)
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   )
 }

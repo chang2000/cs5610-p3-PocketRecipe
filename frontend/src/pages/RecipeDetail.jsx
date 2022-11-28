@@ -38,7 +38,6 @@ function RecipeDetail() {
     fetchData()
   }, [id, ifPublic, favorited, editTimes, currUser])
 
-
   const togglePublic = () => {
     const sendRequest = async () => {
       console.log('enter toggel public')
@@ -48,14 +47,12 @@ function RecipeDetail() {
       await fetch(requestAPI, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(
-          {
-            id: detail._id,
-            public: target
-          }
-        )
+        body: JSON.stringify({
+          id: detail._id,
+          public: target,
+        }),
       })
       setIfPublic(target)
     }
@@ -69,13 +66,13 @@ function RecipeDetail() {
       await fetch(requestAPI, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: currUser,
           id: detail._id,
-          favorite: target
-        })
+          favorite: target,
+        }),
       })
       setFavorited(target)
     }
@@ -95,9 +92,9 @@ function RecipeDetail() {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newDetail)
+      body: JSON.stringify(newDetail),
     })
 
     let data = await res.json()
@@ -118,9 +115,9 @@ function RecipeDetail() {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newDetail)
+      body: JSON.stringify(newDetail),
     })
     let data = await res.json()
     console.log(data)
@@ -140,9 +137,9 @@ function RecipeDetail() {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newDetail)
+      body: JSON.stringify(newDetail),
     })
     let data = await res.json()
     console.log(data)
@@ -167,9 +164,9 @@ function RecipeDetail() {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newDetail)
+      body: JSON.stringify(newDetail),
     })
     let data = await res.json()
     console.log(data)
@@ -201,9 +198,9 @@ function RecipeDetail() {
       let res = await fetch(requestAPI, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newDetail)
+        body: JSON.stringify(newDetail),
       })
       let data = await res.json()
       console.log(data)
@@ -233,9 +230,9 @@ function RecipeDetail() {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newDetail)
+      body: JSON.stringify(newDetail),
     })
     let data = await res.json()
     console.log(data)
@@ -245,90 +242,162 @@ function RecipeDetail() {
   const EditableDetail = () => {
     return (
       <>
-        <div className="">
-          <EditableItem title={'Name'} defaultText={detail.name} submitFunc={applyNameChange} />
-        </div>
-
-        <div className="">
-          <EditableItem title={'Description'} defaultText={detail.description} submitFunc={applyDescChange} />
-        </div>
-
-        <div className="">
-          <EditableItem title={'Prep Time'} defaultText={detail.prepTime.toString()} submitFunc={applyPrepTimeChange} />
-          seconds
-        </div>
-
-        <div className=''>
-          Ingrident:
-          <button className='btn' id='ingri-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
-
-          <div id='ingri-list'>
-            {
-              detail.ingrident?.map((item, i) =>
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="ingri" idx={i} />
-                  <button className="btn delete-icon" id={i + '-ingri-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + 'icon'} />
-                  </button>
-                </div>
-              )
-            }
+        <div className="editable-item-page">
+          <div className="">
+            <EditableItem
+              title={'Name'}
+              defaultText={detail.name}
+              submitFunc={applyNameChange}
+            />
           </div>
-        </div>
 
-        <div>Instruction:
-          <button className='btn' id='instru-add-btn' onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
-
-          <div className="instru-list">
-            {
-              detail.instruction?.map((item, i) =>
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="instru" idx={i} />
-                  <button className="btn delete-icon" id={i + '-instru-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + 'icon'} />
-                  </button>
-                </div>
-              )
-            }
+          <div className="">
+            <EditableItem
+              title={'Description'}
+              defaultText={detail.description}
+              submitFunc={applyDescChange}
+            />
           </div>
-        </div>
 
-        <div>Nurtrition:
-          <button className='btn' id="nurtri-add-btn" onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
-          <div className="nurtri-list">
-            {
-              detail.nutrition?.map((item, i) =>
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="nurtri" idx={i} />
-                  <button className="btn delete-icon" id={i + '-nurtri-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
-                    <DeleteIcon key={i + 'icon'} />
-                  </button>
-                </div>
-              )
-            }
+          <div className="">
+            <EditableItem
+              title={'Prep Time'}
+              defaultText={detail.prepTime.toString()}
+              submitFunc={applyPrepTimeChange}
+            />
+            
           </div>
-        </div>
-        <div>Tags:
-          <button className='btn' id="tag-add-btn" onClick={addSubItem}>
-            <AddCircleIcon />
-          </button>
-          <div className="tag-list">
-            {
-              detail.tags?.map((item, i) =>
+
+          <div className="ingridients">
+            <div className="list-name-title">
+              <div className="list-name">Ingrident:</div>
+              
+              <button className="btn" id="ingri-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
+            <div id="ingri-list">
+              {detail.ingrident?.map((item, i) => (
                 <div className="editable-wrapper" key={i + 'editable-wrapper'}>
-                  <EditableItem key={i} title={i + 1} defaultText={item} submitFunc={applyItemChange} optType="tag" idx={i} />
-                  <button className="btn delete-icon" id={i + '-tag-delete-icon'} key={i + 'icon-wrapper'} onClick={deleteSubItem}>
+                  <EditableItem
+                    key={i}
+                    title={i + 1}
+                    defaultText={item}
+                    submitFunc={applyItemChange}
+                    optType="ingri"
+                    idx={i}
+                  />
+                  <button
+                    className="btn delete-icon"
+                    id={i + '-ingri-delete-icon'}
+                    key={i + 'icon-wrapper'}
+                    onClick={deleteSubItem}
+                  >
                     <DeleteIcon key={i + 'icon'} />
                   </button>
                 </div>
-              )
-            }
+              ))}
+            </div>
+          </div>
+
+          <div className="instruction">
+            <div className="list-name-title">
+              <div className="list-name">Instruction:</div>
+              
+              <button className="btn" id="instru-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
+            <div className="instru-list">
+              {detail.instruction?.map((item, i) => (
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                  <EditableItem
+                    key={i}
+                    title={i + 1}
+                    defaultText={item}
+                    submitFunc={applyItemChange}
+                    optType="instru"
+                    idx={i}
+                  />
+                  <button
+                    className="btn delete-icon"
+                    id={i + '-instru-delete-icon'}
+                    key={i + 'icon-wrapper'}
+                    onClick={deleteSubItem}
+                  >
+                    <DeleteIcon key={i + 'icon'} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="nutrition">
+            <div className="list-name-title">
+              <div className="list-name">Nurtrition:</div>
+              
+              <button className="btn" id="nurtri-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
+            <div className="nurtri-list">
+              {detail.nutrition?.map((item, i) => (
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                  <EditableItem
+                    key={i}
+                    title={i + 1}
+                    defaultText={item}
+                    submitFunc={applyItemChange}
+                    optType="nurtri"
+                    idx={i}
+                  />
+                  <button
+                    className="btn delete-icon"
+                    id={i + '-nurtri-delete-icon'}
+                    key={i + 'icon-wrapper'}
+                    onClick={deleteSubItem}
+                  >
+                    <DeleteIcon key={i + 'icon'} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="tags">
+            <div className="list-name-title">
+              <div className="list-name">Tags:</div>
+              
+              <button className="btn" id="tag-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
+            <div className="tag-list">
+              {detail.tags?.map((item, i) => (
+                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                  <EditableItem
+                    key={i}
+                    title={i + 1}
+                    defaultText={item}
+                    submitFunc={applyItemChange}
+                    optType="tag"
+                    idx={i}
+                  />
+                  <button
+                    className="btn delete-icon"
+                    id={i + '-tag-delete-icon'}
+                    key={i + 'icon-wrapper'}
+                    onClick={deleteSubItem}
+                  >
+                    <DeleteIcon key={i + 'icon'} />
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </>
@@ -338,63 +407,77 @@ function RecipeDetail() {
   const ViewOnlyDetail = () => {
     return (
       <>
-        <h1>View Only.....</h1>
-        <div className="">
-          <div className="view-name">Name: {detail.name}</div>
-        </div>
-
-        <div className="">
-          <div className="view-desc">Description: {detail.desc}</div>
-        </div>
-
-        <div className="">
-          <div className="view-preptime">Prep Time: {detail.prepTime} seconds</div>
-        </div>
-
-        <div className=''>
-          <h2>Ingrident:</h2>
-          <div id='ingri-list'>
-            {
-              detail.ingrident?.map((item, i) =>
-                <div className="view-ingri" key={i}>{i + 1}: {item}</div>
-              )
-            }
+        <div className="view-only-item">
+          <div className="list-title">View Only Page</div>
+          <div className="basic-info">
+            <div className="list-title1">Namess:</div>
+            <div className="view-name"> {detail.name}</div>
           </div>
-        </div>
 
-        <div>
-          <h2>Instruction:</h2>
-
-          <div className="instru-list">
-            {
-              detail.instruction?.map((item, i) =>
-                <div className="view-instru" key={i}>{i + 1}: {item}</div>
-              )
-            }
+          <div className="basic-info">
+            <div className="list-title1">Description:</div>
+            <div className="view-desc"> {detail.desc}</div>
           </div>
-        </div>
 
-        <div>
-          <h2>Nurtrition:</h2>
-
-          <div className="nurtri-list">
-            {
-              detail.nutrition?.map((item, i) =>
-                <div className="view-nurtri" key={i}>{i + 1}: {item}</div>
-              )
-            }
+          <div className="basic-info">
+            <div className="list-title1">Prep Time:</div>
+            <div className="view-preptime">{detail.prepTime} seconds</div>
           </div>
-        </div>
 
-        <div>
-          <h2>Tags:</h2>
+          <div className="ingridients">
+            <label>
+              <div className="list-title2">Ingrident:</div>
 
-          <div className="tag-list">
-            {
-              detail.tags?.map((item, i) =>
-                <div className="view-tag" key={i}>{i + 1}: {item}</div>
-              )
-            }
+              <div id="ingri-list">
+                {detail.ingrident?.map((item, i) => (
+                  <div className="view-ingri" key={i}>
+                    {i + 1}: {item}
+                  </div>
+                ))}
+              </div>
+            </label>
+          </div>
+
+          <div className="instruction">
+            <label>
+              <div className="list-title2">Instruction:</div>
+
+              <div className="instru-list">
+                {detail.instruction?.map((item, i) => (
+                  <div className="view-instru" key={i}>
+                    {i + 1}: {item}
+                  </div>
+                ))}
+              </div>
+            </label>
+          </div>
+
+          <div className="nutrition">
+            <label>
+              <div className="list-title2">Nurtrition:</div>
+
+              <div className="nurtri-list">
+                {detail.nutrition?.map((item, i) => (
+                  <div className="view-nurtri" key={i}>
+                    {i + 1}: {item}
+                  </div>
+                ))}
+              </div>
+            </label>
+          </div>
+
+          <div className="tags">
+            <label>
+              <div className="list-title2">Tags:</div>
+
+              <div className="tag-list">
+                {detail.tags?.map((item, i) => (
+                  <div className="view-tag" key={i}>
+                    {i + 1}: {item}
+                  </div>
+                ))}
+              </div>
+            </label>
           </div>
         </div>
       </>
@@ -408,7 +491,7 @@ function RecipeDetail() {
       let res = await fetch(requestAPI)
       let data = await res.json()
       console.log(data)
-      let curTab = (window.location.pathname).split('/')[1]
+      let curTab = window.location.pathname.split('/')[1]
       navigate('/' + curTab)
       window.location.reload()
     }
@@ -416,57 +499,53 @@ function RecipeDetail() {
 
   return (
     <div id="recipe-detail">
-      <div> <b>Recipe Detail: </b>
-        {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
-        {
-          detail.user === currUser ? (
-            <button onClick={deleteRecipe}>Delete</button>
-          )
-            :
-            <></>
-        }
-        <div>Visibility:
-          {
-            detail.user === currUser ? (
-              detail.public ? (
-                <button onClick={togglePublic}>Public</button>
-              ) : (
-                <button onClick={togglePublic}>Private</button>
-              )
-            ) : (
-              detail.public ? (
-                <div>Public</div>
-              ) : (
-                <div>Private</div>
-              )
-            )
-          }
+      <div>
+        {' '}
+        <div className='detail-recipe-text'>Recipe Detail: </div>
+        <div className="list-name-title">
+          <div className="author-title">Author:</div>
+          <div className='detail-user'> {detail.user}</div>
         </div>
-
-        <button className='btn' onClick={toggleFavorite}>
-          {
-            detail.favorite ? (
-              <FavoriteIcon />
+        {/* A recipes visibility CAN ONLY BE CHANGED when it belongs to current user */}
+        <div className='visible-box'>
+          {/* <div> */}
+          <div className='visible-text'>Visibility: </div>
+          <div className='visible-btn-whole'>
+            {detail.user === currUser ? (
+              detail.public ? (
+                <button className="visible-btn" onClick={togglePublic}>
+                Public
+                </button>
+              ) : (
+                <button className="visible-btn" onClick={togglePublic}>
+                Private
+                </button>
+              )
+            ) : detail.public ? (
+              <div>Public</div>
             ) : (
-              <FavoriteBorderIcon />
-            )
-          }
-
-        </button>
+              <div>Private</div>
+            )}
+          </div>
+          <button className="btn" onClick={toggleFavorite}>
+            {detail.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </button>
+        </div>
       </div>
       <div className="">
-        <div>ID: {detail._id}</div>
-        <div>Author: {detail.user}</div>
-
-        {
-          detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />
-        }
-
-
+        {detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />}
       </div>
 
-    </div >
-
+      <div className="foot-delete">
+        {detail.user === currUser ? (
+          <button id="delete-btn" onClick={deleteRecipe}>
+            Delete
+          </button>
+        ) : (
+          <></>
+        )}
+      </div>
+    </div>
   )
 }
 

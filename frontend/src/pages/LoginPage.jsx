@@ -3,17 +3,15 @@ import md5 from 'md5'
 import './LoginPage.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 import Stack from '@mui/material/Stack'
-
-
 
 const LoginPage = () => {
   const [pageStatus, setPageStatus] = useState('login')
   const [createState, setCreatestate] = useState('initialState')
-  useEffect(() => { }, [pageStatus])
-  useEffect(() => { }, [createState])
+  useEffect(() => {}, [pageStatus])
+  useEffect(() => {}, [createState])
 
   const login = async (e) => {
     e.preventDefault()
@@ -23,28 +21,23 @@ const LoginPage = () => {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(
-        {
-          email: e.target.username.value,
-          password: hashedPwd,
-        }
-      )
-
+      body: JSON.stringify({
+        email: e.target.username.value,
+        password: hashedPwd,
+      }),
     })
     let data = await res.json()
     if (data.val === 1) {
-      console.log('here')
       window.localStorage.setItem('email', e.target.username.value)
+      window.location.replace(window.location.origin + '/mine') 
+
       window.location.reload(true)
+      
     } else {
-      console.log('not here')
       document.getElementById('login-fail-alert').style.display = 'block'
     }
-
-    // // TODO: judge if successful user login, if so, add to localstorage and refresh page
-
   }
 
   const createUser = async (e) => {
@@ -57,23 +50,20 @@ const LoginPage = () => {
     let res = await fetch(requestAPI, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(
-        {
-          email: e.target.username.value,
-          password: hashedPwd,
-        }
-      )
-
+      body: JSON.stringify({
+        email: e.target.username.value,
+        password: hashedPwd,
+      }),
     })
     let data = await res.json()
     console.log(data)
     if (data.val == 1) {
-      console.log('here data is 1')
+      document.getElementById('create-success').style.display = 'block'
       setCreatestate(false)
 
-      setPageStatus(true)
+      // setPageStatus(true)
     } else {
       document.getElementById('create-fail-alert').style.display = 'block'
       setCreatestate(false)
@@ -81,24 +71,16 @@ const LoginPage = () => {
     }
   }
 
-
   return pageStatus ? ( // true => sign in page
     <div className="back-page">
       <div className="wrapper">
         <Stack sx={{ width: '100%' }} spacing={2}>
           <Alert
-            id="create-success"
-            severity="success"
-            style={{ display: 'none' }}
-          >
-            Successfully created the account
-          </Alert>
-          <Alert
             id="login-fail-alert"
             severity="error"
             style={{ display: 'none' }}
           >
-            Wrong email or password
+            Wrong user or password
           </Alert>
         </Stack>
 
@@ -162,6 +144,14 @@ const LoginPage = () => {
             &lt; back
           </a>
         </div>
+        <Alert
+          id="create-success"
+          severity="success"
+          style={{ display: 'none' }}
+        >
+          <AlertTitle>Successfully created the account</AlertTitle>
+          <strong>Now back to sign in page</strong>
+        </Alert>
         <Alert
           id="create-fail-alert"
           severity="error"

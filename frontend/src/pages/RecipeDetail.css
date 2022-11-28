@@ -3,8 +3,9 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  /* gap: 10rem; */
   height: 40px;
 }
 
