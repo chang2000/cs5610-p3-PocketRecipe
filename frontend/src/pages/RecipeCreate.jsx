@@ -129,17 +129,16 @@ const RecipeCreate = () => {
   return (
     <div className="recipe-create-view">
       <div className="top-menu">
-      <h1>Create a New Recipe</h1>
-      <label>
-        <span className="visible">Visibility:</span>
+        <div className="create-title">Create a New Recipe</div>
+        <label>
+          <span className="visible">Visibility:</span>
 
-        <select className="visibility" id="visibility-select">
-          <option value="private">Private</option>
-          <option value="public">Public</option>
-        </select>
-      </label>
+          <select className="visibility" id="visibility-select">
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+          </select>
+        </label>
       </div>
-      
 
       <form onSubmit={createRecipe} id="new-recipe">
         <label className="newrecipe-name">
@@ -160,17 +159,17 @@ const RecipeCreate = () => {
           <span>minutes</span>
         </label>
 
-        <br></br>
         <div className="newrecipe-ingridient">
-          <h4>Ingridients</h4>
-          <span>Ingridients</span>
-          <button
-            className="btn"
-            id="newrecipe-ingri-add-btn"
-            onClick={addSubItem}
-          >
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Ingridients:</div>
+            <button
+              className="btn"
+              id="newrecipe-ingri-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
           {ingridients?.map((item, i) => (
             <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -194,16 +193,17 @@ const RecipeCreate = () => {
           ))}
         </div>
 
-        <br></br>
         <div className="newrecipe-instruction">
-          <h4>Instructions: </h4>
-          <button
-            className="btn"
-            id="newrecipe-instru-add-btn"
-            onClick={addSubItem}
-          >
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Instructions:</div>
+            <button
+              className="btn"
+              id="newrecipe-instru-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
           {instructions?.map((item, i) => (
             <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -227,16 +227,17 @@ const RecipeCreate = () => {
           ))}
         </div>
 
-        <br></br>
         <div className="newrecipe-nurtritions">
-          <h4>Nurtritions: </h4>
-          <button
-            className="btn"
-            id="newrecipe-nurtri-add-btn"
-            onClick={addSubItem}
-          >
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Nurtritions:</div>
+            <button
+              className="btn"
+              id="newrecipe-nurtri-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
           {nurtritions?.map((item, i) => (
             <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -260,16 +261,17 @@ const RecipeCreate = () => {
           ))}
         </div>
 
-        <br></br>
         <div className="newrecipe-tags">
-          <h4>Tags: </h4>
-          <button
-            className="btn"
-            id="newrecipe-tag-add-btn"
-            onClick={addSubItem}
-          >
-            <AddCircleIcon />
-          </button>
+          <div className="list-name-title">
+            <div className="list-name">Tags:</div>
+            <button
+              className="btn"
+              id="newrecipe-tag-add-btn"
+              onClick={addSubItem}
+            >
+              <AddCircleIcon />
+            </button>
+          </div>
 
           {tags?.map((item, i) => (
             <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -293,12 +295,11 @@ const RecipeCreate = () => {
           ))}
         </div>
 
-        <br></br>
         <div className="btn-down">
           <button className="normal-btn" type="submit" onClick={submitRecipe}>
             Save
           </button>
-          
+
           <button
             id="cancel-btn"
             onClick={() => {
@@ -307,8 +308,6 @@ const RecipeCreate = () => {
           >
             Cancel
           </button>
-          
-          
         </div>
       </form>
     </div>

@@ -28,6 +28,9 @@
   /* padding-bottom: 0.5rem; */
 }
 
+.editable-item-display, .editable-item-input {
+  max-width: 30rem;
+}
 
 .view-only-item {
   display: flex;

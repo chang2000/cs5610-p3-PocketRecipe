@@ -268,12 +268,15 @@ function RecipeDetail() {
             seconds
           </div>
 
-          <br></br>
           <div className="ingridients">
-            Ingrident:
-            <button className="btn" id="ingri-add-btn" onClick={addSubItem}>
-              <AddCircleIcon />
-            </button>
+            <div className="list-name-title">
+            <div className="list-name">Ingrident:</div>
+              
+              <button className="btn" id="ingri-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
             <div id="ingri-list">
               {detail.ingrident?.map((item, i) => (
                 <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -298,12 +301,15 @@ function RecipeDetail() {
             </div>
           </div>
 
-          <br></br>
           <div className="instruction">
-            Instruction:
-            <button className="btn" id="instru-add-btn" onClick={addSubItem}>
-              <AddCircleIcon />
-            </button>
+            <div className="list-name-title">
+            <div className="list-name">Instruction:</div>
+              
+              <button className="btn" id="instru-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
             <div className="instru-list">
               {detail.instruction?.map((item, i) => (
                 <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -328,12 +334,15 @@ function RecipeDetail() {
             </div>
           </div>
 
-          <br></br>
           <div className="nutrition">
-            Nurtrition:
-            <button className="btn" id="nurtri-add-btn" onClick={addSubItem}>
-              <AddCircleIcon />
-            </button>
+            <div className="list-name-title">
+            <div className="list-name">Nurtrition:</div>
+              
+              <button className="btn" id="nurtri-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
             <div className="nurtri-list">
               {detail.nutrition?.map((item, i) => (
                 <div className="editable-wrapper" key={i + "editable-wrapper"}>
@@ -358,12 +367,15 @@ function RecipeDetail() {
             </div>
           </div>
 
-          <br></br>
           <div className="tags">
-            Tags:
-            <button className="btn" id="tag-add-btn" onClick={addSubItem}>
-              <AddCircleIcon />
-            </button>
+            <div className="list-name-title">
+              <div className="list-name">Tags:</div>
+              
+              <button className="btn" id="tag-add-btn" onClick={addSubItem}>
+                <AddCircleIcon />
+              </button>
+            </div>
+
             <div className="tag-list">
               {detail.tags?.map((item, i) => (
                 <div className="editable-wrapper" key={i + "editable-wrapper"}>
