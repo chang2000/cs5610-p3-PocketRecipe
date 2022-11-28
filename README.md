@@ -6,13 +6,39 @@ Author: Tianchang Wang & Guoqin Sun
 
 Course Link: https://johnguerra.co/classes/webDevelopment_fall_2022/
 
-Online Demo:
+Live Demo: https://pocket-recipe.onrender.com/
 
 Slides Presentation:
 
+Presentation Video:
+
 Design Document [./design-document.md](./design-document.md).
 
-# 80% CHECKPOINT for Nov 22
+## Project Objective
+
+## ScreenShots
+
+## Instruction on Build
+
+**Development Mode**
+
+Pre-requiste: MongoDB running on `localhost:27017`
+
+1. `cd frontend`->`yarn` -> `yarn start`
+2. `cd ../backend` -> `yarn`->`yarn run dev`
+3. Visit `localhost:3000`
+
+**Deployment Mode**
+
+Pre-requiste: MongoDB running on `localhost:27017`
+
+1. `yarn` will install dependencies for Express and the `postinstall` will automatically install the dependencies for frontend and build frontend.
+2. `yarn importdata` to import the user collection with 2 records and recipe collection with 1200 records.
+3. `yarn start`, then visit `localhost:5555` to view the page.
+
+## MISC
+
+### 80% CHECKPOINT for Nov 22
 
 What we already done:
 
@@ -25,7 +51,7 @@ What's left:
 - Deployment
 - Report, Slides & demo videos
 
-# 60% CHECKPOINT
+### 60% CHECKPOINT
 
 What we already done:
 
@@ -39,21 +65,4 @@ What's left:
 - Client side: user create/login
 - Client side: Edit A recipe
 - Add CSS
-- Both client side and server side: Filter by tag
 - Client side: delete a recipe
-
-## Project Objective
-
-## Thumbnails
-
-## Instruction on Build
-
-**Development Mode**
-
-Pre-requiste: MongoDB running on `localhost:27017`
-
-1. `cd frontend`->`yarn` -> `yarn start`
-2. `cd ../backend` -> `yarn`->`yarn run dev`
-3. Visit `localhost:3000`
-
-## MISC
