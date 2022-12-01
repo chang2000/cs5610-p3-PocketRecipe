@@ -22,3 +22,7 @@ app.use(express.static(path.join(__dirname, 'frontend/build')))
 app.use('/', indexRouter)
 
 export default app
+
+// Code looks good to me, and the demo works well in terms of functionality
+// But I didn't see 1000 records in you database
+// The code can be organized better， maybe make some part modules and put them in separate files
