@@ -531,6 +531,7 @@ function RecipeDetail() {
         </div>
       </div>
       <div className="">
+        
         {detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />}
       </div>
 
