@@ -60,7 +60,7 @@ Pre-requiste: MongoDB running on `localhost:27017`
 1. `yarn` will install dependencies for Express and the `postinstall` will automatically install the dependencies for frontend and build frontend.
 2. `yarn importdata` to import the user collection with 2 records and recipe collection with 1200 records.
 3. `yarn start`, then visit `localhost:5555` to view the page.
-
+4. We have provided two account: `root` and `other`, passwords are the same as usernames.
 
 
 To specify which DB to use, set up a env variable and run like following
