@@ -157,13 +157,13 @@ function RecipeDetail() {
     console.log(type)
     let newDetail = JSON.parse(JSON.stringify(detail))
     if (type === 'ingri-add-btn') {
-      newDetail.ingrident.push('New ingri')
+      newDetail.ingrident.push('Add new')
     } else if (type === 'instru-add-btn') {
-      newDetail.instruction.push('New step...')
+      newDetail.instruction.push('Add new')
     } else if (type === 'nurtri-add-btn') {
-      newDetail.nutrition.push('New nurtrition item...')
+      newDetail.nutrition.push('Add new')
     } else if (type === 'tag-add-btn') {
-      newDetail.tags.push('New Tag...')
+      newDetail.tags.push('Add new')
     }
     newDetail.id = newDetail._id
     let requestAPI = '/item/edit'
@@ -246,9 +246,8 @@ function RecipeDetail() {
   }
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Backspace') {
+    if (event.key === 'Backspace' && (event.metaKey || event.ctrlKey)) {
       event.preventDefault();
-      console.log('backspace pressed')
       console.log(event.target)
       const btn = event.target.querySelectorAll('button')[0]
       btn.click()
@@ -441,7 +440,7 @@ function RecipeDetail() {
     return (
       <>
         <div className="view-only-item">
-          <div className="list-title">View Only Page</div>
+          {/* <div className="list-title">View Only Page</div> */}
           <div className="basic-info">
             <div className="list-title1">Name:</div>
             <div className="view-name"> {detail.name}</div>
@@ -531,8 +530,8 @@ function RecipeDetail() {
   return (
     <div id="recipe-detail" >
       <div>
-        {' '}
-        <div className='detail-recipe-text' ref={compRef} tabIndex='0'>Recipe Detail: </div>
+        {/* {' '} */}
+        <div className='detail-recipe-text' ref={compRef} tabIndex='0'></div>
         <div className="list-name-title">
           <div className="author-title">Author:</div>
           <div className='detail-user'> {detail.user}</div>
