@@ -454,7 +454,7 @@ function RecipeDetail() {
 
           <div className="basic-info">
             <div className="list-title1">Prep Time:</div>
-            <div className="view-preptime">{detail.prepTime} seconds</div>
+            <div className="view-preptime">{detail.prepTime} minutes</div>
           </div>
 
           <div className="ingridients">
