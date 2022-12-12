@@ -84,8 +84,8 @@ const LoginPage = () => {
           </Alert>
         </Stack>
 
-        <div className="text-center mt-4 name">Pocket Recipe</div>
-        <form onSubmit={login} className="p-3 mt-3">
+        <div id="title-diff-font" className="text-center mt-4 name">Pocket Recipe</div>
+        <form onSubmit={login} className="p-3">
           <div>
             <label className="form-label" htmlFor="username">
               Username
@@ -160,8 +160,8 @@ const LoginPage = () => {
           User already exists
         </Alert>
 
-        <div className="text-center mt-4 name">Create new account</div>
-        <form onSubmit={createUser} className="p-3 mt-3">
+        <div id="title2-diff-font" className="text-center mt-4 name">Create new account</div>
+        <form onSubmit={createUser} className="p-3">
           <div>
             <label className="form-label" htmlFor="username">
               Username

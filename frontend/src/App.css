@@ -63,8 +63,8 @@ button {
   margin: 0;
 }
 button, .normal-btn {
-  color: #3992ff;
-  background-color: #e8f0fc;
+  color: #2066A8;
+  background-color: #FFFFFF;
   font-weight: 500;
   border-radius: 8px;
 }
@@ -76,14 +76,15 @@ button, .normal-btn {
 }
 
 .visible-btn {
-  color: #fc9c26;
-  background-color: #fcf9f4;
+  color: #A36807;
+  background-color: #FFFFFF;
   border-radius: 8px;
 }
 
+
 #delete-btn {
-  color: red;
-  background-color: #fcebe8;
+  color: rgb(224, 4, 4);
+  background-color: #ffffff;
   border-radius: 8px;
 }
 
@@ -94,13 +95,15 @@ button, .normal-btn {
 
 .list-title1 {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
   padding: 0 0.5rem 0.5rem 0;
 }
 
 .list-title2 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
   padding-top: 0.5rem;
 }
 
@@ -110,14 +113,15 @@ button, .normal-btn {
 }
 
 .whole-title-text {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .author-title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .detail-user {
@@ -251,9 +255,9 @@ form[action$="destroy"] button {
   padding-right: 2rem;
 }
 
-#category-bar h1, #log-out {
-  font-size: 1rem;
-  font-weight: 500;
+#category-bar h1 {
+  font-size: 1.1rem;
+  font-weight: 300;
   display: flex;
   align-items: center;
   margin: 0;
@@ -261,6 +265,16 @@ form[action$="destroy"] button {
   border-top: 1px solid #e3e3e3;
   
   line-height: 1;
+}
+
+#log-out {
+  color: #A36807;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
+  background-color: white;
+  line-height: 1.5;
 }
 
 #category-bar h1 {
@@ -392,12 +406,12 @@ i {
 }
 
 #category-bar nav a.active {
-  background: hsl(224, 98%, 58%);
+  background: #2066A8;
   color: white;
 }
 
 #category-bar nav a.pending {
-  color: hsl(224, 98%, 58%);
+  color: #2066A8;
 }
 
 #recipe-list nav a:hover {
@@ -405,12 +419,12 @@ i {
 }
 
 #recipe-list nav a.active {
-  background: hsl(224, 98%, 58%);
+  background: #2066A8;
   color: white;
 }
 
 #recipe-list nav a.pending {
-  color: hsl(224, 98%, 58%);
+  color: #2066A8;
 }
 
 #contact {
@@ -508,8 +522,15 @@ i {
 
 .list-name {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
   padding-right: 1rem;
+}
+
+#cur-user {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .detail-recipe {
@@ -517,7 +538,9 @@ i {
 }
 
 .detail-recipe-text, .visible-text {
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .visible-text {
