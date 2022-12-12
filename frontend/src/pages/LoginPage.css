@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface:wght@300;400;500;600;700;800;900&display=swap');
 
 /* Reseting */
 * {
@@ -7,6 +8,7 @@
     padding: 0; */
     /* box-sizing: border-box; */
     font-family: 'Poppins', sans-serif;
+    
     /* background-color: #ecf0f3; */
 }
 
@@ -29,6 +31,15 @@
 .logo {
     width: 80px;
     margin: auto;
+}
+
+#title-diff-font, #title2-diff-font {
+    font-family: 'Abril Fatface';
+}
+
+.form-label {
+    padding-top: 1rem;
+    font-weight: 500;
 }
 
 .logo img {
@@ -59,7 +70,6 @@
     font-size: 1.2rem;
     color: #666;
     padding: 10px 15px 10px 10px;
-    border: 1px solid red;
 }
 
 .wrapper .form-field {
@@ -78,8 +88,8 @@
     width: 100%;
     height: 40px;
     font-weight: 600;
-    background-color: #faaf3f;
-    color: #fff;
+    background-color: #2066A8;
+    color: #FFFFFF;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1,
         -3px -3px 3px #fff;
@@ -87,27 +97,20 @@
 }
 
 .wrapper .btn:hover {
-    background-color: #e39416;
-}
-
-.wrapper .btn:active {
-    background-color: #e39416;
+    background-color: #46A0F5;
 }
 
 .wrapper a {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    color: #f48c03;
+    color: #2066A8;
 }
 
 .wrapper a:hover {
-    color: #e58e03;
+    color: #030969;
 }
 
-.small-text {
-    color: #e58e03;
-}
 
 @media(max-width: 380px) {
     .wrapper {
