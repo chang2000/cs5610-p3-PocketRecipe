@@ -36,7 +36,7 @@ function Root() {
     <>
       <div id="whole-page">
         <div id="category-bar">
-          <h1>Current user: {curUser}</h1>
+          <h1 id="cur-user">Current user: {curUser}</h1>
 
           <h1>
           <button id="log-out" onClick={logOut}>

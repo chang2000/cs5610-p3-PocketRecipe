@@ -256,8 +256,8 @@ form[action$="destroy"] button {
 }
 
 #category-bar h1 {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 300;
   display: flex;
   align-items: center;
   margin: 0;
@@ -268,7 +268,6 @@ form[action$="destroy"] button {
 }
 
 #log-out {
-  /* background-color: #F5B347; */
   color: #A36807;
   font-size: 1rem;
   border: none;
@@ -526,6 +525,12 @@ i {
   font-weight: 300;
   font-family: 'Abril Fatface';
   padding-right: 1rem;
+}
+
+#cur-user {
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .detail-recipe {
