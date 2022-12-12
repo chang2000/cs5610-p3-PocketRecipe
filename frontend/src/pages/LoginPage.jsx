@@ -10,8 +10,8 @@ import Stack from '@mui/material/Stack'
 const LoginPage = () => {
   const [pageStatus, setPageStatus] = useState('login')
   const [createState, setCreatestate] = useState('initialState')
-  useEffect(() => {}, [pageStatus])
-  useEffect(() => {}, [createState])
+  useEffect(() => { }, [pageStatus])
+  useEffect(() => { }, [createState])
 
   const login = async (e) => {
     e.preventDefault()
@@ -31,10 +31,10 @@ const LoginPage = () => {
     let data = await res.json()
     if (data.val === 1) {
       window.localStorage.setItem('email', e.target.username.value)
-      window.location.replace(window.location.origin + '/mine') 
+      window.location.replace(window.location.origin + '/mine')
 
       window.location.reload(true)
-      
+
     } else {
       document.getElementById('login-fail-alert').style.display = 'block'
     }
@@ -59,9 +59,11 @@ const LoginPage = () => {
     })
     let data = await res.json()
     console.log(data)
-    if (data.val == 1) {
+    if (data.val === 1) {
       document.getElementById('create-success').style.display = 'block'
       setCreatestate(false)
+      window.localStorage.setItem('email', e.target.username.value)
+      window.location.replace(window.location.origin + '/mine')
 
       // setPageStatus(true)
     } else {
