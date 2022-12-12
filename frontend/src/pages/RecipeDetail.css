@@ -3,11 +3,10 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  /* gap: 10rem; */
-  height: 40px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
+
 
 .editable-wrapper .delete-icon {
   display: none;
@@ -17,11 +16,21 @@
   display: block;  
 }
 
-.btn {
-  /* background-color: DodgerBlue; Blue background */
-  border: none;
-  color: white; 
-  padding: 12px 16px; /* Some padding */
+.editable-wrapper:focus .delete-icon{
+  display: block;  
+}
+
+
+.mybtn {
+  /* background-color: cyan; */
+  /* border: none; */
+  border-radius: 8px;
+  padding: 8px 14px; /* Some padding */
   font-size: 16px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
 }
+
+
+/* .btn-primary:active {
+  background-color: red;
+} */
