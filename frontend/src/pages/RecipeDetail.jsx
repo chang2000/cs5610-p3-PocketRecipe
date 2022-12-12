@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -24,8 +24,12 @@ function RecipeDetail() {
   const [ifPublic, setIfPublic] = useState()
   const [favorited, setFavorited] = useState()
   const [editTimes, setEditTimes] = useState(0)
-
+  const compRef = useRef(null)
   const navigate = useNavigate()
+  useEffect(() => {
+    compRef.current.focus()
+  }, [])
+
   useEffect(() => {
     // get detail by id
     const fetchData = async () => {
@@ -37,6 +41,7 @@ function RecipeDetail() {
     }
     fetchData()
   }, [id, ifPublic, favorited, editTimes, currUser])
+
 
   const togglePublic = () => {
     const sendRequest = async () => {
@@ -80,6 +85,7 @@ function RecipeDetail() {
   }
 
   const applyNameChange = async (e) => {
+    console.log(e.target)
     let newName = e.target.value
     if (newName == null || newName === '') {
       alert('New Name cannot be empty')
@@ -176,7 +182,6 @@ function RecipeDetail() {
   const deleteSubItem = async (e) => {
     let deleteConfirm = window.confirm('Want to delete?')
     console.log(deleteConfirm)
-
     if (deleteConfirm) {
       let htmlEleID = e.currentTarget.id
       console.log(htmlEleID)
@@ -211,6 +216,7 @@ function RecipeDetail() {
   const applyItemChange = async (e) => {
     let targetValue = e.target.value
     let targetID = e.currentTarget.id
+    console.log(targetValue)
     let idx = targetID.split('-')[0]
     let type = targetID.split('-')[1]
     console.log(targetValue)
@@ -239,11 +245,21 @@ function RecipeDetail() {
     setEditTimes(editTimes + 1)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Backspace') {
+      event.preventDefault();
+      console.log('backspace pressed')
+      console.log(event.target)
+      const btn = event.target.querySelectorAll('button')[0]
+      btn.click()
+    }
+  };
+
   const EditableDetail = () => {
     return (
       <>
         <div className="editable-item-page">
-          <div className="">
+          <div className="" tabIndex={`detail-editable-name`}>
             <EditableItem
               title={'Name'}
               defaultText={detail.name}
@@ -251,7 +267,7 @@ function RecipeDetail() {
             />
           </div>
 
-          <div className="">
+          <div className="" tabIndex={`detail-editable-desc`}>
             <EditableItem
               title={'Description'}
               defaultText={detail.description}
@@ -259,7 +275,7 @@ function RecipeDetail() {
             />
           </div>
 
-          <div className="">
+          <div className="" tabIndex={`detail-editable-preptime`}>
             <EditableItem
               title={'Prep Time'}
               defaultText={detail.prepTime.toString()}
@@ -268,18 +284,22 @@ function RecipeDetail() {
 
           </div>
 
-          <div className="ingridients">
+          <div className="ingridients" >
             <div className="list-name-title">
               <div className="list-name">Ingrident:</div>
 
-              <button className="btn" id="ingri-add-btn" onClick={addSubItem}>
+              <button className="mybtn" id="ingri-add-btn" onClick={addSubItem} tabIndex={`detail-ingri-addbtn`}>
                 <AddCircleIcon />
               </button>
             </div>
 
             <div id="ingri-list">
               {detail.ingrident?.map((item, i) => (
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                <div className="editable-wrapper"
+                  key={i + 'editable-wrapper'}
+                  tabIndex='0'
+                  onKeyDown={handleKeyDown}
+                >
                   <EditableItem
                     key={i}
                     title={i + 1}
@@ -305,14 +325,18 @@ function RecipeDetail() {
             <div className="list-name-title">
               <div className="list-name">Instruction:</div>
 
-              <button className="btn" id="instru-add-btn" onClick={addSubItem}>
+              <button className="mybtn" id="instru-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
             </div>
 
             <div className="instru-list">
               {detail.instruction?.map((item, i) => (
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                <div className="editable-wrapper"
+                  key={i + 'editable-wrapper'}
+                  tabIndex='0'
+                  onKeyDown={handleKeyDown}
+                >
                   <EditableItem
                     key={i}
                     title={i + 1}
@@ -338,14 +362,19 @@ function RecipeDetail() {
             <div className="list-name-title">
               <div className="list-name">Nurtrition:</div>
 
-              <button className="btn" id="nurtri-add-btn" onClick={addSubItem}>
+              <button className="mybtn" id="nurtri-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
             </div>
 
             <div className="nurtri-list">
               {detail.nutrition?.map((item, i) => (
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                <div className="editable-wrapper"
+                  key={i + 'editable-wrapper'}
+                  tabIndex='0'
+                  onKeyDown={handleKeyDown}
+                >
+
                   <EditableItem
                     key={i}
                     title={i + 1}
@@ -371,14 +400,18 @@ function RecipeDetail() {
             <div className="list-name-title">
               <div className="list-name">Tags:</div>
 
-              <button className="btn" id="tag-add-btn" onClick={addSubItem}>
+              <button className="mybtn" id="tag-add-btn" onClick={addSubItem}>
                 <AddCircleIcon />
               </button>
             </div>
 
             <div className="tag-list">
               {detail.tags?.map((item, i) => (
-                <div className="editable-wrapper" key={i + 'editable-wrapper'}>
+                <div className="editable-wrapper"
+                  key={i + 'editable-wrapper'}
+                  tabIndex='0'
+                  onKeyDown={handleKeyDown}
+                >
                   <EditableItem
                     key={i}
                     title={i + 1}
@@ -496,10 +529,10 @@ function RecipeDetail() {
   }
 
   return (
-    <div id="recipe-detail">
+    <div id="recipe-detail" >
       <div>
         {' '}
-        <div className='detail-recipe-text'>Recipe Detail: </div>
+        <div className='detail-recipe-text' ref={compRef} tabIndex='0'>Recipe Detail: </div>
         <div className="list-name-title">
           <div className="author-title">Author:</div>
           <div className='detail-user'> {detail.user}</div>
@@ -525,7 +558,7 @@ function RecipeDetail() {
               <div>Private</div>
             )}
           </div>
-          <button className="btn" onClick={toggleFavorite}>
+          <button className="mybtn" onClick={toggleFavorite}>
             {detail.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </button>
         </div>

@@ -36,12 +36,12 @@ function RecipeList(props) {
       <div id="recipe-list">
         {/* {`Current List Type: ${type}`} */}
         {/* <br></br> */}
-        <nav>
+        <nav id={`recipe-list-nav-${type}`}>
           <ul>
             {/* The following items should be dynamic */}
             {/* Dynamic render */}
             {recipes.map((item, i) => (
-              <li key={i}>
+              <li key={i} tabIndex={`${type}-item-${i}`}>
                 <NavLink
                   to={`/${type}/${item._id}`}
                   className={({ isActive, isPending }) =>

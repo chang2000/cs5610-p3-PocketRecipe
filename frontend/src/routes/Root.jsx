@@ -39,14 +39,14 @@ function Root() {
           <h1 id="cur-user">Current user: {curUser}</h1>
 
           <h1>
-          <button id="log-out" onClick={logOut}>
-            Log Out
-          </button>
+            <button id="log-out" onClick={logOut}>
+              Log Out
+            </button>
           </h1>
-          
+
 
           <div className='whole-title'>
-            <div className='whole-title-text'>
+            <div className='whole-title-text' tabIndex={0}>
               Pocket recipe
             </div>
 
@@ -54,7 +54,7 @@ function Root() {
               <button className="normal-btn" type="submit">New Recipe</button>
             </form>
           </div>
-          <nav>
+          <nav id='meta-list-nav'>
             <ul>
               <li>
                 <NavLink
