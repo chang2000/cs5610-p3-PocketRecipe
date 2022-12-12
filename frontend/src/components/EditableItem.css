@@ -33,7 +33,8 @@
 }
 
 .item-title {
-  font-weight: 600;
+  font-weight: 300;
+  font-family: 'Abril Fatface';
 }
 
 .view-only-item {

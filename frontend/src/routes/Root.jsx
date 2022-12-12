@@ -38,9 +38,12 @@ function Root() {
         <div id="category-bar">
           <h1>Current user: {curUser}</h1>
 
+          <h1>
           <button id="log-out" onClick={logOut}>
             Log Out
           </button>
+          </h1>
+          
 
           <div className='whole-title'>
             <div className='whole-title-text'>
