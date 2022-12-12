@@ -5,7 +5,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 import EditableItem from '../components/EditableItem'
 import './RecipeDetail.css'
 
@@ -46,6 +47,7 @@ function RecipeDetail() {
   const togglePublic = () => {
     const sendRequest = async () => {
       console.log('enter toggel public')
+      const id = toast.loading("Loading...")
       let requestAPI = '/item/pub'
       let target = !detail.public
 
@@ -60,6 +62,7 @@ function RecipeDetail() {
         }),
       })
       setIfPublic(target)
+      toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
     }
     sendRequest()
   }
@@ -68,6 +71,7 @@ function RecipeDetail() {
     const sendRequest = async () => {
       let requestAPI = '/item/fav'
       let target = !detail.favorite
+      const id = toast.loading("Loading...")
       await fetch(requestAPI, {
         method: 'POST',
         headers: {
@@ -80,11 +84,13 @@ function RecipeDetail() {
         }),
       })
       setFavorited(target)
+      toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
     }
     sendRequest()
   }
 
   const applyNameChange = async (e) => {
+    const id = toast.loading("Loading...")
     console.log(e.target)
     let newName = e.target.value
     if (newName == null || newName === '') {
@@ -106,9 +112,11 @@ function RecipeDetail() {
     let data = await res.json()
     console.log(data)
     setEditTimes(editTimes + 1)
+    toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
   }
 
   const applyDescChange = async (e) => {
+    const id = toast.loading("Loading...")
     let newVal = e.target.value
     if (newVal == null || newVal === '') {
       alert('New description cannot be empty')
@@ -128,9 +136,11 @@ function RecipeDetail() {
     let data = await res.json()
     console.log(data)
     setEditTimes(editTimes + 1)
+    toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
   }
 
   const applyPrepTimeChange = async (e) => {
+    const id = toast.loading("Loading...")
     let newVal = e.target.value
     if (newVal == null || newVal === '') {
       alert('New prepTime cannot be empty')
@@ -150,9 +160,11 @@ function RecipeDetail() {
     let data = await res.json()
     console.log(data)
     setEditTimes(editTimes + 1)
+    toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
   }
 
   const addSubItem = async (e) => {
+    const id = toast.loading("Loading...")
     let type = e.currentTarget.id
     console.log(type)
     let newDetail = JSON.parse(JSON.stringify(detail))
@@ -177,9 +189,11 @@ function RecipeDetail() {
     let data = await res.json()
     console.log(data)
     setEditTimes(editTimes + 1)
+    toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
   }
 
   const deleteSubItem = async (e) => {
+    const id = toast.loading("Loading...")
     let deleteConfirm = window.confirm('Want to delete?')
     console.log(deleteConfirm)
     if (deleteConfirm) {
@@ -210,10 +224,12 @@ function RecipeDetail() {
       let data = await res.json()
       console.log(data)
       setEditTimes(editTimes + 1)
+      toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
     }
   }
 
   const applyItemChange = async (e) => {
+    const id = toast.loading("Loading...")
     let targetValue = e.target.value
     let targetID = e.currentTarget.id
     console.log(targetValue)
@@ -243,6 +259,7 @@ function RecipeDetail() {
     let data = await res.json()
     console.log(data)
     setEditTimes(editTimes + 1)
+    toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
   }
 
   const handleKeyDown = (event) => {
@@ -519,10 +536,12 @@ function RecipeDetail() {
   const deleteRecipe = async () => {
     let deleteConfirm = window.confirm('Want to delete?')
     if (deleteConfirm) {
+      const id = toast.loading("Loading...")
       let requestAPI = `/item/delete?id=${detail._id}`
       let res = await fetch(requestAPI)
       let data = await res.json()
       console.log(data)
+      toast.update(id, { render: "Saved!", type: "success", isLoading: false, autoClose: 2000 });
       navigate(0)
     }
   }
@@ -565,6 +584,7 @@ function RecipeDetail() {
       <div className="">
         {detail.user === currUser ? <EditableDetail /> : <ViewOnlyDetail />}
       </div>
+      <ToastContainer autoClose={2000} />
 
       <div className="foot-delete">
         {detail.user === currUser ? (
