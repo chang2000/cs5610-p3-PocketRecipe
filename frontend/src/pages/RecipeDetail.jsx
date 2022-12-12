@@ -443,7 +443,7 @@ function RecipeDetail() {
         <div className="view-only-item">
           <div className="list-title">View Only Page</div>
           <div className="basic-info">
-            <div className="list-title1">Namess:</div>
+            <div className="list-title1">Name:</div>
             <div className="view-name"> {detail.name}</div>
           </div>
 

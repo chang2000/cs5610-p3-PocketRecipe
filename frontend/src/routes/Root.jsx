@@ -36,11 +36,14 @@ function Root() {
     <>
       <div id="whole-page">
         <div id="category-bar">
-          <h1>Current user: {curUser}</h1>
+          <h1 id="cur-user">Current user: {curUser}</h1>
 
-          <button id="log-out" onClick={logOut} tabIndex={0}>
-            Log Out
-          </button>
+          <h1>
+            <button id="log-out" onClick={logOut}>
+              Log Out
+            </button>
+          </h1>
+
 
           <div className='whole-title'>
             <div className='whole-title-text' tabIndex={0}>
