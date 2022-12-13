@@ -20,7 +20,7 @@ A web application for writing recipes and discovering new recipes posted by othe
 
 ## What's new in Project 4
 
-According to the usability report, we found that user wanted us to add some hint to reaction due to the slow rendering and modify the overall style. Thus, we add loading notification when user changed the setting. Then, we redesigned the whole app with the color palette. It now becomes more vivid. We also debugged and passed the axe test. Last but not least, we supported the accessibility keyboard control. The following section describes the usage.
+According to the usability report, we found that user wanted us to add some hint to reaction due to the slow rendering and modify the overall style. Thus, we add loading notification when user changed the setting. Then, we redesigned the whole app with the color palette. It now becomes more vivid. We also used the paired fonts Abril Fatface and Poppins in the webpage. We debugged and passed the axe test. Last but not least, we supported the accessibility keyboard control. The following section describes the usage.
 
 ## Full Keyboard Control
 
