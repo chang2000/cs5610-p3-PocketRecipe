@@ -573,9 +573,9 @@ function RecipeDetail() {
                 </button>
               )
             ) : detail.public ? (
-              <div>Public</div>
+              <div className="view-only-txt">Public</div>
             ) : (
-              <div>Private</div>
+              <div className="view-only-txt">Private</div>
             )}
           </div>
           <button className="mybtn" onClick={toggleFavorite}>

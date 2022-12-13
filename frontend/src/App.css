@@ -70,8 +70,8 @@ button, .normal-btn {
 }
 
 #cancel-btn {
-  color: #fc9c26;
-  background-color: #fcebe8;
+  color: #A36807;
+  background-color: #ffffff;
   border-radius: 8px;
 }
 
@@ -524,6 +524,7 @@ i {
   font-size: 1.1rem;
   font-weight: 300;
   font-family: 'Abril Fatface';
+  padding-top: 0.3rem;
   padding-right: 1rem;
 }
 
@@ -551,6 +552,15 @@ i {
   display: flex;
   flex-direction: row;
   padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.view-only-txt {
+  position: center;
+  padding-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
 }
 
 .visible-btn-whole {
