@@ -28,10 +28,12 @@ function Root() {
     console.log('enter create new recipe')
     navigate('/mine/new')
   }
+
   let curUser = window.localStorage.getItem('email')
   useEffect(() => {
     navigate('/mine')
   }, [])
+
   return (
     <>
       <div id="whole-page">
