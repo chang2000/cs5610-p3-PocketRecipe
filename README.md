@@ -18,6 +18,19 @@ Design Document [./design-document.md](./design-document.md).
 
 A web application for writing recipes and discovering new recipes posted by others. Users can create a new receipt and edit it later, with information like ingredients, cooking time, cooking instructions, nutrition and uploading beautiful images for the recipe. Users can assign tags for a recipe. Users can mark any recipe as “Favorite” and could be found in the Favorite page. Users can view the latest recipes posted by other users in the Discover page. Users can also choose whether to make a recipe public to other users. All the user data is stored online.
 
+## What's new in Project 4
+
+According to the usability report, we found that user wanted us to add some hint to reaction due to the slow rendering and modify the overall style. Thus, we add loading notification when user changed the setting. Then, we redesigned the whole app with the color palette. It now becomes more vivid. We also debugged and passed the axe test. Last but not least, we supported the accessibility keyboard control. The following section describes the usage.
+
+## Full Keyboard Control
+
+1. Use `Tab` to cycle through the elements.
+2. Use `Enter` to select recipe, edit block, trigger buttons
+3. Use `command + backspace` (for macOS) or `ctrl + backspace`(for Windows) to delete a item of ingridients, intrusctions, etc.
+
+## Color Palette
+![color](./document-images/colorpalette.jpeg)
+
 ## ScreenShots
 
 **Login/Sign Up**
@@ -43,6 +56,9 @@ A web application for writing recipes and discovering new recipes posted by othe
 **Recipe Detail**
 ![detail](./document-images/detail.png)
 
+**Loading**
+![loading](./document-images/loading.png)
+
 ## Instruction on Build
 
 **Development Mode**
@@ -67,11 +83,7 @@ To specify which DB to use, set up a env variable and run like following
 
 `MONGO_URL="mongodb+srv://username:pwd@dburl" yarn run dev`
 
-## Full Keyboard Control
 
-1. Use `Tab` to cycle through the elements.
-2. Use `Enter` to select recipe, edit block, trigger buttons
-3. Use `command + backspace` (for macOS) or `ctrl + backspace`(for Windows) to delete a item of ingridients, intrusctions, etc.
 
 ## MISC
 
