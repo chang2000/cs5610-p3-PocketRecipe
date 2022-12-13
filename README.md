@@ -16,7 +16,7 @@ Design Document [./design-document.md](./design-document.md).
 
 ## Project Objective
 
-A web application for writing recipes and discovering new recipes posted by others. Users can create a new receipt and edit it later, with information like ingredients, cooking time, cooking instructions, nutrition and uploading beautiful images for the recipe. Users can assign tags for a recipe and search with tag name to get corresponding recipes. Users can mark any recipe as “Favorite” and could be found in the Favorite page. Users can view the latest recipes posted by other users in the Discover page. Users can also choose whether to make a recipe public to other users. All the user data is stored online.
+A web application for writing recipes and discovering new recipes posted by others. Users can create a new receipt and edit it later, with information like ingredients, cooking time, cooking instructions, nutrition and uploading beautiful images for the recipe. Users can assign tags for a recipe. Users can mark any recipe as “Favorite” and could be found in the Favorite page. Users can view the latest recipes posted by other users in the Discover page. Users can also choose whether to make a recipe public to other users. All the user data is stored online.
 
 ## ScreenShots
 
@@ -60,12 +60,18 @@ Pre-requiste: MongoDB running on `localhost:27017`
 1. `yarn` will install dependencies for Express and the `postinstall` will automatically install the dependencies for frontend and build frontend.
 2. `yarn importdata` to import the user collection with 2 records and recipe collection with 1200 records.
 3. `yarn start`, then visit `localhost:5555` to view the page.
-4. We have provided two account: `root` and `other`, passwords are the same as usernames.
+4. We have provided two account: `root` and `other`, passwords are the same as usernames. **By logging to these two accounts you may see the 1.2k synthetic records**.
 
 
 To specify which DB to use, set up a env variable and run like following
 
 `MONGO_URL="mongodb+srv://username:pwd@dburl" yarn run dev`
+
+## Full Keyboard Control
+
+1. Use `Tab` to cycle through the elements.
+2. Use `Enter` to select recipe, edit block, trigger buttons
+3. Use `command + backspace` (for macOS) or `ctrl + backspace`(for Windows) to delete a item of ingridients, intrusctions, etc.
 
 ## MISC
 
