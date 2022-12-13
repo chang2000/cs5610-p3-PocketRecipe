@@ -119,15 +119,15 @@ button, .normal-btn {
 }
 
 .author-title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 300;
   font-family: 'Abril Fatface';
 }
 
 .detail-user {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 
 textarea:hover,

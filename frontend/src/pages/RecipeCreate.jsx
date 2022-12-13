@@ -11,26 +11,26 @@ const RecipeCreate = () => {
   const [tags, setTags] = useState(['Click here to edit...'])
 
   const navigate = useNavigate()
-  useEffect(() => {}, [ingridients, instructions, nurtritions, tags])
+  useEffect(() => { }, [ingridients, instructions, nurtritions, tags])
 
   const addSubItem = (e) => {
     console.log('enter add sub item')
     let type = e.currentTarget.id
     if (type === 'newrecipe-ingri-add-btn') {
       let tmp = JSON.parse(JSON.stringify(ingridients))
-      tmp.push('Click here to add new Ingridients....')
+      tmp.push('Add new')
       setIngridients(tmp)
     } else if (type === 'newrecipe-instru-add-btn') {
       let tmp = JSON.parse(JSON.stringify(instructions))
-      tmp.push('Click here to add a new instruction....')
+      tmp.push('Add new')
       setInstructions(tmp)
     } else if (type === 'newrecipe-nurtri-add-btn') {
       let tmp = JSON.parse(JSON.stringify(nurtritions))
-      tmp.push('Click here to add a new instruction....')
+      tmp.push('Add new')
       setNurtritions(tmp)
     } else if (type === 'newrecipe-tag-add-btn') {
       let tmp = JSON.parse(JSON.stringify(tags))
-      tmp.push('Click here to add a new instruction....')
+      tmp.push('Add new')
       setTags(tmp)
     }
   }

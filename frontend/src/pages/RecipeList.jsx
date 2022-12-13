@@ -1,6 +1,7 @@
 import '../App.css'
 import React, { useState, useEffect } from 'react'
 import { Outlet, NavLink, useNavigation } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 import PropTypes from 'prop-types'
 
 function RecipeList(props) {
@@ -12,9 +13,9 @@ function RecipeList(props) {
 
   // Do this once page reloaded
   useEffect(() => {
-    // TODO: remove hardcode later
     const fetchData = async () => {
       let requestAPI = ''
+      const toastID = toast.loading("Loading...")
       if (type === 'mine') {
         requestAPI = `/item/getByUser?email=${user}`
       } else if (type === 'discover') {
@@ -26,6 +27,7 @@ function RecipeList(props) {
       let data = await res.json()
       console.log(data)
       setRecipes(data.recipes)
+      toast.update(toastID, { render: "Loaded!", type: "success", isLoading: false, autoClose: 2000 });
     }
     fetchData()
   }, [type, user])
@@ -55,6 +57,7 @@ function RecipeList(props) {
           </ul>
         </nav>
       </div>
+      <ToastContainer />
       <div
         id="contact"
         className={navigation.state === 'loading' ? 'loading' : ''}

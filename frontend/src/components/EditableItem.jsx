@@ -14,7 +14,6 @@ const EditableItem = (props) => {
   }, [isE])
 
   const toggleEditing = (e) => {
-    console.log('enter toggle editing')
     if (isE) {
       submitFunc(e)
     }
@@ -42,7 +41,7 @@ const EditableItem = (props) => {
           <input className="editable-item-input"
             id={`${idx}-${optType}`}
             autoFocus
-            defaultValue={defaultText}
+            defaultValue={(defaultText === 'Add new' || defaultText === 'Click here to edit...') ? "" : defaultText}
             onBlur={toggleEditing}
             onKeyDown={handleKeyDown}
             ref={editingRef}
