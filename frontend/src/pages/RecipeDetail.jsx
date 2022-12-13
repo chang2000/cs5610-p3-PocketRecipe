@@ -35,10 +35,12 @@ function RecipeDetail() {
     // get detail by id
     const fetchData = async () => {
       let requestAPI = `/item/detail?id=${id}&email=${currUser}`
+      const toastID = toast.loading("Loading...")
       let res = await fetch(requestAPI)
       let data = await res.json()
       console.log(data.detail)
       setDetail(data.detail)
+      toast.update(toastID, { render: "Loaded!", type: "success", isLoading: false, autoClose: 2000 });
     }
     fetchData()
   }, [id, ifPublic, favorited, editTimes, currUser])
