@@ -63,7 +63,7 @@ const LoginPage = () => {
       document.getElementById('create-success').style.display = 'block'
       setCreatestate(false)
       window.localStorage.setItem('email', e.target.username.value)
-      window.location.replace(window.location.origin + '/mine')
+      window.location.replace(window.location.origin + '/#/mine')
 
       // setPageStatus(true)
     } else {
