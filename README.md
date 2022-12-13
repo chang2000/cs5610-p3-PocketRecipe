@@ -10,7 +10,7 @@ Live Demo: https://pocket-recipe.onrender.com/
 
 Slides Presentation: https://docs.google.com/presentation/d/1eYxaN23WkqVQN5hwlESTOvhD5IR_deif8qmiLbZScAE/edit?usp=sharing
 
-Presentation Video: https://youtu.be/1ZqE6n1yzlg
+Presentation Video: https://youtu.be/ytzSBBdN7T8
 
 Design Document [./design-document.md](./design-document.md).
 
