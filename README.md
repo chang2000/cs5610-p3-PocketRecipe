@@ -115,3 +115,11 @@ What's left:
 - Client side: Edit A recipe
 - Add CSS
 - Client side: delete a recipe
+
+
+##CODE REVIEW(MIHIR MESIA)
+Your website looks really good. I loved the UI and the design of your home page. Well Done.
+There are few improvements that you I feel you can add it to your website.
+-The login component is not center aligned
+-On the favouries section, while reviewing favourites of other users, if nothing was added in instruction and ingredients, it shows click here to edit. But I was not able to edit it. This could be misleading. You could have rather just showed it as NA or missing.
+-While adding new ingredients, if the ingredients name was not written then it was still added.
