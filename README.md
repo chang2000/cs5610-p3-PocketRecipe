@@ -26,7 +26,10 @@ According to the usability report, we found that user wanted us to add some hint
 
 1. Use `Tab` to cycle through the elements.
 2. Use `Enter` to select recipe, edit block, trigger buttons
-3. Use `command + backspace` (for macOS) or `ctrl + backspace`(for Windows) to delete a item of ingridients, intrusctions, etc.
+
+#hi, I like your website design, it looks clean and nice.
+#I check your website using the axetool, there is a little warnings: 1. all element should be contained by landmarks 2. login page should have a H1 title
+4. Use `command + backspace` (for macOS) or `ctrl + backspace`(for Windows) to delete a item of ingridients, intrusctions, etc.
 
 ## Color Palette
 ![color](./document-images/colorpalette.jpeg)
